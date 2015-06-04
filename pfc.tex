@@ -34,6 +34,8 @@
 }
 \pagestyle{plain} %Set Document Page Style to plain
 \setlength{\headheight}{15pt} % Header height 15 points.
+\setcounter{tocdepth}{4} % Set Table of Contents sectioning depth
+\setcounter{secnumdepth}{4} % Set Table of Contents numbering depth
 
 %%%%% End Formatting Section %%%%%%
 
@@ -47,36 +49,40 @@
 \usepackage{epigraph}
 \usepackage{hyperref}
 \usepackage{makeidx}
+\usepackage{titlesec}
+\usepackage{lipsum}
 %%%% End Import Packages %%%%
 
-\graphicspath{ {./img/} }
-\makeindex
+\graphicspath{ {./img/} } % Set image lookup path
+\makeindex % Setup Index
+\raggedbottom
 
 \begin{document}
 
 \maketitle
 
-\input{./acknowledgements/acknowledgements.tex}
+\input{./acknowledgements/acknowledgements}
 
 \tableofcontents
 
-\input{./summary/summary.tex}
+\input{./summary/summary}
 
-\input{./introduction/introduction.tex}
+\input{./introduction/introduction}
 
-\input{./tech/techoverview.tex}
+\input{./tech/techoverview}
 
-\input{./arch/systemarch.tex}
+\input{./arch/systemarch}
 
-\input{./future/futuredev.tex}
+\input{./future/futuredev}
 
-\input{./planning/planning.tex}
+\input{./planning/planning}
 
-\input{./conclusions/conclusions.tex}
+\input{./conclusions/conclusions}
 
-\input{./bibliography/bibliography.tex}
+\input{./bibliography/bibliography}
 
-\index{Test}
+\input{./annexes/annexes}
+
 \listoffigures
 \listoftables
 \printindex
