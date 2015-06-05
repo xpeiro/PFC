@@ -1,9 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
-\PYGdefault{k+kt}{string} \PYGdefault{n}{title} \PYGdefault{p}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}This is a Unicode π in the sky\PYGdefaultZdq{}}
-\PYGdefault{c+cm}{/*}
-\PYGdefault{c+cm}{Defined as $\pi=\lim_{n\to\infty}\frac{P_n}{d}$ where $P$ is the perimeter}
-\PYGdefault{c+cm}{of an $n$\PYGdefaultZhy{}sided regular polygon circumscribing a}
-\PYGdefault{c+cm}{circle of diameter $d$.}
-\PYGdefault{c+cm}{*/}
-\PYGdefault{k}{const} \PYGdefault{k+kt}{double} \PYGdefault{n}{pi} \PYGdefault{p}{=} \PYGdefault{l+m}{3.1415926535}
-\end{Verbatim}
