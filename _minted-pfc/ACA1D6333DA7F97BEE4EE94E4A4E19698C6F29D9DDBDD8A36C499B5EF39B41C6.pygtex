@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{n+nf}{GET} \PYGdefault{n+nn}{/path/file.html} \PYGdefault{k+kr}{HTTP}\PYGdefault{o}{/}\PYGdefault{l+m}{1.0}
+\PYGdefault{n+na}{From}\PYGdefault{o}{:} \PYGdefault{l}{someuser@jmarshall.com}
+\PYGdefault{n+na}{User\PYGdefaultZhy{}Agent}\PYGdefault{o}{:} \PYGdefault{l}{HTTPTool/1.0}
+\PYGdefault{err}{[blank} \PYGdefault{l}{line here]}
+\end{Verbatim}

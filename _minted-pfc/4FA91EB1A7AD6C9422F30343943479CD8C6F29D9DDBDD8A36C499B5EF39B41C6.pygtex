@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k+kr}{HTTP}\PYGdefault{o}{/}\PYGdefault{l+m}{1.1} \PYGdefault{l+m}{200} \PYGdefault{n+ne}{OK}
+\PYGdefault{n+na}{Date}\PYGdefault{o}{:} \PYGdefault{l}{Fri, 05 Jun 2015 17:13:20 GMT}
+\PYGdefault{n+na}{Server}\PYGdefault{o}{:} \PYGdefault{l}{Apache/2}
+\PYGdefault{n+na}{Content\PYGdefaultZhy{}Location}\PYGdefault{o}{:} \PYGdefault{l}{Home.html}
+\PYGdefault{n+na}{Vary}\PYGdefault{o}{:} \PYGdefault{l}{negotiate,accept}
+\PYGdefault{n+na}{TCN}\PYGdefault{o}{:} \PYGdefault{l}{choice}
+\PYGdefault{n+na}{Last\PYGdefaultZhy{}Modified}\PYGdefault{o}{:} \PYGdefault{l}{Fri, 05 Jun 2015 14:20:15 GMT}
+\PYGdefault{n+na}{ETag}\PYGdefault{o}{:} \PYGdefault{l}{\PYGdefaultZdq{}a290\PYGdefaultZhy{}517c5fda505c0;89\PYGdefaultZhy{}3f26bd17a2f00\PYGdefaultZdq{}}
+\PYGdefault{n+na}{Accept\PYGdefaultZhy{}Ranges}\PYGdefault{o}{:} \PYGdefault{l}{bytes}
+\PYGdefault{n+na}{Content\PYGdefaultZhy{}Length}\PYGdefault{o}{:} \PYGdefault{l}{41616}
+\PYGdefault{n+na}{Cache\PYGdefaultZhy{}Control}\PYGdefault{o}{:} \PYGdefault{l}{max\PYGdefaultZhy{}age=600}
+\PYGdefault{n+na}{Expires}\PYGdefault{o}{:} \PYGdefault{l}{Fri, 05 Jun 2015 17:23:20 GMT}
+\PYGdefault{n+na}{P3P}\PYGdefault{o}{:} \PYGdefault{l}{policyref=\PYGdefaultZdq{}http://www.w3.org/2014/08/p3p.xml\PYGdefaultZdq{}}
+\PYGdefault{n+na}{Content\PYGdefaultZhy{}Type}\PYGdefault{o}{:} \PYGdefault{l}{text/html; charset=utf\PYGdefaultZhy{}8}
+\end{Verbatim}

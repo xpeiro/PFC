@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{n+nf}{GET} \PYGdefault{n+nn}{/} \PYGdefault{k+kr}{HTTP}\PYGdefault{o}{/}\PYGdefault{l+m}{1.1}
+\PYGdefault{n+na}{Host}\PYGdefault{o}{:} \PYGdefault{l}{www.w3.org}
+\PYGdefault{n+na}{Connection}\PYGdefault{o}{:} \PYGdefault{l}{keep\PYGdefaultZhy{}alive}
+\PYGdefault{n+na}{Accept}\PYGdefault{o}{:} \PYGdefault{l}{text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8}
+\PYGdefault{n+na}{User\PYGdefaultZhy{}Agent}\PYGdefault{o}{:} \PYGdefault{l}{Mozilla/5.0 (X11; Linux x86\PYGdefaultZus{}64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36}
+\PYGdefault{n+na}{Accept\PYGdefaultZhy{}Encoding}\PYGdefault{o}{:} \PYGdefault{l}{gzip, deflate, sdch}
+\PYGdefault{n+na}{Accept\PYGdefaultZhy{}Language}\PYGdefault{o}{:} \PYGdefault{l}{es\PYGdefaultZhy{}ES,es;q=0.8,en;q=0.6}
+\PYGdefault{n+na}{Cookie}\PYGdefault{o}{:} \PYGdefault{l}{authorstyle=no}
+\end{Verbatim}
