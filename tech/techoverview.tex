@@ -8,14 +8,13 @@ This will loosely entail, for each section, a brief history, the current state o
 to the project. By no means is this intended to be a comprehensive in depth look into each subject, given that 
 entire books can and have been written on each of them, but should give the reader enough information to understand 
 the following chapter, that details how the system is built and what it does with these technologies.
-\section{HTTP}
-
+\section{HTTP} \label{HTTP}
 HTTP (Hypertext Transfer Protocol) is the data communication protocol underlying in what is known today as the World
 Wide Web. The idea of hypertext (a text that contains links to other texts) was first defined in the 1960s by Ted
 Nelson (inspired by the Memex, a microfilm linked database envisioned by Vannevar Bush in 1945), founder of Project
 Xanadu, the first attempt at an implementation of the idea. Several other implementations appeared in the following
 decades (Douglas Engelbart's oN-Line System, Apple's Hypercard, Tim Berners-Lee's own ENQUIRE), but none of them
-married the concept with the idea of the internet, which had been developed independently from it's origins (ARPANET
+married the concept with the idea of the Internet, which had been developed independently from it's origins (ARPANET
 and TCP and later TCP/IP) in the late 1960s. Not until Tim Berners-Lee, a computer scientist working at CERN in 1989,
 took his existing ENQUIRE hypertext database and the existing TCP/IP protocol and thought to make a network of
 documents, linked between each other to form a web, that he called the ``WorldWideWeb'' or W3. To do that he needed
@@ -26,9 +25,9 @@ project) and the last of course is HTTP. There were other protocols that essenti
 notably Gopher, which still exists, but in the 1990s the World Wide Web became ubiquitous and synonymous with the
 Internet, mainly thanks to the Mosaic Web Browser's popularity following its release in 1993. Today HTTP is the main
 protocol (frequently combined with SSL/TLS to form the HTTPS protocol for enhanced security) used in the world to
-communicate through the internet.\\
+communicate through the Internet.\\
 
-HTTP implements a typical Client-Server stateless pattern with a request-response communication architechture. What
+HTTP implements a typical Client-Server stateless pattern with a request-response communication architecture. What
 stateless means is that every transaction between client and server is independent from any other. In other words,
 HTTP treats every connection as a new one, given that it has no ``memory'' of any others before it. The sequence of
 events that define one transaction, define the whole protocol. The basic steps that take place in one such transaction
@@ -99,27 +98,27 @@ The only way to do this with standard HTTP is periodic polling, which entails la
 stopgap solutions exist to minimize this overhead, most relevant of which is the Comet web application model. Comet is
 based on the concept of long-polling: effectively ``hanging'' the server response until the requested data is
 available, and calling another request once the data is received. This approach  still causes increased server loads
-but allows some semblance of realtime data transmission. The possibility to use only one connection, as seen in the
+but allows some semblance of real-time data transmission. The possibility to use only one connection, as seen in the
 previous example was another improvement that became standard in HTTP 1.1. With the HTTP/2 Standard (published in May
 2015), the server is allowed to effectively ``push'' data to clients by queuing up more responses than received
 requests. However, none of these modifications and hacks are a complete, elegant solution to the problem, given that
-HTTP was never intended to be a realtime protocol.\\
+HTTP was never intended to be a real-time protocol.\\
 
 That is why other technologies have taken over this new realm of interactivity, providing much more than the ``big,
 virtual documentation system in the sky'' \cite{bernerslee09} envisioned by Berners-Lee more than 25 years ago. Some
 of them are key parts of this project, as the following sections describe. Still, HTTP remains the initiator for all
 these other technologies to function. As of today, any web page you open, no matter how complex the code served in
-javascript or flash or any other plugin still begins with a simple GET request and response.
-\section{HTML}
+javascript or flash or any other plug-in still begins with a simple GET request and response.
+\section{HTML} \label{HTML}
 HTML (Hypertext Markup Language) is the language in which web pages are written. It was created in 1989 by Tim
-Berners-Lee as part of his WorldWideWeb, a set of documents linked between each other on a network using the internet
+Berners-Lee as part of his WorldWideWeb, a set of documents linked between each other on a network using the Internet
 protocol. It was initially based on SGML (Standard Generalized Markup Language) a document markup language released in
 1986 as an ISO Standard (ISO 8879:1986 -- Information processing -- Text and office systems), which was itself derived
 from GML (both an acronym for Generalized Markup Language and for Goldfarb, Mosher, Lorie, the last names of its
 developers), developed by IBM in 1969.\\
 
 Markup languages in general existed before digital media and still exist in paper based documentation (blue/red
-annotations used by editors because litography/photography/xerography did not capture these colors, the engineering
+annotations used by editors because lithography/photography/xerography did not capture these colors, the engineering
 code for editing documents red = add, blue = delete, green = comment, and many others). In general, markup is a way to
 add information regarding the document's structure, presentation, state of development, comments, author, date,
 copyright, etc. in a way that is distinguishable from the content of the document. For digital media, it also needs to
@@ -146,7 +145,7 @@ are basically two ways of doing this:
 \end{enumerate}
 HTML and its precursor SGML are essentially declarative markup languages. The main advantage of declarative markup,
 and more generally the declarative programming paradigm is the decoupling of the intended result and the processing
-required to achieve it. This has been crucial for HTML to be able to evolve and adapt dinamically over decades of
+required to achieve it. This has been crucial for HTML to be able to evolve and adapt dynamically over decades of
 technological innovation. The computers and programs used in 1989 have very little in common with those used today in
 many cases. A markup language designed to be ubiquitous, read on an ever changing array of software and hardware
 platforms and permanently backwards compatible, where a web page designed in 1991 is just as valid as one designed
@@ -155,7 +154,9 @@ using the last specification, has to be as procedurally oblivious as possible.\\
 The basic HTML markup unit is the tag. A tag is simply a keyword surrounded by brackets. HTML tags usually come in
 pairs, an opening tag and a closing tag (designated adding a forward slash after the first bracket), that give markup
 information on the enclosed content:
-\begin{figure}[ht]
+\begin{figure}[h]
+\centering
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
 \begin{minted}[breaklines,fontsize=\footnotesize]{html}
 <!--This is a comment-->
 <h1>This is a heading</h1>
@@ -178,12 +179,16 @@ information on the enclosed content:
 </ul>
 <a href="http://www.w3.org">This text links to W3C Web Page</a>
 \end{minted}
-\caption{Declarative HTML Tags Example}
-\end{figure}
+\caption{Declarative HTML Tags}
+\end{figure}\\
 All of the tags in the above example are purely declarative. They state what the enclosed text is, leaving it up to
-the parser how to obtain the desired result. As the web evolved since it's inception, adding interactivity to
-documents, more tags were added to HTML that weren't so clearly declarative and had a behavioral component:
-\begin{figure}[ht]
+the parser how to obtain the desired result. To extend markup within a tag, attributes are added and given a value. For 
+example, the href attribute in the <a> hyper link tag above points to the URL the browser will go to when the text is 
+clicked. As the web evolved since it's inception, adding interactivity to documents, more tags were added to HTML that 
+weren't so clearly declarative and had a behavioral component, as well as semantic attributes:\\
+\begin{figure}[h]
+\centering
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
 \begin{minted}[breaklines,fontsize=\footnotesize]{html}
 <form action="" method="">
   <input type="text" name="input1"><br>
@@ -195,8 +200,8 @@ documents, more tags were added to HTML that weren't so clearly declarative and 
   <input type="submit" value="Submit">
 </form>
 \end{minted}
-\caption{Behavioral HTML Tags Example}
-\end{figure}
+\caption{Behavioral HTML Tags}
+\end{figure}\\
 These behavioral tags (and many others) were a response to the demand for a more interactive web, not only composed of
 linked documents, but of applications implementing business logic and data transactions. They were added by web
 browser developers independently, and in consequence were incompatible with other software as well as poorly
@@ -204,28 +209,109 @@ documented. In 1994, Tim Berners-Lee created the W3C (World Wide Web Consortium)
 achieve consensus between browser developers developing standard versions of HTML. This helped HTML remain relatively
 simple and consistently usable across browsers. The W3C also attempted to standardize the way browsers parsed HTML,
 which initially was very lenient to errors. The repercussions of these attempts will be discussed in section
-\ref{HTML5}, especifically related to HTML5, as they indirectly led to the standard.\\
+\ref{HTML5}, specifically related to HTML5, as they indirectly led to the standard.\\
 
-In this project there is just one HTML document (albeit one composed of more than 500 lines of markup), as it
-implements the ``Single Page Application'' user interface paradigm as a means to make the user experience more fluid
-and similar to that of a native program. The structure of the page, which is decidedly non-declarative as a whole, is
-nonetheless defined using almost exclusively declarative tags. Only multimedia is truly generated dynamically on the
-page, with everything else being declared statically, with the caveat of being bi-directionally bound to a model which
-in turn is dynamically changed (see section \ref{AngularJS} on AngularJS).\\
+HTML tags can be nested, with the outer tags being called parent tags, and tags enclosed by others called children.
+This nested structure, which can also be seen as a tree structure is called the Document Object Model or DOM for short.
+This model represents all of the objects included in the document in nodes, with parent nodes encapsulating child nodes,
+and one root node that encapsulates all of them. To create the DOM, different browsers use different methods, called
+layout engines that parse the HTML to create the DOM Tree. This tree serves only the purpose of correctly representing
+nested content on a page, where static web pages are concerned. However, the DOM is crucial for dynamic web pages, as it
+provides external controllers, such as JavaScript a model to interact with (see section \ref{JavaScript} on JavaScript).\\
+
+In this project there is just one HTML document (albeit one composed of more than 500 lines of markup) and therefore only
+one DOM Tree, as it implements the ``Single Page Application'' user interface paradigm as a means to make the user
+experience more fluid and similar to that of a native program. The structure of the page, which is decidedly non-
+declarative as a whole, is nonetheless defined using almost exclusively declarative tags. Only multimedia is truly
+generated dynamically on the page, with everything else being declared statically, with the caveat of being bi-
+directionally bound to a model which in turn is dynamically changed (see section \ref{AngularJS} on AngularJS).\\
 
 The declarative markup method has many advantages as shown: simplicity, portability, light-weight parsing... But it's
 main flaw remains that it lacks the ability to create complex structures, interactive structures, and dynamic
 structures. Declarative markup is distinctly static in nature: once parsed, the content is presented and remains the
-way it was declared (at least in pure declarative tags). This is not a flaw inherent to its design, as it was designed
+way it was declared (at least in purely declarative tags). This is not a flaw inherent to its design, as it was designed
 to markup documents, but one created through the evolution of the web. HTML as a language has itself evolved, blurring
 the lines of declarative and behavioral markup (see section \ref{HTML5} on HTML5 for more), but for interactivity and
 complexity to truly flourish, markup as a whole just isn't enough. As early as 1995, it became evident that the web
 needed a programming language. That language was JavaScript.
-\section{JavaScript}
+\section{JavaScript} \label{JavaScript}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth/4]{javascript}
+\caption{JavaScript Badge}
+\end{figure}
+JavaScript is a programming language. The most common use for JavaScript is running scripts alongside web pages, making
+them dynamic and interactive in ways HTML alone cannot. JavaScript was created by Netscape, an early web browser vendor
+and developer in 1994, as part of its Netscape Navigator browser. Originally named Mocha, then LiveScript and finally
+JavaScript (not because it is related to the Sun developed language, but as an attempt by its creators to use the
+popularity of Java for marketing reasons). It was initially conceived as a ``glue'' programming language to be used by
+web designers with little programming knowledge or experience to include Java (considered a more ``serious'' and powerful
+language at the time) applets in their pages without necessarily knowing anything about Java programming. It quickly
+evolved beyond that, becoming a programming language in it's own right. After Microsoft included it in Internet Explorer
+3.0 in 1996 (as JScript, to add to the naming confusion), Netscape sought to standardize the language through the ECMA
+standards organization, eventually leading to ECMAScript, the current technical name of the language (used only in
+standard versions). The current standard is ECMAScript 5 originally released in 2009, while ECMAScript 6 will be released
+sometime in 2015. Although JavaScript is mainly used client-side even today, it was originally conceived to also run
+server-side. This concept was widely ignored during the early days of the web, focusing on client-side dynamic scripting,
+while using other languages (PHP, CGI, Perl, etc.) on the server-side. The late 2000s and early 2010s have seen a
+resurgence of the idea of server-side JavaScript allowing full-stack (front-end to back-end in javascript) applications,
+like this project, to exist. This will be covered in section \ref{TheMEANStack} on the MEAN Stack.\\
+
+The formal classification and description of JavaScript as a language is beyond the scope of this overview, so it won't
+be discussed here. Suffice it to say that it's a prototype-based, dynamically-typed scripting language, which allows it
+to implement multiple programming paradigms (imperative, functional and object oriented), sacrificing performance (as do
+all dynamic languages) and formal elegance for a high level of abstraction, flexibility and dynamic execution.\\
+
+The key aspect of client-side JavaScript is that runs in the browser, dynamically modifying the HTML document. A
+JavaScript script is included in an HTML document simply by using the script tag:
+\begin{figure}[h]
+\centering
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}{html}
+<script type="text/javascript" src="examplescript.js"></script>
+\end{minted}
+\end{figure}
+
+As seen in section \ref{HTTP} on HTTP, this tag will trigger a HTTP GET request to the server for the text file
+``examplescript.js'', that the browser will parse as JavaScript, and dynamically execute, with total transparency
+from the users point of view. This script could, in a typical early web use-case, modify the web page dynamically,
+without necessarily triggering new HTTP requests to the server, given that once the script is served, it is running
+independently on the client system. For modifications to be possible, a machine-readable model of the web pages' content
+and markup is required. The DOM (Document Object Model, see section \ref{HTML} on HTML) is the convention used to model
+the page, and is kept in memory by the JavaScript Engine as the global ``state'' of the page. Scripts can then get
+information from the model, as well as control and modify the model. The browser will then refresh the representation of
+the page, following a classic Model (DOM), View (Browser window), Controller (JavaScript scripts) paradigm.\\
+
+This use-case, while still the most extended use for JavaScript has given way in the last decade and a half to a much
+more behavior-centric use, where JavaScript no longer is an add-on or enhancement to HTML, as much as a fundamental part
+of how we understand web pages, to the point where the latest standard in HTML includes many tags that are simply useless
+without JavaScript to provide the behavior behind them. This demand for interactivity has also led to some pages that are
+sloppy when it comes to separating behavior and structure of a web application, tending to use JavaScript for everything,
+even when HTMLs declarative approach is more appropriate for a given use-case, simply because JavaScript is more
+``comfortable'' from a programmers perspective. This brings with it code maintainability, elegance and performance issues
+if not handled correctly. To help maintain declarative and behavioral code separate, and use each one when appropriate,
+JavaScript frameworks such as AngularJS have appeared, allowing highly dynamic, complex, single-page web applications to
+keep a Model-View-Controller paradigm. This framework, as part of the MEAN Stack, is used in this project (see section
+\ref{AngularJS} on AngularJS).
+
+JavaScript essentially provides behavior, interactivity and dynamism to otherwise static HTML. Other methods of adding
+these traits to web pages exist and some remain popular today. Java Applets run in a JVM (Java Virtual Machine) once
+executed from an HTML document. Adobe Flash (previously Macromedia Shockwave Flash) allows full animations, video and
+audio to play embedded inside of a web page. Microsoft Silverlight (now deprecated) served a similar purpose as Flash.
+All of these technologies had the major flaw of not integrating with HTML as much as substituting it, or embedding a
+``black-box'' in it. This impacts platform compatibility, performance, and accessibility (without going in to the
+problems that arise from proprietary technologies). Of the previous, only Flash remains relevant today, mainly as a means
+to provide multimedia content, where the HTML standard is considerably lagging behind. But even then, Flash today is
+either incompatible or unsupported on all major mobile platforms, and is quickly being substituted with HTML5 by
+multimedia providers (Youtube, for example, now defaults to an HTML5 player as opposed to Flash). JavaScript on the other
+hand has been consistently relevant since it's inception and continues to grow in importance as a web technology,
+expanding to the back-end, and becoming inextricably embedded in the latest HTML standards. This is precisely because it
+doesn't try to substitute or deprecate HTML, but complements it by adding behavior to structure, while allowing both to
+remain separate.
 \section{CSS}
 \section{HTML5} \label{HTML5}
 \section{WebSockets}
-\section{The MEAN Stack}
+\section{The MEAN Stack} \label{TheMEANStack}
 \subsection{NodeJS}
 \subsection{Express}
 \subsection{MongoDB}
