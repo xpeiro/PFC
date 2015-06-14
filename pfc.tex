@@ -46,6 +46,7 @@
 
 %%%%%% Import Packages %%%%%%
 \usepackage{graphicx}
+\usepackage{subfig}
 \usepackage{epigraph}
 \usepackage{hyperref}
 \usepackage{makeidx}
@@ -55,7 +56,9 @@
 
 \graphicspath{ {./img/} } % Set image lookup path
 \hypersetup{%
-    pdfborder = {0 0 0}
+    pdfborder = {0 0 0},
+    colorlinks = true,
+    linkcolor = black
 } % remove red box around links
 \makeindex % Setup Index
 \raggedbottom
@@ -82,12 +85,11 @@
 
 \input{./conclusions/conclusions}
 
-\input{./bibliography/bibliography}
-
 \input{./annexes/annexes}
 
 \listoffigures
 \listoftables
 \printindex
+\input{./bibliography/bibliography}
 
 \end{document}
