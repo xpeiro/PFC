@@ -1,4 +1,4 @@
-*.pdf
+*.pdf*
 *subl*
 *.log
 *.fls

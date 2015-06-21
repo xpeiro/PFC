@@ -79,11 +79,11 @@ specified).
 \item The Server waits for another request on port 80.
 \item The client uses the resource served. In most cases, the client would be a web browser, that would parse the
 html, and present it to the user. This would in turn force the browser to request more resources (images, css,
-scripts, etc.) that are embedded in the html (see Figure 3.1).
+scripts, etc.) that are embedded in the html (see figure \ref{http_requests}).
 \end{enumerate}
-\begin{figure}[ht]
-	\includegraphics[width=\linewidth]{HTTP_Example}
-	\caption{Google Developer Tools window showing HTTP Requests}	
+\begin{figure}[h]
+	\includegraphics[width=\linewidth]{http_requests}
+	\caption{Google Developer Tools window showing HTTP Requests\label{http_requests}}	
 \end{figure}
 
 In the above example only the GET HTTP method is used, because the client only requests data from the server, without
@@ -130,16 +130,16 @@ are basically two ways of doing this:
   the \LaTeX\ macro language (which is itself a mixture of procedural and declarative markup), used to write this
   document.
 	\begin{figure}[ht]
-    \subfloat[Procedural Source (\LaTeX)]{{\includegraphics[width=\linewidth/2]{procedural}}}
-    \subfloat[Procedural Output (PDF)]{{\includegraphics[width=\linewidth/2]{procedural_out}}}
+    \subfloat[Procedural Source (\LaTeX)]{{\includegraphics[width=\linewidth/2]{html_procedural_in}}}
+    \subfloat[Procedural Output (PDF)]{{\includegraphics[width=\linewidth/2]{html_procedural_out}}}
     \caption{Procedural Markup Example}
 	\end{figure}
 	\item Declarative or Descriptive Markup: The content of the text is labeled or ``tagged'' with the markup, without
   giving any instructions on how to process these labels. HTML (especially before HTML5) and XML are clear examples of
   this method.
 	\begin{figure}[ht]
-    \subfloat[Declarative Input (HTML5)]{{\includegraphics[width=\linewidth/2]{declarative}}}
-    \subfloat[Declarative Output (Google Chrome)]{{\includegraphics[width=\linewidth/2]{declarative_out}}}
+    \subfloat[Declarative Input (HTML5)]{{\includegraphics[width=\linewidth/2]{html_declarative_in}}}
+    \subfloat[Declarative Output (Google Chrome)]{{\includegraphics[width=\linewidth/2]{html_declarative_out}}}
     \caption{Declarative Markup Example}
 	\end{figure}
 \end{enumerate}
@@ -237,7 +237,7 @@ needed a programming language. That language was JavaScript.
 \section{JavaScript} \label{JavaScript}
 \begin{figure}[h]
 \centering
-\includegraphics[width=\linewidth/4]{javascript}
+\includesvg[width=1.1\linewidth/4]{./img/javascript}
 \caption{JavaScript Badge}
 \end{figure}
 JavaScript is a programming language. The most common use for JavaScript is running scripts alongside web pages, making
@@ -309,8 +309,145 @@ expanding to the back-end, and becoming inextricably embedded in the latest HTML
 doesn't try to substitute or deprecate HTML, but complements it by adding behavior to structure, while allowing both to
 remain separate.
 \section{CSS}
+\begin{figure}[h]
+\centering
+\includesvg[width=\linewidth/4]{./img/css3}
+\caption{CSS3 Badge}
+\end{figure}
+HTML provides structure to web documents. JavaScript adds behavior, turning documents into applications. CSS (Cascading
+Style Sheets) adds style, giving the document renderer instructions on the presentation of the structure created with HTML.
+This gives documents and applications, which have no inherent visual representation, a distinct style, as chosen by the
+designer, not by the renderer. CSS was created by Håkon Wium Lie and Bert Bos in 1994. It was originally named Cascading
+HTML Style Sheets (CHSS), as it was aimed exclusively at HTML styling. The H was soon dropped from the name, as the authors
+wanted CSS to be applicable to other markup languages. CSS, like HTML wasn't the first language of it's kind. Style sheet
+languages like DSSSL (Document Style Semantics and Specification Language) or FOSI (Formatted Output Specification
+Instance) were created for HTMLs precursor, SGML (see section \ref{HTML}). However, these languages didn't allow for style
+sheets to be separated from the document, and were therefore unsuitable for the nature of the web, while also being deemed
+too complex. CSS has been standardized by the W3C since it's creation, producing three main recommendations:
+CSS1 in 1996, CSS2 in 1998, and CSS3 which was divided into modules for different aspects of the language, some of which
+have already been finished in the last few years, others still evolving. CSS4 development has begun on completed modules,
+but will not be extensively worked on until CSS3 is finalized.\\
+
+Before CSS, HTML either was devoid of any presentational specifications (leaving all styling to the default specified by
+the renderer, making all web pages quite simple and unappealing) or had to be styled from within HTML. This was done using
+presentational tags, which remained part of HTML standard until HTML4 (see figure \ref{presentational_tags}).\\
+\begin{figure}[h]
+\centering
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}{html}
+<h1>
+  <font size="3" color="red">This is a heading</font>
+</h1>
+<body background="bgimage.jpg"><!--Use image as background-->
+<strike>This text is strikethrough.</strike>
+<img src="exampleimage.png" border="5"><!--Image with 5px border-->
+<center>This text will be center-aligned.</center>
+</body>
+\end{minted}
+\caption{Deprecated Presentational Tags \label{presentational_tags}}
+\end{figure}
+
+This presented the problem of mixing declarative, structural markup with styling, making the structure much less clear to
+the editor, which in turn led to error-prone design, while still being a limited solution, since the amount of tags needed
+to be kept in check, if there was to be any structure to the language.\\
+
+CSS allows, similarly to how JavaScript does with behavioral components, the addition of style without substituting
+structure while keeping a separate environment for each. With CSS, the only tag necessary is the script tag, or if included
+from another file, the link tag:
+\begin{figure}[h]
+\centering
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}{html}
+<head>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<!--OR-->
+
+<style>
+h1 {
+font-size: 3px;
+color:red;
+}
+</style>
+\end{minted}
+\caption{Linking or including CSS in HTML}
+\end{figure}
+This separates the structure and the presentation of the web page neatly, allowing both to remain clear, readable and
+maintainable.\\
+
+The main styling unit of CSS is the rule. A rule is composed of selector and a declaration block. A selector specifies the
+target of a set of style specifications (declarations) that follow in the declaration block. In the previous example, there
+is only one rule, with selector h1 and declarations font-size and color. This rule will target all h1 tags present in the
+document and apply the declarations inside the declaration block to the content of the tag. There are a wide range of
+selectors available, from the simplest like the wild-card, *, that targets all elements, to complex, composite selectors
+that target elements with certain attribute values (particularly useful is the ".class" selector that targets all elements
+with a certain class attribute value), pseudo-selectors that target elements under certain circumstances (``:hover''
+targets elements with the mouse over them), etc. which allow complete control over the presentation of web pages.\\
+
+While rules provide granular presentational control over the web page, as a standalone, they would be cumbersome at best
+and impossible to implement at worst were it not for cascading. Cascading allows the definition of a hierarchical structure
+in the way rules are applied, where rules with a higher priority overwrites lower priority rules. There are several
+priority definitions (for example, in line style tags prevail over included stylesheets), but the most important is
+selector specificity. If an element fits the target for two or more selectors, the one with the highest specificity will
+prevail, if that rule defines a conflicting declaration. For example:
+\begin{figure}[h]
+\centering
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}{css}
+/* Applies to all elements */
+* {
+  color: green;
+  text-align: center;
+}
+
+/*
+  Applies to h1 elements.
+  Overrides color from *,
+  keeping text-align: center.
+*/
+h1 {
+font-size: 3px;
+color:red;
+}
+
+/*
+  Applies to p elements nested in div elements.
+  Overrides both * declarations.
+*/
+div > p {
+  color: blue;
+  text-align: right;
+}
+
+/*
+  All other elements will apply *,
+  without need for more rules.
+*/
+\end{minted}
+\caption{Cascading CSS Specificity.}
+\end{figure}
+\\(Note: Use of * selector is somewhat inefficient and inelegant, used here for illustration purposes).\\
+
+Without this feature, it would be necessary to specify styles for each type of element, or leave some up to the renderer.
+This, as previously stated would be tedious for document based pages, and near impossible for applications.\\
+
+This project implements the ``Single Page Application'' user interface pattern, and therefore only one style sheet is used.
+In websites with multiple web pages, there's normally one root style sheet that defines the general presentation of the
+site, common to all pages, and each page may have it's own particular style sheet for more specific presentation
+specification. This allows for neat compartmentalization of styling, which benefits maintainability, future development and
+documentation.\\
+
+Some of the more modern modules of CSS3 used in this project (media queries and transitions) will be discussed in section
+\ref{HTML5} on HTML5. Even though CSS3 is technically a separate entity and W3C standard, it is most certainly part of the
+wider definition of HTML5 as "the cornerstone for modern web applications"\cite{w3c11}.
 \section{HTML5} \label{HTML5}
-\section{WebSockets}
+\begin{figure}[h]
+\centering
+\includesvg[width=1.4\linewidth/4]{./img/html5}
+\caption{HTML5 Badge}
+\end{figure}
+\subsection{WebSockets}
 \section{The MEAN Stack} \label{TheMEANStack}
 \subsection{NodeJS}
 \subsection{Express}
