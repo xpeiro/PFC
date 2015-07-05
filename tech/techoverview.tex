@@ -308,7 +308,7 @@ hand has been consistently relevant since it's inception and continues to grow i
 expanding to the back-end, and becoming inextricably embedded in the latest HTML standards. This is precisely because it
 doesn't try to substitute or deprecate HTML, but complements it by adding behavior to structure, while allowing both to
 remain separate.
-\section{CSS}
+\section{CSS} \label{CSS}
 \begin{figure}[h]
 \centering
 \includesvg[width=\linewidth/4]{./img/css3}
@@ -447,7 +447,345 @@ wider definition of HTML5 as "the cornerstone for modern web applications"\cite{
 \includesvg[width=1.4\linewidth/4]{./img/html5}
 \caption{HTML5 Badge}
 \end{figure}
-\subsection{WebSockets}
+HTML5 is the latest version of the HTML (see \ref{HTML} on HTML in general) Specification Recommendation developed and
+published by the W3C (in its final form, development started outside the Consortium) released the 28th of October, 2014.
+The significance of this date is somewhat diminished given that HTML5 has been in development since 2004, and many of the
+APIs (Application Programming Interface) it specifies have been implemented in browsers preceding the formal release date,
+in many cases years in advance.\\
+
+The fundamental change between HTML5 and previous versions of HTML is the shift to a Web Application model from the
+original Web Document model. This change came as a response to the direction the W3C had taken after the publication of
+HTML 4.0 in 1997, which was much more conservative. At that time, the W3C was very concerned with broken HTML: it is
+assumed (including by the W3C\cite{w3cwebquality02}) that 99\% of web pages are not valid HTML. This is made possible by
+the lenient error handling methods used by browser HTML parsers. When a browser finds an error in an HTML document 
+(incorrect tag spelling, unclosed tags, missing brackets, incorrect nesting order etc.), instead of stopping and not 
+rendering the page, it works around the error, displaying the page as well as it can. This allows for web pages to have 
+minor errors that do not alter the overall display of the page, remaining usable for most users, and more importantly, 
+allowing anybody that has a basic knowledge of the language to write a web page without having to become an expert, 
+effectively making HTML a much more accessible and universal language. The downside to this is inconsistency, which is 
+what concerned the W3C: What methods are used in this lenient error handling? Are they to be standard? Proprietary? Which 
+errors are permissible? Are future browsers going to be able to read invalid pages which were parsed with undocumented 
+error handling methods? All these valid concerns lead the W3C to a drastic decision: draconian error handling.\\
+
+
+The W3C established that the next HTML standard, called XHTML 1.0, would have to be well-formed XML (eXstensible Markup
+Language, a profile of SGML) to be rendered. This, technicalities aside, meant that all documents that wanted to be valid
+markup under the new specification, would need to have no errors for browsers to render them. If not, the page would not
+render and an error message would be presented to the user. Even for a single mistyped tag. This also rendered all
+previous, error laden web pages obsolete in the eyes of the W3C.\\
+
+As discussed in previous sections, attempts to deprecate existing HTML or substitute it with something new, have been in
+general unsuccessful. XHTML was no exception. Given that the benefits of upgrading were few, and barely apparent for the
+general public, web creators didn't make the jump from HTML 4.0. XHTML 1.0 allowed, through a transitional loophole, the
+possibility of declaring the document as XHTML while keeping lenient error handling from HTML 4.0. Even then, adoption was
+slow, but when XHTML 1.1 closed this loophole, it sealed its fate as a failed ``upgrade''.\\
+
+After XHTML, the W3C was at an impasse of sorts. It had spent years on the development of XHTML, which had a very low
+adoption rate and the power of home computing was sky rocketing, leading to demands for web applications instead of
+documents to increase immensely. In 2004, it held a workshop (The W3C Workshop on Web Applications and Compound Documents
+\cite{w3c04}) to define the future of web applications. Many manufacturers and interest groups proposed that a series of
+mid-level APIs should be developed as extensions to HTML and CSS for use in Web Applications as opposed to fully fledged OS
+-Level APIs. This meant leaning toward in-browser solutions as opposed to ``black-box'' plug-in software (such as Java
+Applets or Flash). This proposal was rejected (see Workshop Summary straw poll topic no. 3 in \cite{w3c04}), and led to a
+group of the proposers to create a work group outside the W3C, the WHAT Working Group (Web Hypertext Applications
+Technology Working Group). This group went in the opposite direction the W3C did to solve HTMLs error handling problems
+and the evolution of the web. Instead of dropping error handling altogether, like XHTML did, the WHAT group decided it
+would specify and document the way lenient error handling works, so that it would no longer rely on proprietary, poorly
+documented solutions that made future proofing and maintaining compatibility among different browsers virtually
+impossible. This wasn't as easy as the XHTML solution, in fact it took 5 years to complete, but it allowed full backwards
+compatibility for older pages, a crucial aspect of evolving the web, as seen in previous sections. For Web Applications,
+the WHAT group turned away from plug-ins, and started work on three of the most important multimedia APIs present in
+HTML5: Canvas (direct-mode drawing) and native Audio/Video support.\\
+
+In 2006, Tim Berners-Lee announced that the W3C would start working with the WHAT WG to evolve the web. The new HTML
+Specification that would come from this new group, would be called HTML5.\\
+
+HTML5 introduced a long list of new features to HTML, most of them directed at Web Application Development:
+\begin{itemize}
+  \item \textbf{Canvas Element}: Direct Mode 2D Drawing. Essentially allowing for fully native animations.
+  \item \textbf{Audio and Video Element}: Native multimedia support, effectively deprecating flash.
+  \item \textbf{Geolocation}: Allows sharing the clients location with the application seamlessly.
+  \item \textbf{Local Storage}: Allows the application to store data on the clients computer.
+  \item \textbf{Offline Web Applications}: Once downloaded, the application can run without being connected to the Internet.
+  \item \textbf{WebSockets}: Full duplex communication between client and server, in one TCP connection. (Now a separate specification)
+  \item \textbf{Web Workers}: JavaScript running in the background, taking full advantage of the client CPUs power for heavy tasks.
+\end{itemize}
+While others were much needed upgrades and deprecations of HTML 4.0 features, such as the addition of a wealth of new
+controls to forms and semantic tags, as well as the removal of presentational tags altogether. Only the features used in
+this project will be discussed briefly further.
+\subsection{HTML5 Semantics}
+\begin{figure}[h]
+\centering
+\includesvg[width=1.4\linewidth/8]{./img/html5_semantics}
+\caption{HTML5 Semantics Badge}
+\end{figure}
+HTML5 Semantics are used to more clearly and succinctly define the elements content. This improves the readability of the
+markup and allows browsers to make better accessibility tools. It makes the markup easier to read by eliminating
+unnecessary text:\\
+
+\begin{figure}[h]
+\centering
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}{html}
+<!--In XHTML 1.0-->
+<!DOCTYPE html
+          PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en"
+      xml:lang="en">
+</html>
+<!--In HTML5-->
+<!DOCTYPE html>
+<html></html>
+\end{minted}
+\caption{HTML5 Semantics: Text Usage Comparison}
+\end{figure}
+And by giving names to typical web page components:\\
+
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=\linewidth/3]{html5_layout}
+  \end{center}
+  \caption{HTML5 Semantics: Typical Page Layout. Source: \href{http://www.w3schools.com/html/html5_semantic_elements.asp}{
+  W3Schools}.}
+\end{figure}
+This allows web browsers to better understand what the content is declared as, and choose to present it in different ways (
+for example, a page with an article and a header might be presented differently on a mobile browser to enhance the reading 
+experience), and allows for accessibility features such as text-to-speech to present the content in a fitting manner.\\
+
+In this project, the page is written using HTML5 semantics, reducing the amount of superfluous text, making it easier to
+read (taking into account the complexity of the liquid layout). It also uses the header and footer tags to frame the
+controls, using the header as the title of the page, and the footer to include copyright acknowledgments and references.
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=\linewidth]{html5_headerfooter}
+  \end{center}
+  \caption{HTML5 Semantics: Use of Header and Footer (Marked in green) in HRUI}
+\end{figure}
+\subsection{HTML5 Canvas Element}
+\begin{figure}[h]
+\centering
+\includesvg[width=1.4\linewidth/8]{./img/html5_canvas}
+\caption{HTML5 Graphics Badge}
+\end{figure}
+The Canvas element is, in the simplest terms possible, a rectangle in a web page in which a JavaScript script can draw
+anything. It allows things as simple as drawing a line with the cursor, to full fledged game graphics, and requires
+nothing but a canvas element (\mintinline{html}{<canvas></canvas>}) and access from JavaScript to said element. By
+changing the drawing at a fast enough frequency, animation becomes trivial.\\
+
+In this project, the canvas element is used for three of its modules. It's used to create virtual joysticks for the user
+to control dynamically with the mouse or using a touch interface (see section \ref{joystick} on the Joystick input module).\\
+
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=\linewidth/3]{joystick}
+  \end{center}
+  \caption{HTML5 Canvas: Joystick in HRUI. (2 Canvas Elements: Joystick and Vector)}
+\end{figure}
+It's used for the live video feed, using JSMpeg, a MPEG1 decoder written in JavaScript (see section \ref{livevideo} on the
+Live Video module). It's also used for the dynamic obstacle map in the data monitor module (see section \ref{datamonitor}),
+which can be generated from the server, uploaded by the user or can even be drawn on the fly with the cursor or touch
+interfaces (see figure \ref{html5_map}).\\
+
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[width=\linewidth/3]{html5_map}
+  \end{center}
+  \caption{HTML5 Canvas: Map in HRUI. (Black: Drawn Obstacles. Blue: Robot Pos.)\label{html5_map}}
+\end{figure}
+The Canvas API allows for essentially any sort of content to appear on a website natively without the need for flash, which
+was the go-to resource for animation previously. This amounts to a big leap in graphics and animation versatility for HTML.\\
+
+\subsection{HTML5 WebSockets}
+\begin{figure}[h]
+\centering
+\includesvg[width=1.4\linewidth/8]{./img/html5_connectivity}
+\caption{HTML5 Connectivity Badge}
+\end{figure}
+WebSockets allow for full-duplex communication between server and client using one TCP connection. As its name implies it's
+most easily described as an implementation of TCP/IP Sockets for the web. It allows for fully bidirectional communication,
+using only one HTTP request (see section \ref{HTTP} on HTTP), that is upgraded to a WebSocket connection. This HTTP handshake
+is important, as it allows for a graceful backwards compatibility, using the same technology as standard web pages.\\
+
+WebSockets are essential for this project. As a real-time application, data needs to move to and from the client and the
+server constantly to relay instructions from the controls to the back-end, an update output data to the front-end.
+Furthermore, to live stream media from the server to clients, WebSockets are used, providing minimal latency. Without
+WebSockets this project would be almost impossible to achieve, with any measure of success.\\
+
+The WebSockets API in HRUI is implemented in two forms: raw and through the Socket.IO framework. The raw form creates and uses
+WebSockets through direct calls to the API and is used for media streaming. The Socket.IO framework adds a layer of
+abstraction to WebSockets, by creating an event-based model. An event is a message that is broadcast by an emitter and
+captured by a listener. The emitter and listener are the server and client, and vice versa. An event carries attached to it a
+JavaScript object which will be received by the listener. The programmer creates these asynchronous events on either the
+server or the client, establishing the behavior of the listener. For example: Every 50 ms the back-end wants to send the front-
+end an update on the value of X in the robots position. With Socket.IO (after setup) the code would be:\\
+
+\begin{figure}[h]
+\centering
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}[fontsize=\footnotesize]{javascript}
+//On the Server side:
+//[...](setup and surrounding code omitted for clarity)
+var x = 10; //value of robot X coordinate (defined here for brevity)
+
+socket.emit("UPDATE_X", x);
+//emit an event with message UPDATE_X and data x (value: 10)
+
+//On the Client side:
+//[...](setup and surrounding code omitted for clarity)
+socket.on("UPDATE_X", function(received_x) {
+              console.log(received_x);
+            };
+//listen for an event with message UPDATE_X
+//and print the value of the data received to the console.
+\end{minted}
+\caption{HTML5 WebSockets: Socket.IO Event Example}
+\end{figure}
+This added layer of abstraction makes using WebSockets very simple, needing only to define when and where in the code events
+are generated and adding listeners for these events. It also makes code much easier to understand, and much more structured,
+closer to the business logic and separated from low level serializing and underlying connections.
+\subsection{HTML5 Device Access}
+\begin{figure}[h]
+\centering
+\includesvg[width=1.4\linewidth/8]{./img/html5_device_access}
+\caption{HTML5 Device Access Badge}
+\end{figure}
+HTML5 Device Access allows the web application to use the hardware of the machine the browser is running on. This means
+anything from microphones and cameras to accelerometers and GPS data.\\
+
+HRUI makes full use of three of these APIs:\\
+
+\begin{itemize}
+  \item \textbf{Microphone}: The Voice Command module (see section \ref{voicecommands}) uses device access to receive audio
+  from the users microphone, which is then recognized (using Annyang) into commands which are sent to the server for use (see
+  figure \ref{html5_voice}). It also uses the WebRTC API to enable an alternative in non-chromium browsers that don't have the
+  speech recognition API, by recording a 5 second audio clip that is sent as a .wav file to the server. WebRTC started out as
+  part of HTML5 but has spun out into its own specification, that allows for peer-to-peer server-less audio and video sharing,
+  among many other multimedia uses which are outside of this reports scope, since they're not used in this project.
+
+  \begin{figure}[h]
+    \begin{center}
+      \includegraphics[width=\linewidth/2]{html5_voice}
+    \end{center}
+    \caption{HTML5 Device Access: Voice Commands in HRUI.\label{html5_voice}}
+  \end{figure}
+  \item \textbf{Device Orientation}: The Device Orientation module (see section \ref{deviceorientation}) gets the orientation,
+   velocity and acceleration from the device (if available) and sends it to the server for use (see figure 
+
+  \ref{html5_orientation})
+  \begin{figure}[h]
+    \begin{center}
+      \includegraphics[width=\linewidth/2]{html5_orientation}
+    \end{center}
+    \caption{HTML5 Device Access: Device Orientation in HRUI.\label{html5_orientation}}
+  \end{figure}
+  \item \textbf{Gamepad}: The Gamepad module (see section \ref{gamepad}) uses the Gamepad API to get the inputs of a gamepad
+  connected to the client machine and send them to the server for use. This extends the HRUI web application controls to
+  virtually any device that can be connected to a web capable device as an input, allowing for external hardware to function
+  seamlessly with this project with little to no integration effort. However, this API is still experimental at the time of
+  writing, and support is limited to a few browsers (Chrome and Firefox mainly), with different implementations that require
+  tweaking of parameters (mainly the mapping of buttons, which changes from Chrome to Firefox and with the controller in use)
+  for consistent usage.
+\end{itemize}
+\subsection{HTML5 Styling}
+\begin{figure}[h]
+\centering
+\includesvg[width=1.4\linewidth/8]{./img/html5_css3}
+\caption{HTML5 Styling Badge}
+\end{figure}
+HTML5 Styling is actually a misnomer, albeit one used by the W3C, because it considers that HTML5 refers to more than just the latest HTML Recommendation, encompassing several specifications and should be used as an umbrella term to encapsulate all technologies of the modern web, calling HTML5 "The cornerstone for modern Web applications"\cite{w3c11}. This is cause of some debate among enthusiasts, but controversy aside, the fact is that HTML5 has no significant styling features (in consonance with the separation between declarative and presentational discussed in previous sections), relying on the CSS3 (Cascading Style Sheets, see section \ref{CSS}) specification for innovation in this aspect.\\
+
+In HRUI many new CSS3 features are used to make the application more visually attractive and useful on different devices:\\
+
+\begin{itemize}
+  \item \textbf{Media Queries}: One the most useful additions made to CSS3 is the ability to apply styles to different viewports (the space where the web page is rendered in a browser) and device types without having to make different versions of the site, by using media queries. A media query basically defines a subset of styling rules that apply only to viewports that fit a certain criteria, while keeping in place the cascading nature of CSS. This means that by making, for example, a media query on the pixel width of the screen, a set of rules will be applied that can drastically change the presentation of the page. In HRUI only one media query is made, specifically to target smartphones (truncated for brevity):\\
+
+  \begin{figure}[h]
+    \centering
+    \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+    \begin{minted}[fontsize=\footnotesize]{css}
+      @media only screen and (max-width: 480px) {
+          .frame {
+              width: 100%;
+          }
+          #rightColumn, #centerColumn, #leftColumn {
+              float: left;
+              clear: both;
+              width: 98%;
+          }
+      }
+    \end{minted}
+    \caption{HTML5 Styling (CSS3): Media Query in HRUI}
+  \end{figure}
+  Which targets screens under 480 pixels wide and applies the enclosed rules only to those screens. All other styling is maintained and applied, through cascading. These rule (and others omitted for brevity) make all modules occupy the whole width of the screen, more appropriate for small, touch based devices than the three-column default for computers and tablets. The user can then scroll through the modules to use them since including more than one module on a smartphone screen at once would clutter the interface and make it virtually unusable. This approach makes a necessary compromise by allowing the active visualization of one module at a time, while allowing all modules to run in the background, visible at the slide of a finger.
+  \begin{figure}[h]
+  \captionsetup{justification=centering}
+      \begin{center}
+        \includegraphics[width=\linewidth/3]{html5_css_mq2}
+      \end{center}
+      \caption{HTML5 Styling (CSS3): HRUI Smartphone version\\(simulated SGS4 using Chrome Dev Tools. Blue bar marks the detected media query)}
+  \end{figure}
+  \begin{figure}[h]
+    \begin{center}
+      \includegraphics[width=\linewidth/2]{html5_css_mq1}
+    \end{center}
+    \caption{HTML5 Styling (CSS3): HRUI Laptop version}
+  \end{figure}
+  \item \textbf{Transitions}: CSS3 Transitions can make the value of element properties change over time, creating an attractive visual effect. HRUI uses this feature (combined with AngularJS Animate, see section \ref{AngularJS}) to animate module activation and deactivation with a fade in/out effect. Because this specification is still not final, it's still necessary to include vendor prefixes to transition rules, as each one implements the feature in slightly different ways.
+  \begin{figure}[h]
+    \centering
+    \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+    \begin{minted}[fontsize=\footnotesize]{css}
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -ms-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+    \end{minted}
+    \caption{HTML5 Styling (CSS3): Transitions in HRUI.}
+  \end{figure}
+  \item \textbf{Gradients}: CSS3 Gradients make backgrounds change from one color to another across the surface of the element. It's used in HRUI to provide a smooth silver background with a lighting effect. As with CSS3 Transitions, vendor prefixes are required.
+  \begin{figure}[h]
+    \centering
+    \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+    \begin{minted}[fontsize=\footnotesize]{css}
+    background-image: -webkit-gradient( linear, left top, right bottom,...);
+    background-image: -o-linear-gradient(right bottom, #CFD1D1 0%, #EDEDED 100%);
+    background-image: -moz-linear-gradient(right bottom, #CFD1D1 0%, #EDEDED 100%);
+    background-image: -webkit-linear-gradient(right bottom, #CFD1D1 0%, #EDEDED 100%);
+    background-image: -ms-linear-gradient(right bottom, #CFD1D1 0%, #EDEDED 100%);
+    background-image: linear-gradient(to right bottom, #CFD1D1 0%, #EDEDED 100%);
+    \end{minted}
+    \caption{HTML5 Styling (CSS3): Gradients in HRUI.}
+  \end{figure}
+  \begin{figure}[h]
+    \begin{center}
+      \frame{\includegraphics[width=\linewidth]{html5_css_gradient}}
+    \end{center}
+    \caption{HTML5 Styling (CSS3): HRUI Header Gradient}
+  \end{figure}
+  \item \textbf{Pseudo Classes}: CSS3 Pseudo Classes are classes that target elements that match a given criteria. For example the :hover pseudo class targets elements over which the cursor is currently held. This allows for some dynamic style changes following user actions. Pseudo Classes existed in CSS2, but CSS3 added 16 new ones, including the one used in HRUI to change the color of disabled buttons to show the situation to the user.
+  \begin{figure}[h]
+    \centering
+    \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+    \begin{minted}[fontsize=\footnotesize]{css}
+    button:disabled {
+    color: grey;
+    box-shadow: inset 1px 1px 1px #3D3242;
+    }
+    \end{minted}
+    \caption{HTML5 Styling (CSS3): Pseudo Classes in HRUI.}
+  \end{figure}
+  \item \textbf{Rounded Borders \& Box Shadows}
+  \begin{figure}[H]
+    \begin{center}
+      \frame{\includegraphics[width=\linewidth/4]{html5_css_round}}
+    \end{center}
+    \caption{HTML5 Styling (CSS3): HRUI Rounded Borders and Box Shadow}
+  \end{figure}
+\end{itemize}
+
 \section{The MEAN Stack} \label{TheMEANStack}
 \subsection{NodeJS}
 \subsection{Express}
