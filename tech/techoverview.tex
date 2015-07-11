@@ -1,3 +1,4 @@
+
 % 	HTML5 Robot User Interface Project Report: Technology Overview
 % 	An ASLab Project,
 % 	Developed by Daniel Peiró
@@ -254,7 +255,7 @@ standard versions). The current standard is ECMAScript 5 originally released in 
 sometime in 2015. Although JavaScript is mainly used client-side even today, it was originally conceived to also run
 server-side. This concept was widely ignored during the early days of the web, focusing on client-side dynamic scripting,
 while using other languages (PHP, CGI, Perl, etc.) on the server-side. The late 2000s and early 2010s have seen a
-resurgence of the idea of server-side JavaScript allowing full-stack (front-end to back-end in javascript) applications,
+resurgence of the idea of server-side JavaScript allowing full-stack (front-end to back-end in JavaScript) applications,
 like this project, to exist. This will be covered in section \ref{TheMEANStack} on the MEAN Stack.\\
 
 The formal classification and description of JavaScript as a language is beyond the scope of this overview, so it won't
@@ -597,7 +598,7 @@ interfaces (see figure \ref{html5_map}).\\
 The Canvas API allows for essentially any sort of content to appear on a website natively without the need for flash, which
 was the go-to resource for animation previously. This amounts to a big leap in graphics and animation versatility for HTML.\\
 
-\subsection{HTML5 WebSockets}
+\subsection{HTML5 WebSockets} \label{html5websockets}
 \begin{figure}[h]
 \centering
 \includesvg[width=1.4\linewidth/8]{./img/html5_connectivity}
@@ -609,7 +610,7 @@ using only one HTTP request (see section \ref{HTTP} on HTTP), that is upgraded t
 is important, as it allows for a graceful backwards compatibility, using the same technology as standard web pages.\\
 
 WebSockets are essential for this project. As a real-time application, data needs to move to and from the client and the
-server constantly to relay instructions from the controls to the back-end, an update output data to the front-end.
+server constantly to relay instructions from the controls to the back-end, and update output data to the front-end.
 Furthermore, to live stream media from the server to clients, WebSockets are used, providing minimal latency. Without
 WebSockets this project would be almost impossible to achieve, with any measure of success.\\
 
@@ -694,12 +695,22 @@ HRUI makes full use of three of these APIs:\\
 \includesvg[width=1.4\linewidth/8]{./img/html5_css3}
 \caption{HTML5 Styling Badge}
 \end{figure}
-HTML5 Styling is actually a misnomer, albeit one used by the W3C, because it considers that HTML5 refers to more than just the latest HTML Recommendation, encompassing several specifications and should be used as an umbrella term to encapsulate all technologies of the modern web, calling HTML5 "The cornerstone for modern Web applications"\cite{w3c11}. This is cause of some debate among enthusiasts, but controversy aside, the fact is that HTML5 has no significant styling features (in consonance with the separation between declarative and presentational discussed in previous sections), relying on the CSS3 (Cascading Style Sheets, see section \ref{CSS}) specification for innovation in this aspect.\\
+HTML5 Styling is actually a misnomer, albeit one used by the W3C, because it considers that HTML5 refers to more than just the
+latest HTML Recommendation, encompassing several specifications and should be used as an umbrella term to encapsulate all
+technologies of the modern web, calling HTML5 "The cornerstone for modern Web applications"\cite{w3c11}. This is cause of some
+debate among enthusiasts, but controversy aside, the fact is that HTML5 has no significant styling features (in consonance
+with the separation between declarative and presentational discussed in previous sections), relying on the CSS3 (Cascading
+Style Sheets, see section \ref{CSS}) specification for innovation in this aspect.\\
 
 In HRUI many new CSS3 features are used to make the application more visually attractive and useful on different devices:\\
 
 \begin{itemize}
-  \item \textbf{Media Queries}: One the most useful additions made to CSS3 is the ability to apply styles to different viewports (the space where the web page is rendered in a browser) and device types without having to make different versions of the site, by using media queries. A media query basically defines a subset of styling rules that apply only to viewports that fit a certain criteria, while keeping in place the cascading nature of CSS. This means that by making, for example, a media query on the pixel width of the screen, a set of rules will be applied that can drastically change the presentation of the page. In HRUI only one media query is made, specifically to target smartphones (truncated for brevity):\\
+  \item \textbf{Media Queries}: One the most useful additions made to CSS3 is the ability to apply styles to different
+  viewports (the space where the web page is rendered in a browser) and device types without having to make different versions
+  of the site, by using media queries. A media query basically defines a subset of styling rules that apply only to viewports
+  that fit a certain criteria, while keeping in place the cascading nature of CSS. This means that by making, for example, a
+  media query on the pixel width of the screen, a set of rules will be applied that can drastically change the presentation of
+  the page. In HRUI only one media query is made, specifically to target smartphones (truncated for brevity):\\
 
   \begin{figure}[h]
     \centering
@@ -718,13 +729,20 @@ In HRUI many new CSS3 features are used to make the application more visually at
     \end{minted}
     \caption{HTML5 Styling (CSS3): Media Query in HRUI}
   \end{figure}
-  Which targets screens under 480 pixels wide and applies the enclosed rules only to those screens. All other styling is maintained and applied, through cascading. These rule (and others omitted for brevity) make all modules occupy the whole width of the screen, more appropriate for small, touch based devices than the three-column default for computers and tablets. The user can then scroll through the modules to use them since including more than one module on a smartphone screen at once would clutter the interface and make it virtually unusable. This approach makes a necessary compromise by allowing the active visualization of one module at a time, while allowing all modules to run in the background, visible at the slide of a finger.
+  Which targets screens under 480 pixels wide and applies the enclosed rules only to those screens. All other styling is
+  maintained and applied, through cascading. These rule (and others omitted for brevity) make all modules occupy the whole
+  width of the screen, more appropriate for small, touch based devices than the three-column default for computers and
+  tablets. The user can then scroll through the modules to use them since including more than one module on a smartphone
+  screen at once would clutter the interface and make it virtually unusable. This approach makes a necessary compromise by
+  allowing the active visualization of one module at a time, while allowing all modules to run in the background, visible at
+  the slide of a finger.
   \begin{figure}[h]
   \captionsetup{justification=centering}
       \begin{center}
         \includegraphics[width=\linewidth/3]{html5_css_mq2}
       \end{center}
-      \caption{HTML5 Styling (CSS3): HRUI Smartphone version\\(simulated SGS4 using Chrome Dev Tools. Blue bar marks the detected media query)}
+      \caption{HTML5 Styling (CSS3): HRUI Smartphone version\\(simulated SGS4 using Chrome Dev Tools. Blue bar marks the
+      detected media query)}
   \end{figure}
   \begin{figure}[h]
     \begin{center}
@@ -732,7 +750,10 @@ In HRUI many new CSS3 features are used to make the application more visually at
     \end{center}
     \caption{HTML5 Styling (CSS3): HRUI Laptop version}
   \end{figure}
-  \item \textbf{Transitions}: CSS3 Transitions can make the value of element properties change over time, creating an attractive visual effect. HRUI uses this feature (combined with AngularJS Animate, see section \ref{AngularJS}) to animate module activation and deactivation with a fade in/out effect. Because this specification is still not final, it's still necessary to include vendor prefixes to transition rules, as each one implements the feature in slightly different ways.
+  \item \textbf{Transitions}: CSS3 Transitions can make the value of element properties change over time, creating an
+  attractive visual effect. HRUI uses this feature (combined with AngularJS Animate, see section \ref{AngularJS}) to animate
+  module activation and deactivation with a fade in/out effect. Because this specification is still not final, it's still
+  necessary to include vendor prefixes to transition rules, as each one implements the feature in slightly different ways.
   \begin{figure}[h]
     \centering
     \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
@@ -745,7 +766,9 @@ In HRUI many new CSS3 features are used to make the application more visually at
     \end{minted}
     \caption{HTML5 Styling (CSS3): Transitions in HRUI.}
   \end{figure}
-  \item \textbf{Gradients}: CSS3 Gradients make backgrounds change from one color to another across the surface of the element. It's used in HRUI to provide a smooth silver background with a lighting effect. As with CSS3 Transitions, vendor prefixes are required.
+  \item \textbf{Gradients}: CSS3 Gradients make backgrounds change from one color to another across the surface of the
+  element. It's used in HRUI to provide a smooth silver background with a lighting effect. As with CSS3 Transitions, vendor
+  prefixes are required.
   \begin{figure}[h]
     \centering
     \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
@@ -765,7 +788,10 @@ In HRUI many new CSS3 features are used to make the application more visually at
     \end{center}
     \caption{HTML5 Styling (CSS3): HRUI Header Gradient}
   \end{figure}
-  \item \textbf{Pseudo Classes}: CSS3 Pseudo Classes are classes that target elements that match a given criteria. For example the :hover pseudo class targets elements over which the cursor is currently held. This allows for some dynamic style changes following user actions. Pseudo Classes existed in CSS2, but CSS3 added 16 new ones, including the one used in HRUI to change the color of disabled buttons to show the situation to the user.
+  \item \textbf{Pseudo Classes}: CSS3 Pseudo Classes are classes that target elements that match a given criteria. For example
+  the :hover pseudo class targets elements over which the cursor is currently held. This allows for some dynamic style changes
+  following user actions. Pseudo Classes existed in CSS2, but CSS3 added 16 new ones, including the one used in HRUI to change
+  the color of disabled buttons to show the situation to the user.
   \begin{figure}[h]
     \centering
     \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
@@ -780,24 +806,111 @@ In HRUI many new CSS3 features are used to make the application more visually at
   \item \textbf{Rounded Borders \& Box Shadows}
   \begin{figure}[H]
     \begin{center}
-      \frame{\includegraphics[width=\linewidth/4]{html5_css_round}}
+      \frame{\includegraphics[width=\linewidth/3]{html5_css_round}}
     \end{center}
-    \caption{HTML5 Styling (CSS3): HRUI Rounded Borders and Box Shadow}
+    \caption{HTML5 Styling (CSS3): HRUI Rounded Borders and Box Shadow Example}
   \end{figure}
 \end{itemize}
 
 \section{The MEAN Stack} \label{TheMEANStack}
-\subsection{NodeJS}
+\begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=0.7\linewidth]{mean}
+    \end{center}
+    \caption{MEAN Stack Logo}
+  \end{figure}
+The MEAN (MongoDB, Express, AngularJS, Node.js) Stack is an open source web development full stack specifically suited for web applications. To understand the definition, the concept of the software engineering stack must be understood first.\\
+
+A stack in software engineering (not to be confused with the programming concept of the stack, an abstract data collection
+used to store and retrieve data in programs using ``push and pop'' instructions) is a collection of software or technologies
+used to create a complete solution for the development of an application. This software bundle serves as a platform for the
+application, providing the software required to realize its architecture. In web development this architecture is typically a
+server-client paradigm (see chapter \ref{systemarchitecture} on the HRUI System Architecture, particularly section 
+\ref{clientserverpattern} on the Client-Server pattern), in which the main components traditionally are: an operating system that will run the server; web server software; a database to store the application data (a web server is stateless, as discussed in section \ref{HTTP}, so a database is needed to supply "memory" to the architecture); and finally a programming language in which programs or scripts will be written to perform the tasks required by the application on the server.\\
+
+The most used and famous web development stack is of course the LAMP (Linux OS, Apache Web Server, MySQL Database, PHP
+programming language) Stack, and its variants (MAMP for Mac OS, WAMP for Windows OS, LAMP with Python or Perl as programming
+languages...). It's been the default way to create a web server since the mid 90s', mainly because of its simplicity and
+extensibility, allowing for the last component, the programming language to be virtually any language, by using scripts that
+can call external programs. Of course, it's also fully open source, which is also one of its greatest strengths. The biggest
+problem with the LAMP stack in modern web application development is that it relies heavily on HTTP requests (see section \ref{HTTP} on HTTP) and therefore is not suited to real-time constraints. The way a LAMP stack generally functions requires that
+for every HTTP request made from the client, either an HTML document is served or a script (PHP/Python/Perl) is run, that then
+generates HTML output that is sent back to the client by the server. This last method is called CGI (Common Gateway
+Interface), used since the mid 90s' to create more interactive web content circumventing the constraints of a document-based
+web, but even this is unsuitable for real-time, as these requests would have to be made every few milliseconds to achieve the
+required responsiveness, resulting in unsustainable overhead on the server. The true solution for real-time web applications
+is WebSockets (see section \ref{html5websockets} on HTML5 WebSockets) that allow bidirectional communication over one TCP
+connection upgraded from an HTTP request. The LAMP Stack was developed much before this technology and is built on a
+completely different communication pattern, so trying to integrate WebSockets into LAMP makes little sense when building a new
+application. It is possible (using PHP or with mods to the Apache Server itself), but it goes against the paradigm of a LAMP
+server, making it inelegant and bound to be a limited solution.\\
+
+The MEAN Stack fully supports WebSockets and in fact is the go-to way of implementing them in modern web applications. The
+main reason for this is part of the definition given at the beginning of this section: the MEAN Stack is a \textit{full}
+stack. This means that unlike other web development stacks (such as LAMP), the stack provides software for the development of
+the front-end (the client-side) as well as the back-end (the server-side). Furthermore, both client and server (front-end and
+back-end) are written in the same language: JavaScript. This allows for code on both sides to be nearly identical in their
+implementation and makes a protocol like WebSockets that allows for full bidirectional communication very easy to implement
+because no translation of the data needs to take place on the application level. Either the client or the server send data
+over this protocol in a way the receiving program can instantly comprehend, because it's in the same language, JavaScript  
+(see section \ref{html5websockets} for an example). This makes the MEAN Stack the best solution for real-time modern web
+applications, such as this project.\\
+
+Another great advantage of the MEAN Stack is its portability. In the acronym, no operating system is included because the MEAN
+Stack can run on any OS that can run its components, completely agnostically. This is possible thanks to Node.js, which will
+be discussed further in the following section. What this means is that an application using the MEAN Stack can have its
+server deployed on Linux, Mac or Windows, or any OS that has Node.js and MongoDB software packages without making any changes
+to the code, if no OS level APIs or external programs are used that require a specific platform. In HRUI, media streaming is
+restricted to the Linux platform because access to OS level APIs (Unix device files that are only present in Linux
+distributions like /dev/videoX) and external programs (FFMpeg/Avconv) is required, but the core application is fully
+functional on any platform, without any changes made to the code (media streaming will simply not work, without crashing or
+halting the application, using error handling procedures).\\
+
+To complete the breakdown of the definition of the MEAN Stack, open-source software is software that has its source code available to the public for study, discussion, distribution, modification and redistribution for any purpose. The Open Source Software Movement is discussed as part of the social and professional implications of engineering in chapter \ref{conclusions} section \ref{opensourcemovement}.\\
+
+In the following sections, the components of the MEAN Stack will be briefly discussed.\\
+
+\subsection{Node.js}
+\begin{figure}[H]
+\centering
+\includesvg[width=0.7\linewidth]{./img/nodejs}
+\caption{Node.js Logo}
+\end{figure}
+The creators of Node.js define it as ``a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices''\cite{nodejs15}. This essentially means that it's a modified version of the JavaScript engine (the software that runs JavaScript in browsers) present in the Google Chrome Browser (the V8 JavaScript Engine) that runs locally instead of in the browser. The JavaScript code that's usually run alongside HTML to manipulate the DOM is run locally, independent from the DOM, used as any other general purpose programming language.\\
+
+Node.js was created by Ryan Dahl in 2009 after feeling frustrated by traditional request-response centric servers that don't acknowledge concurrent requests (particularly after seeing how a file upload app was inefficiently requesting the server to update the percentage of uploaded data\cite{nodesummit12}) and constantly lag the user experience waiting for requests to process synchronously. He decided to create a framework combining JavaScript, a very well known language, the Google Chrome V8 JavaScript engine that was released in 2008 as open source software, and non-blocking IO, for web applications that required real-time data transmission.
+
+The V8 JavaScript engine on which Node.js is based, is somewhat different to previous JavaScript engines in that it compiles the code into machine code before execution instead of interpreting it on the fly. Without going into more technical explanations, this is the same difference between C code that is compiled into machine code that runs directly on the CPU of the computer, or any interpreted language such as Python that is interpreted instruction by instruction. In short, compiled code will always be faster than interpreted code. This makes the V8 engine very fast, compared to other interpreting engines. Another consequence of using an engine like this is that all Node.js applications are cross-platform. Since all the code is compiled into machine code by the engine, any machine that can run the engine can run any Node.js application, similarly to how any machine that can run the JVM (Java Virtual Machine) can run any Java program. Of course, if the application makes use of OS Level APIs or requires external programs, it will be compromised when deployed on different platforms, but any fully native apps will run indistinguishably on different platforms. In the case of HRUI, which does use external programs and OS level APIs, error handling functions permit the application to handle other platforms, downgrading the application without crashing it (media streaming will not work on platforms other than Linux). Node.js is available for most popular Linux distributions, MAC OSX, Windows and runs on 32/64 bit architectures and ARM.\\
+
+Node.js is event driven, which in short means that it does not run code synchronously, instead relying on listening for events (any significant change in the state of the application is called an event) that are handled by functions called callbacks. The main loop of a Node.js is reduced to listening for events and directing them to the function that handles that particular event, which in turn should have a callback function that is run when the handler is done. What this means without going into technical details is that well designed Node.js applications are extremely lightweight when it comes to CPU load, because most of the time, the application is not doing anything, in contrast with synchronous applications, that are constantly loading the CPU with instructions because they have to be executed in order. This makes it specially suited for portable applications, that need to run on low frequency CPUs. This also makes it very well suited for web applications that require a large amount of concurrent connections all with the same priority. In layman's terms, when a client requires a task performed by the server, instead of having to execute the task immediately without doing anything else, the task is queued to start, while the server goes back to listening for more client requests. Once the CPU has gotten around to finalizing the task (scheduling its CPU time with the rest of concurrent tasks), the callback function is called signaling the completion to the server, which can then provide the response to the client. This prioritizes the responsiveness towards the clients, as no request is lost or put on hold because a task is still executing.\\
+
+This makes Node.js ideal for a single-page GUI (Graphical User Interface) web application that requires responsiveness and real-time data transmissions, such as HRUI. With a traditional back-end, it would be near impossible to achieve a responsive interface to represent data updates on the page and send commands from the client in milliseconds. Synchronous requests would block concurrent tasks, meaning that, for example, a flick of the joystick would make the reception of position data lag, or vice versa.\\
+
+Node.js has a vibrant community of developers making modules that are freely available for use through node's package manager. Installing new modules for use in a project is as simple as running the command ``npm install package''. HRUI uses many of these packages, including but not limited to:
+\begin{itemize}
+  \item \textbf{Socket.IO}: An event-base framework for WebSockets (see section \ref{html5websockets} for more).
+  \item \textbf{Monk}: An abstraction layer to access the MongoDB Node.js driver.
+  \item \textbf{PNGJS}: A PNG Image decoder/encoder used to generate the map from a binary-matrix/parse the user-drawn map.
+  \item \textbf{Busboy}: A module that parses incoming HTTP requests, used to accept file uploads from the client (map image).
+\end{itemize}
+The most important module used in HRUI is Express, which is discussed in the following section.
 \subsection{Express}
+\begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=0.7\linewidth]{express}
+    \end{center}
+    \caption{Express Logo}
+  \end{figure}
 \subsection{MongoDB}
 \subsection{AngularJS} \label{AngularJS}
-\section{Python}
+
 \section{Development Environment \& Tools}
 \subsection{Linux}
 \subsection{Sublime Text}
 \subsection{Git}
 \subsection{\LaTeX}
 \subsection{PM2}
+\section{Python}
 \section{Hardware}
 \subsection{Khepera III}
 \subsection{Crazyflie 2}
