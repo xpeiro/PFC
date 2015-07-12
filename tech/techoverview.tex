@@ -1,4 +1,3 @@
-
 % 	HTML5 Robot User Interface Project Report: Technology Overview
 % 	An ASLab Project,
 % 	Developed by Daniel Peiró
@@ -47,7 +46,7 @@ Accept-Language: es-ES,es;q=0.8,en;q=0.6
 Cookie: authorstyle=no
 \end{minted}
 This example is taken from a Chrome Browser ``development tools'' window (accesible with Ctrl+Shift+J), when opening
-the http://www.w3.org URL.\\
+the \url{http://www.w3.org} URL.\\
 
 This simple text message is asking the server to GET (HTTP Method) the path ``/'' (the root path) with version 1.1 of
 the HTTP Protocol. The rest of the text is not required (HTTP 1.1 does require the Host Header to be present), but
@@ -564,7 +563,7 @@ controls, using the header as the title of the page, and the footer to include c
   \end{center}
   \caption{HTML5 Semantics: Use of Header and Footer (Marked in green) in HRUI}
 \end{figure}
-\subsection{HTML5 Canvas Element}
+\subsection{HTML5 Canvas Element} \label{html5canvaselement}
 \begin{figure}[h]
 \centering
 \includesvg[width=1.4\linewidth/8]{./img/html5_canvas}
@@ -689,7 +688,7 @@ HRUI makes full use of three of these APIs:\\
   tweaking of parameters (mainly the mapping of buttons, which changes from Chrome to Firefox and with the controller in use)
   for consistent usage.
 \end{itemize}
-\subsection{HTML5 Styling}
+\subsection{HTML5 Styling} \label{html5styling}
 \begin{figure}[h]
 \centering
 \includesvg[width=1.4\linewidth/8]{./img/html5_css3}
@@ -812,6 +811,7 @@ In HRUI many new CSS3 features are used to make the application more visually at
   \end{figure}
 \end{itemize}
 
+HRUIs' single web page is written in valid HTML5. What this means is that it adheres strictly to the W3C Recommendation and is well-formed (does not contain errors). This has been checked throughout the project using the W3C HTML Validation Service\cite{w3cvalidation} to fully comply with the specification.
 \section{The MEAN Stack} \label{TheMEANStack}
 \begin{figure}[H]
     \begin{center}
@@ -866,27 +866,73 @@ distributions like /dev/videoX) and external programs (FFMpeg/Avconv) is require
 functional on any platform, without any changes made to the code (media streaming will simply not work, without crashing or
 halting the application, using error handling procedures).\\
 
-To complete the breakdown of the definition of the MEAN Stack, open-source software is software that has its source code available to the public for study, discussion, distribution, modification and redistribution for any purpose. The Open Source Software Movement is discussed as part of the social and professional implications of engineering in chapter \ref{conclusions} section \ref{opensourcemovement}.\\
+To complete the breakdown of the definition of the MEAN Stack, open-source software is software that has its source code
+available to the public for study, discussion, distribution, modification and redistribution for any purpose. The Open Source
+Software Movement is discussed as part of the social and professional implications of engineering in chapter \ref{conclusions}
+section \ref{opensourcemovement}.\\
 
 In the following sections, the components of the MEAN Stack will be briefly discussed.\\
-
-\subsection{Node.js}
+\newpage
+\subsection{Node.js} \label{nodejs}
 \begin{figure}[H]
 \centering
 \includesvg[width=0.7\linewidth]{./img/nodejs}
 \caption{Node.js Logo}
 \end{figure}
-The creators of Node.js define it as ``a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices''\cite{nodejs15}. This essentially means that it's a modified version of the JavaScript engine (the software that runs JavaScript in browsers) present in the Google Chrome Browser (the V8 JavaScript Engine) that runs locally instead of in the browser. The JavaScript code that's usually run alongside HTML to manipulate the DOM is run locally, independent from the DOM, used as any other general purpose programming language.\\
+The creators of Node.js define it as ``a platform built on Chrome's JavaScript runtime for easily building fast, scalable
+network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect
+for data-intensive real-time applications that run across distributed devices''\cite{nodejs15}. This essentially means that
+it's a modified version of the JavaScript engine (the software that runs JavaScript in browsers) present in the Google Chrome
+Browser (the V8 JavaScript Engine) that runs locally instead of in the browser. The JavaScript code that's usually run
+alongside HTML to manipulate the DOM is run locally, independent from the DOM, used as any other general purpose programming
+language.\\
 
-Node.js was created by Ryan Dahl in 2009 after feeling frustrated by traditional request-response centric servers that don't acknowledge concurrent requests (particularly after seeing how a file upload app was inefficiently requesting the server to update the percentage of uploaded data\cite{nodesummit12}) and constantly lag the user experience waiting for requests to process synchronously. He decided to create a framework combining JavaScript, a very well known language, the Google Chrome V8 JavaScript engine that was released in 2008 as open source software, and non-blocking IO, for web applications that required real-time data transmission.
+Node.js was created by Ryan Dahl in 2009 after feeling frustrated by traditional request-response centric servers that don't
+acknowledge concurrent requests (particularly after seeing how a file upload app was inefficiently requesting the server to
+update the percentage of uploaded data\cite{nodesummit12}) and constantly lag the user experience waiting for requests to
+process synchronously. He decided to create a framework combining JavaScript, a very well known language, the Google Chrome V8
+JavaScript engine that was released in 2008 as open source software, and non-blocking IO, for web applications that required
+real-time data transmission.
 
-The V8 JavaScript engine on which Node.js is based, is somewhat different to previous JavaScript engines in that it compiles the code into machine code before execution instead of interpreting it on the fly. Without going into more technical explanations, this is the same difference between C code that is compiled into machine code that runs directly on the CPU of the computer, or any interpreted language such as Python that is interpreted instruction by instruction. In short, compiled code will always be faster than interpreted code. This makes the V8 engine very fast, compared to other interpreting engines. Another consequence of using an engine like this is that all Node.js applications are cross-platform. Since all the code is compiled into machine code by the engine, any machine that can run the engine can run any Node.js application, similarly to how any machine that can run the JVM (Java Virtual Machine) can run any Java program. Of course, if the application makes use of OS Level APIs or requires external programs, it will be compromised when deployed on different platforms, but any fully native apps will run indistinguishably on different platforms. In the case of HRUI, which does use external programs and OS level APIs, error handling functions permit the application to handle other platforms, downgrading the application without crashing it (media streaming will not work on platforms other than Linux). Node.js is available for most popular Linux distributions, MAC OSX, Windows and runs on 32/64 bit architectures and ARM.\\
+The V8 JavaScript engine on which Node.js is based, is somewhat different to previous JavaScript engines in that it compiles
+the code into machine code before execution instead of interpreting it on the fly. Without going into more technical
+explanations, this is the same difference between C code that is compiled into machine code that runs directly on the CPU of
+the computer, or any interpreted language such as Python that is interpreted instruction by instruction. In short, compiled
+code will always be faster than interpreted code. This makes the V8 engine very fast, compared to other interpreting engines.
+Another consequence of using an engine like this is that all Node.js applications are cross-platform. Since all the code is
+compiled into machine code by the engine, any machine that can run the engine can run any Node.js application, similarly to
+how any machine that can run the JVM (Java Virtual Machine) can run any Java program. Of course, if the application makes use
+of OS Level APIs or requires external programs, it will be compromised when deployed on different platforms, but any fully
+native apps will run indistinguishably on different platforms. In the case of HRUI, which does use external programs and OS
+level APIs, error handling functions permit the application to handle other platforms, downgrading the application without
+crashing it (media streaming will not work on platforms other than Linux). Node.js is available for most popular Linux
+distributions, MAC OSX, Windows and runs on 32/64 bit architectures and ARM.\\
 
-Node.js is event driven, which in short means that it does not run code synchronously, instead relying on listening for events (any significant change in the state of the application is called an event) that are handled by functions called callbacks. The main loop of a Node.js is reduced to listening for events and directing them to the function that handles that particular event, which in turn should have a callback function that is run when the handler is done. What this means without going into technical details is that well designed Node.js applications are extremely lightweight when it comes to CPU load, because most of the time, the application is not doing anything, in contrast with synchronous applications, that are constantly loading the CPU with instructions because they have to be executed in order. This makes it specially suited for portable applications, that need to run on low frequency CPUs. This also makes it very well suited for web applications that require a large amount of concurrent connections all with the same priority. In layman's terms, when a client requires a task performed by the server, instead of having to execute the task immediately without doing anything else, the task is queued to start, while the server goes back to listening for more client requests. Once the CPU has gotten around to finalizing the task (scheduling its CPU time with the rest of concurrent tasks), the callback function is called signaling the completion to the server, which can then provide the response to the client. This prioritizes the responsiveness towards the clients, as no request is lost or put on hold because a task is still executing.\\
+Node.js is event driven, which in short means that it does not run code synchronously, instead relying on listening for events
+(any significant change in the state of the application is called an event) that are handled by functions called callbacks.
+The main loop of a Node.js is reduced to listening for events and directing them to the function that handles that particular
+event, which in turn should have a callback function that is run when the handler is done. What this means without going into
+technical details is that well designed Node.js applications are extremely lightweight when it comes to CPU load, because most
+of the time, the application is not doing anything, in contrast with synchronous applications, that are constantly loading the
+CPU with instructions because they have to be executed in order. This makes it specially suited for portable applications,
+that need to run on low frequency CPUs. This also makes it very well suited for web applications that require a large amount
+of concurrent connections all with the same priority. In layman's terms, when a client requires a task performed by the
+server, instead of having to execute the task immediately without doing anything else, the task is queued to start, while the
+server goes back to listening for more client requests. Once the CPU has gotten around to finalizing the task (scheduling its
+CPU time with the rest of concurrent tasks), the callback function is called signaling the completion to the server, which can
+then provide the response to the client. This prioritizes the responsiveness towards the clients, as no request is lost or put
+on hold because a task is still executing.\\
 
-This makes Node.js ideal for a single-page GUI (Graphical User Interface) web application that requires responsiveness and real-time data transmissions, such as HRUI. With a traditional back-end, it would be near impossible to achieve a responsive interface to represent data updates on the page and send commands from the client in milliseconds. Synchronous requests would block concurrent tasks, meaning that, for example, a flick of the joystick would make the reception of position data lag, or vice versa.\\
+This makes Node.js ideal for a single-page GUI (Graphical User Interface) web application that requires responsiveness and 
+real-timedata transmissions, such as HRUI. With a traditional back-end, it would be near impossible to achieve a responsive
+interface to represent data updates on the page and send commands from the client in milliseconds. Synchronous requests would
+block concurrent tasks, meaning that, for example, a flick of the joystick would make the reception of position data lag, or
+vice versa.\\
 
-Node.js has a vibrant community of developers making modules that are freely available for use through node's package manager. Installing new modules for use in a project is as simple as running the command ``npm install package''. HRUI uses many of these packages, including but not limited to:
+Node.js has a vibrant community of developers making modules that are freely available for use through node's package manager,
+NPM. Installing new modules for use in a project is as simple as running the command ``npm install package''. HRUI itself can
+be installed simply by running ``npm install hrui'' which will install all dependencies automatically and get the latest
+version of hrui from github. HRUI uses many of these packages, including but not limited to:
 \begin{itemize}
   \item \textbf{Socket.IO}: An event-base framework for WebSockets (see section \ref{html5websockets} for more).
   \item \textbf{Monk}: An abstraction layer to access the MongoDB Node.js driver.
@@ -896,22 +942,363 @@ Node.js has a vibrant community of developers making modules that are freely ava
 The most important module used in HRUI is Express, which is discussed in the following section.
 \subsection{Express}
 \begin{figure}[H]
-    \begin{center}
-      \includegraphics[width=0.7\linewidth]{express}
-    \end{center}
-    \caption{Express Logo}
-  \end{figure}
-\subsection{MongoDB}
-\subsection{AngularJS} \label{AngularJS}
+  \begin{center}
+    \includegraphics[width=0.7\linewidth]{express}
+  \end{center}
+  \caption{Express Logo}
+\end{figure}
+Express is a Node.js module defined as a routing and middleware web framework. What this essentially means is that express functions as a minimal web server, relying on middleware functions to provide responses to HTTP requests (see section \ref{HTTP} on HTTP for more on requests). Middleware functions are simply handler functions that receive a request through Express, process it in whatever manner necessary and either provide a response or pass the request onto the next middleware function in line. The following example illustrates a basic Express server.
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[fontsize=\footnotesize]{javascript}
+  var express = require('express'); //Require the express module (equivalent to include in C)
+  var app = express(); //Instantiate the express framework 
 
+  //Middleware function: Called on GET Request on the root of the server
+  app.get('/', function (req, res) {
+    //req contains the HTTP request. This instruction prints it to console.
+    console.log(req);
+    //res is the HTTP response. This response is just a string confirming reception.
+    res.send('Response: Request Received');
+  });
+
+  var server = app.listen(3000, function () {
+    console.log('Server listening on port 3000.')
+  });
+  \end{minted}
+  \caption{Express minimal web server: Middleware functions.\\(modified from source: \url{http://expressjs.com/})}
+\end{figure}
+Running this code would print to the console ``Server listening on port 3000.''. Using any web browser and opening the URL http://localhost:3000 would print the response ``Response: Request Received'' in the browser. With express, it takes less than 10 lines of code to create a web server. It's important to note that these middleware functions are non-blocking, meaning that they are not executed synchronously immediately upon request, instead being run asynchronously with the server receiving notification of the response when the processing is complete. This benefits responsiveness when handling many concurrent requests and is part of the Node.js non-blocking I/O event driven philosophy (see the previous section \ref{nodejs}). Express allows for all sorts of middleware, not just request-response functions. Many third-party express middleware is available through npm (Node Package Manager), some of them used in this project. Middleware used in HRUI:
+\begin{itemize}
+  \item \textbf{Compression}: this middleware compresses all HTTP responses using gzip reducing the amount of data transmitted, making more efficient use of network resources (compression can be confirmed looking at the value of the HTTP header ``Content-Encoding'' or using a website like whatsmyip.org).
+  \begin{figure}[H]
+  \captionsetup{justification=centering}
+  \begin{center}
+    \includegraphics[width=\linewidth]{express_compression}
+  \end{center}
+  \caption{Express Middleware: Compression. Results of compression test (81.9\%)\\(Source: \url{http://www.whatsmyip.org/})}
+  \end{figure}
+  \item \textbf{Busboy}: HTTP Request parsing middleware. Parses the HTTP request and allows events to arise on certain types of requests like POST requests with files attached. This is used in HRUI to upload a map from the client to the server and save it on the server.
+  \begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[fontsize=\footnotesize]{javascript}
+  //Setup map upload http response
+  var busboy = require('connect-busboy');
+  app.use(busboy());
+  //a POST request is made to /mapupload with a file attached to it.
+  app.post('/mapupload', function(req, res) {
+      var fstream;
+      req.pipe(req.busboy);
+      //event handler when busboy detects a file attachment.
+      req.busboy.on('file', function(fieldname, file, filename) {
+          //write attached file to disk asynchronously.
+          console.log("HRUI: Uploading " + filename + ' to public/images/uploadmap');
+          fstream = fs.createWriteStream(__dirname + '/../public/images/uploadmap');
+          file.pipe(fstream);
+          //once written to disk, respond to client.
+          fstream.on('close', function() {
+              res.send('Uploaded');
+              console.log("HRUI: Uploaded " + filename + ' succesfully');
+          });
+      });
+  });
+  \end{minted}
+  \caption{Express Middleware: Map Upload with Busboy code (Modified for clarity)}
+  \end{figure}
+  \item \textbf{Morgan}: Logger middleware. Logs to the console all HTTP requests along with the status and timing of the response.
+  \begin{figure}[H]
+  \captionsetup{justification=centering}
+  \begin{center}
+    \includegraphics[width=0.7\linewidth]{express_logger}
+  \end{center}
+  \caption{Express Middleware: HRUI Example Morgan Logger Output\\(Normally configured to only show errors with response code > 400)}
+  \end{figure}
+  \item \textbf{Express Static}: This first-party middleware makes serving files from a directory as simple as: \mintinline{javascript}{app.use(express.static('public'));} Where 'public' is the folder containing the static content. This is useful in sites with few web pages, such as single-page applications like HRUI.
+  \item \textbf{Serve Favicon}: Middleware to serve a favicon to web browsers. A Favicon is the icon that appears in modern browsers next to the URL in the search bar and in Bookmark bars. HRUI's Favicon is an NES Controller.\includesvg[height=12pt]{./img/favicon}
+  \item \textbf{Custom Error Handling Middleware}: Instead of using some third-party error catching middleware, that would frankly be overkill, given that HRUI is a single-page application and is not designed for mass usage, making request errors infrequent, a small error handling middleware function was designed. It is placed at the end of all other middleware calls, meaning that if it's ever reached, no other middleware function could handle it. It generates a bit of HTML that presents the error to the user.
+  \begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[fontsize=\footnotesize]{javascript}
+  //Setup 404 error handler (if no handler before this is called, url not found)
+  app.use(function(req, res, next) {
+      var err = new Error('Not Found');
+      err.status = 404;
+      next(err);
+  });
+  // Display error in html.
+  app.use(function(err, req, res, next) {
+      res.status(err.status || 500);
+      res.send('<h1>Error: ' + err.status + '<br>' + err.message + '</h1>' +
+          '<h3>Description: ' + req.url + ' was not found.</h3>');
+  });
+  \end{minted}
+  \caption{Express Middleware: HRUI Error handling custom middleware}
+  \end{figure}
+  \begin{figure}[H]
+  \captionsetup{justification=centering}
+  \begin{center}
+    \includegraphics[width=0.5\linewidth]{express_error}
+  \end{center}
+  \caption{Express Middleware: HRUI Error handling response}
+  \end{figure}
+\end{itemize}
+Many other middleware modules are available for express, (Layout engines like Jade, that allow creation of templates to make dozens of similar pages without having to write each one independently. Cookie parsers. etc.) and many more are being developed, making it a very versatile, lightweight alternative to traditional servers like Apache or Nginx.
+\subsection{MongoDB}
+\begin{figure}[H]
+  \captionsetup{justification=centering}
+  \begin{center}
+    \includegraphics[width=0.7\linewidth]{mongodb}
+  \end{center}
+  \caption{MongoDB Logo}
+\end{figure}
+MongoDB (the name is derived from huMONGOus) is a NoSQL (Not Only SQL (Structured Query Language)) database. A NoSQL database does not use a relational model, or as the acronym suggests, can use other models as well. The relational model (developed by Edgar Frank Codd in 1970) basically uses a table to store data with logic bindings on each row, called relations.
+\begin{figure}[H]
+  \captionsetup{justification=centering}
+  \begin{center}
+    \includegraphics[width=0.6\linewidth]{mongodb_relational}
+  \end{center}
+  \caption{MongoDB: Relational Database Example.\\(Source: \url{http://www.careerbless.com/})}
+\end{figure}
+This model was so extended before NoSQL databases that a special-purpose semi-standard programming language was developed for these DBMS (DataBase Management System). The relational model, while still very much prevalent in web development, has problems with horizontal scalability (using networks of computers to host large databases, required specially for big data applications), performance (querying speed is largely affected by the size of the database and the complexity of the query) and it can be overly complex in design. NoSQL databases on the other hand tend to be much faster and scalable, with simpler models, but sacrifice some consistency when compared to relational databases. This makes NoSQL adequate for applications that require large amounts of distributed data and applications that require very fast read/write operations. HRUI in its current state, only requires the latter, as the database is the interface with which controllers access and write data to and from the model (see section \ref{mvcpattern} on the Model-View-Controller pattern), making the speed of database I/O crucial. In section \ref{scalability} of chapter \ref{futuredevelopment} the possibility of scaling HRUI horizontally in future development is discussed.\\
+
+MongoDB is a document-based database. This model is very simple, in that the database is merely a collection of objects (documents), each containing data regarding each object. Each document can have any amount of attributes that can be completely unrelated to the attributes of other documents. A MongoDB database is best described as a collection of objects or ``things'' without any obligation to be related to one another. This makes it very simple to implement, as almost no restrictions apply to documents, in contrast with the rigid nature of tables in the relational model.\\
+
+MongoDB uses JSON (JavaScript Object Notation) to describe documents. Again, striving for simplicity, JSON can be defined very succinctly (see \url{http://json.org/}), and is of course very well suited to use with Node.js, given that no translation is required when reading and writing to the database. It should be noted that documents aren't stored in this format in MongoDB, using instead BSON (Binary JSON), which transforms JSON into binary data for enhanced performance.
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}{javascript}
+{
+    "_id": 0,
+    "item": "joystick",
+    "x": "0.00",
+    "y": "0.00",
+    "mode": "lock4ways"
+}
+{
+    "_id": 2,
+    "item": "robotGeolocation",
+    "latitude": 40.496534,
+    "longitude": -3.877457,
+    "accuracyRadiusInMeters": "5"
+}
+{
+    "_id": 4,
+    "item": "profiles",
+}
+\end{minted}
+\caption{MongoDB: HRUI Initial JSON Documents (abridged for brevity)}
+\end{figure}
+The fact that MongoDB uses JSON as a format, doesn't imply that it's only suitable for use with programs written in JavaScript. With SQL not being a suitable language, MongoDB uses drivers to be accessed from programs, apart from the "mongo shell" interactive command line tool. These drivers are essentially libraries that supply simple calls to query, insert, delete documents and so on from the database. Drivers are available for all modern programming languages (C/C++, C\#, Java, Python...\cite{mongodb11}) and allow for simple, fast communication with the database.
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}{python}
+#Import mongoDB driver
+import pymongo
+from pymongo import MongoClient
+#Connect to MongoDB local instance
+mongoclient = MongoClient()
+db = mongoclient.hrui
+data = db.data
+#Obtain a Python dictionary representing the document
+deviceData = data.find_one({"item": "deviceData"})
+#use data
+thrust = float(deviceData['devOrientation']['beta'])
+\end{minted}
+\caption{MongoDB: CrazyFlie Python Controller MongoDB usage (abridged for clarity)}
+\end{figure}
+This is specially useful for HRUI, as back-end controllers that read/write data from the model can be written in the developers choice of language, making it extremely simple to integrate controllers for any robot, in any language. This decoupling of the user interface with the actual robot controller will be discussed further in section \ref{mvcpattern} on the MVC pattern. On the other hand, although the drivers are generally simple to use and implement, it would be better to have a universal solution like SQL, which is still the biggest issue with NoSQL databases as opposed to SQL databases: lack of standardization and documentation. Still, it's very simple to use a Python or Node.js script that extracts data from the database and relays it to whatever other program using RPC (Remote Procedure Calls) software or middleware such as CORBA (Common Object Request Broker Architecture), or raw sockets. This circumvents using the more cumbersome MongoDB drivers, while sacrificing some performance by using an interpreted language (generally negligible for most applications). The latter is used in the Khepera III controller for control over a TCP/IP network and is briefly explained in section \ref{kheperaIII}.
+\newpage
+\subsection{AngularJS} \label{AngularJS}
+\begin{figure}[H]
+\centering
+\includesvg[width=0.7\linewidth]{./img/angularjs}
+\caption{AngularJS Logo}
+\end{figure}
+AngularJS is a front-end web application framework that uses an MVC (Model-View-Controller) architecture for the design of client-side applications. The MVC architecture implemented by AngularJS allows for very clear separation between declarative code and business logic, keeping client-side applications well structured and modular. It's important to point out that the MVC pattern used by AngularJS applies only to the front-end of the application, not the overarching architecture of the application as a whole, which is itself an MVC paradigm.\\
+
+In the AngularJS framework, declarative code stays separate from business logic. The declarative code (HTML) is the \textbf{View} in the architecture, while business logic is implemented by \textbf{Controllers} (JavaScript). The controllers act upon the \textbf{Model}, which are a collection of JavaScript objects that are bound to the controllers scope (the parts of the model the controller has access to). AngularJS then modifies the view dynamically when the model is changed. It's important to emphasize the difference between this architecture and modifying the DOM (Document Object Model, see section \ref{HTML} for more) directly from JavaScript. When doing the latter, there is no model, and thus no way of knowing what piece of code changed the DOM and why, leading to confusing, difficult to maintain and inelegant code. With "the Angular way", the controller that has access to a certain part of the DOM is declared in HTML, and more importantly, the variables that are bound in the DOM to the model are also explicitly declared in the HTML. By looking at the HTML, one can instantly know which elements correspond to model variables, because they are declared as such. To do this, Angular has custom attributes added to HTML tags. These attributes are called directives, and declare the behavior attached to the element in question. For example the ``ngModel'' directive, attaches the value of an element to the value of a variable in the scope of a controller. If this is attached to a checkbox, for example, when a user (considered a controller in the architecture) changes the state of the checkbox by clicking it, the model will be updated and the variable in the scope of the controller will change to false or true accordingly. The controller will then be able to use that model variable to implement the business logic that the change of state in the checkbox requires. This is exactly what is done in HRUI, when checking modules on and off ("data-" prefix added to ng-model for HTML Validation, as custom attributes require data- or x- prepended):
+\begin{figure}[H]
+  \captionsetup{justification=centering}
+  \begin{center}
+    \includegraphics[width=0.5\linewidth]{angular_joystick}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}[fontsize=\footnotesize]{html}
+<html data-ng-app="HRUI" data-ng-controller="HRUIController">
+<!--...-->
+<input id="joystickCheckbox" type="checkbox" data-ng-model="joystickOn"
+data-ng-click="updateControls(event, joystickOn)">
+<!--...-->
+\end{minted}
+\end{figure}
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}[fontsize=\footnotesize]{javascript}
+//...
+app.controller('HRUIController', ['$rootScope', '$scope', 'SocketSrv', 'ProfileSrv',
+    function(rootScope, scope, SocketSrv, ProfileSrv) {
+        scope.joystickOn = false;
+    //...
+    //extract updated control from event, and notify back-end of selected controls
+    scope.updateControls = function(control, newValue) {
+        var changedControl = control.target.attributes.id.value;
+        scope.sendControl(changedControl, newValue);
+    };
+\end{minted}
+\caption{AngularJS: HRUI Checkbox Example (abridged for clarity)}
+\end{figure}
+In the HTML, the controller is declared (in this case for the entire document, as it's the master controller), and the directives are assigned. The state of the checkbox (false equals unchecked) is bound to the scope variable joystickOn, which is initially false, through the ngModel directive. The ngClick directive declares that the function called when the checkbox is clicked is updateControls, that in this case sends the new state of the checkbox back to the server so it can process the actions that are necessary (sendControl, not shown, uses Socket.IO to send the new value of the checkbox to the server via WebSockets. See section \ref{html5websockets} for more).\\
+
+This is just a small example of what can be achieved with what the creators of Angular call two-way data-binding. What this means is that what is represented in the browser is simultaneously a variable in JavaScript, and can be modified by the user or controllers indistinctly. The possibilities with this architecture are endless. Many of these directives are used in HRUI to create a dynamic single-page application very similar to what is expected of native desktop apps in terms of performance and responsiveness.\\
+
+The concept of controllers that act upon different subsections of the DOM also allows for self contained modules to be added and removed at will from an application, without the need to rewrite the whole JavaScript code. Since each controller is an independent entity, that controls a part of the application without interference from other controllers, complex applications such as HRUI become very easy to develop. The main benefits of this modularity are evident: once a module has been added and works correctly, more modules can be added without any fear of breaking previous functionality, as there is no overlap in code; not all modules need to be active at any given time, since each is independent, the user can select the relevant modules for each use-case on the fly; from a programmers perspective, the code is very well compartmentalized making it easy to understand, maintain and improve upon; also from a programmers perspective, code reuse is made simple, writing a controller once, using it in several parts of the application, or in other applications (following the mantra DRY ``don't repeat yourself'. This is used in HRUI, with the same controller code attached to both joysticks, creating two instances of the same controller); from a performance perspective, since modules are active only when they are used, there is no excess resource usage.\\
+
+Describing each of the directives used in detail would take up too much space, and would be hardly relevant to the subject at hand. Only a couple of the more interesting directives used will be discussed briefly.
+\begin{itemize}
+  \item \textbf{ngIf}: The ngIf directive, allows elements to be added or removed from the DOM when the expression it evaluates is true or false respectively. This is a very important part of HRUI, that on startup seems empty, until the user starts turning modules on (or loading a previously save profile, as explained in \ref{profilemanagement}) and these seem to appear in the browser. This is what allows the user to tailor the interface in a way that suits the use-case, and allows for performance to scale with the number of active modules.
+  \item \textbf{ngAnimate}: This directive allows modules entering and exiting the application to have a visual effect when doing so. This uses a combination of CSS3 Transitions (see sections \ref{CSS} and \ref{html5styling}) and Pseudo-classes created by Angular to make modules fade-in and fade-out.
+  \item \textbf{Custom Directive Touch}: The same way Angular lets the programmer create controllers, it allows the creation of custom directives. In HRUI, there is one custom directive used to add touch functionality to canvas elements (see section \ref{html5canvaselement}). This directive is bound to both the joystick canvases as wellas the map canvas, and uses handler functions to bind touch events to the equivalent mouse events. This is necessary only in canvas elements, as the rest of touch interactions are handled on the browser level.
+  \begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[fontsize=\footnotesize]{javascript}
+  app.directive('touch', function() {
+      return {
+          link: function(scope, element, attrs) {
+              element.on('touchmove', function(event) {
+                  scope.touchMove(event);
+                  scope.$apply();
+              });
+              element.on('touchdown mousedown', function(event) {
+                  scope.mouseDown(event);
+                  scope.$apply();
+              });
+              element.on('mousemove', function(event) {
+                  scope.mouseMove(event);
+                  scope.$apply();
+              });
+              element.on('mouseup touchend', function(event) {
+                  scope.mouseUp(event);
+                  scope.$apply();
+              });
+          }
+      }
+  });
+  \end{minted}
+  \end{figure}
+  \begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[fontsize=\footnotesize]{html}
+  <canvas id="joystick" class="canvas joystick" data-touch>
+  <canvas id="joystick2" class="canvas joystick" data-touch>
+  <canvas id="mapcanvas" class="canvas" data-ng-show="mapOn" data-touch>
+  \end{minted}
+  \caption{AngularJS: HRUI Touch Directive (HTML abridged for clarity)}
+  \end{figure}
+  \item \textbf{Custom Directive Compile}: This directive allows the generation of HTML dynamically. This is required in the Custom Input module (see section \ref{custominput}) to generate the HTML controls that the user has required. With the form data entered by the user detailing what kind of inputs are required, an HTML table is created (function generateInputTable) that then needs to be compiled into the DOM with the data-bindings to the model required. It's somewhat complex, but it allows for custom inputs to be generated on the fly, adding great versatility to the interface.
+    \begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[fontsize=\footnotesize]{javascript}
+  app.directive('compile', function($compile) {
+    return function(scope, element, attrs) {
+        scope.$watch(
+            function(scope) {
+                // watch the 'compile' expression for changes
+                return scope.$eval(attrs.compile);
+            },
+            function(value) {
+                // when the 'compile' expression changes
+                // assign it into the current DOM
+                element.html(value);
+
+                // compile the new DOM and link it to the current
+                // scope.
+                $compile(element.contents())(scope);
+            }
+        );
+    };
+  });
+  \end{minted}
+  \end{figure}
+  \begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[fontsize=\footnotesize]{html}
+  <table id="customInputTable" class="table" data-compile="customInputTable" 
+  data-ng-if="customInputFormSubmitted"></table>
+  \end{minted}
+  \caption{AngularJS: HRUI Compile Directive}
+  \end{figure}
+\end{itemize}
+Apart from controllers and directives, Angular (among many other features that are outside the scope of this report) implements services, to allow for communication between controllers, without interfering with each others scope. Services are "singletons" (in object-oriented programming, classes that can only have one instance at runtime) that contained shared methods or shared data. Controllers can claim access to a service and modify or bind to its data as well as call its functions. Since there's only one instance of a service, sharing data between controllers is reduced to writing or binding a service attribute and reading it from another controller. It also allows for code reuse (DRY ``don't repeat yourself') with functions that are used in several controllers being coded only once. There are 4 services in HRUI:
+\begin{itemize}
+  \item \textbf{ProfileSrv}: Allows controllers to publish the state of their scopes to the master controller, that then creates a profile with these states that can then be saved in the back-end for future use. See section \ref{profilemanagement} for more.
+  \item \textbf{SocketSrv}: Holds the Socket.IO Websocket connection that needs to be accessed from all controllers to receive and emit events to the back-end, as well as media streaming raw WebSockets. See section \ref{html5websockets} on WebSockets.
+  \item \textbf{DrawSrv}: Contains functions used to draw in Canvas elements: drawCircle, drawLineFromCenter and writeInCanvas (used in previous iterations).
+  \item \textbf{GeometrySrv}: Contains functions used to calculate coordinates in Canvas elements: isInsideCircle, forceIntoCircle, centerCoord, canvasCoord, forceDirectionLock.
+\end{itemize}
+  \begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[fontsize=\footnotesize]{javascript}
+  //Service with typical drawing methods shared between controllers
+  app.service('DrawSrv', function() {
+      return {
+          drawCircle: function(ctx, x, y, radius, fillColor) {
+              ctx.beginPath();
+              ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+              if (!!fillColor) { //if fillColor arg given, fill in circle.
+                  ctx.fillStyle = fillColor;
+                  ctx.fill();
+              };
+              ctx.stroke();
+          },
+          drawLineFromCenter: function(ctx, x, y) {
+              ctx.beginPath();
+              ctx.moveTo(ctx.canvas.width / 2, ctx.canvas.height / 2);
+              ctx.lineTo(x, y);
+              ctx.stroke();
+          },
+          writeInCanvas: function(ctx, font, text, x, y) {
+              ctx.font = font;
+              ctx.fillText(text, x, y);
+          },
+      }
+  });
+  \end{minted}
+  \caption{AngularJS: HRUI DrawSrv Service example}
+  \end{figure}
 \section{Development Environment \& Tools}
 \subsection{Linux}
 \subsection{Sublime Text}
 \subsection{Git}
 \subsection{\LaTeX}
 \subsection{PM2}
-\section{Python}
+\section{V-REP}
 \section{Hardware}
-\subsection{Khepera III}
+\subsection{Khepera III} \label{kheperaIII}
 \subsection{Crazyflie 2}
 \subsection{Raspberry Pi 2}
