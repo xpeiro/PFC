@@ -811,7 +811,9 @@ In HRUI many new CSS3 features are used to make the application more visually at
   \end{figure}
 \end{itemize}
 
-HRUIs' single web page is written in valid HTML5. What this means is that it adheres strictly to the W3C Recommendation and is well-formed (does not contain errors). This has been checked throughout the project using the W3C HTML Validation Service\cite{w3cvalidation} to fully comply with the specification.
+HRUIs' single web page is written in valid HTML5. What this means is that it adheres strictly to the W3C Recommendation and
+is well-formed (does not contain errors). This has been checked throughout the project using the W3C HTML Validation Service
+\cite{w3cvalidation} to fully comply with the specification.
 \section{The MEAN Stack} \label{TheMEANStack}
 \begin{figure}[H]
     \begin{center}
@@ -819,22 +821,27 @@ HRUIs' single web page is written in valid HTML5. What this means is that it adh
     \end{center}
     \caption{MEAN Stack Logo}
   \end{figure}
-The MEAN (MongoDB, Express, AngularJS, Node.js) Stack is an open source web development full stack specifically suited for web applications. To understand the definition, the concept of the software engineering stack must be understood first.\\
+The MEAN (MongoDB, Express, AngularJS, Node.js) Stack is an open source web development full stack specifically suited for
+web applications. To understand the definition, the concept of the software engineering stack must be understood first.\\
 
 A stack in software engineering (not to be confused with the programming concept of the stack, an abstract data collection
 used to store and retrieve data in programs using ``push and pop'' instructions) is a collection of software or technologies
 used to create a complete solution for the development of an application. This software bundle serves as a platform for the
 application, providing the software required to realize its architecture. In web development this architecture is typically a
 server-client paradigm (see chapter \ref{systemarchitecture} on the HRUI System Architecture, particularly section 
-\ref{clientserverpattern} on the Client-Server pattern), in which the main components traditionally are: an operating system that will run the server; web server software; a database to store the application data (a web server is stateless, as discussed in section \ref{HTTP}, so a database is needed to supply "memory" to the architecture); and finally a programming language in which programs or scripts will be written to perform the tasks required by the application on the server.\\
+\ref{clientserverpattern} on the Client-Server pattern), in which the main components traditionally are: an operating system that will
+run the server; web server software; a database to store the application data (a web server is stateless, as discussed in section
+\ref{HTTP}, so a database is needed to supply "memory" to the architecture); and finally a programming language in which programs or
+scripts will be written to perform the tasks required by the application on the server.\\
 
 The most used and famous web development stack is of course the LAMP (Linux OS, Apache Web Server, MySQL Database, PHP
 programming language) Stack, and its variants (MAMP for Mac OS, WAMP for Windows OS, LAMP with Python or Perl as programming
 languages...). It's been the default way to create a web server since the mid 90s', mainly because of its simplicity and
 extensibility, allowing for the last component, the programming language to be virtually any language, by using scripts that
 can call external programs. Of course, it's also fully open source, which is also one of its greatest strengths. The biggest
-problem with the LAMP stack in modern web application development is that it relies heavily on HTTP requests (see section \ref{HTTP} on HTTP) and therefore is not suited to real-time constraints. The way a LAMP stack generally functions requires that
-for every HTTP request made from the client, either an HTML document is served or a script (PHP/Python/Perl) is run, that then
+problem with the LAMP stack in modern web application development is that it relies heavily on HTTP requests (see section \ref{HTTP} on
+HTTP) and therefore is not suited to real-time constraints. The way a LAMP stack generally functions requires that for every HTTP
+request made from the client, either an HTML document is served or a script (PHP/Python/Perl) is run, that then
 generates HTML output that is sent back to the client by the server. This last method is called CGI (Common Gateway
 Interface), used since the mid 90s' to create more interactive web content circumventing the constraints of a document-based
 web, but even this is unsuitable for real-time, as these requests would have to be made every few milliseconds to achieve the
@@ -940,14 +947,18 @@ version of hrui from github. HRUI uses many of these packages, including but not
   \item \textbf{Busboy}: A module that parses incoming HTTP requests, used to accept file uploads from the client (map image).
 \end{itemize}
 The most important module used in HRUI is Express, which is discussed in the following section.
-\subsection{Express}
+\subsection{Express} \label{express}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[width=0.7\linewidth]{express}
   \end{center}
   \caption{Express Logo}
 \end{figure}
-Express is a Node.js module defined as a routing and middleware web framework. What this essentially means is that express functions as a minimal web server, relying on middleware functions to provide responses to HTTP requests (see section \ref{HTTP} on HTTP for more on requests). Middleware functions are simply handler functions that receive a request through Express, process it in whatever manner necessary and either provide a response or pass the request onto the next middleware function in line. The following example illustrates a basic Express server.
+Express is a Node.js module defined as a routing and middleware web framework. What this essentially means is that express functions as
+a minimal web server, relying on middleware functions to provide responses to HTTP requests (see section \ref{HTTP} on HTTP for more on
+requests). Middleware functions are simply handler functions that receive a request through Express, process it in whatever manner
+necessary and either provide a response or pass the request onto the next middleware function in line. The following example illustrates
+a basic Express server.
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
@@ -970,9 +981,18 @@ Express is a Node.js module defined as a routing and middleware web framework. W
   \end{minted}
   \caption{Express minimal web server: Middleware functions.\\(modified from source: \url{http://expressjs.com/})}
 \end{figure}
-Running this code would print to the console ``Server listening on port 3000.''. Using any web browser and opening the URL http://localhost:3000 would print the response ``Response: Request Received'' in the browser. With express, it takes less than 10 lines of code to create a web server. It's important to note that these middleware functions are non-blocking, meaning that they are not executed synchronously immediately upon request, instead being run asynchronously with the server receiving notification of the response when the processing is complete. This benefits responsiveness when handling many concurrent requests and is part of the Node.js non-blocking I/O event driven philosophy (see the previous section \ref{nodejs}). Express allows for all sorts of middleware, not just request-response functions. Many third-party express middleware is available through npm (Node Package Manager), some of them used in this project. Middleware used in HRUI:
+Running this code would print to the console ``Server listening on port 3000.''. Using any web browser and opening the URL
+http://localhost:3000 would print the response ``Response: Request Received'' in the browser. With express, it takes less than 10 lines
+of code to create a web server. It's important to note that these middleware functions are non-blocking, meaning that they are not
+executed synchronously immediately upon request, instead being run asynchronously with the server receiving notification of the response
+when the processing is complete. This benefits responsiveness when handling many concurrent requests and is part of the Node.js
+non-blocking I/O event driven philosophy (see the previous section \ref{nodejs}). Express allows for all sorts of middleware, not just
+request-response functions. Many third-party express middleware is available through npm (Node Package Manager), some of them used in
+this project. Middleware used in HRUI:
 \begin{itemize}
-  \item \textbf{Compression}: this middleware compresses all HTTP responses using gzip reducing the amount of data transmitted, making more efficient use of network resources (compression can be confirmed looking at the value of the HTTP header ``Content-Encoding'' or using a website like whatsmyip.org).
+  \item \textbf{Compression}: this middleware compresses all HTTP responses using gzip reducing the amount of data transmitted, making
+  more efficient use of network resources (compression can be confirmed looking at the value of the HTTP header ``Content-Encoding'' or
+  using a website like whatsmyip.org).
   \begin{figure}[H]
   \captionsetup{justification=centering}
   \begin{center}
@@ -980,7 +1000,9 @@ Running this code would print to the console ``Server listening on port 3000.''.
   \end{center}
   \caption{Express Middleware: Compression. Results of compression test (81.9\%)\\(Source: \url{http://www.whatsmyip.org/})}
   \end{figure}
-  \item \textbf{Busboy}: HTTP Request parsing middleware. Parses the HTTP request and allows events to arise on certain types of requests like POST requests with files attached. This is used in HRUI to upload a map from the client to the server and save it on the server.
+  \item \textbf{Busboy}: HTTP Request parsing middleware. Parses the HTTP request and allows events to arise on certain types of
+  requests like POST requests with files attached. This is used in HRUI to upload a map from the client to the server and save it on the
+  server.
   \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
@@ -1017,9 +1039,14 @@ Running this code would print to the console ``Server listening on port 3000.''.
   \end{center}
   \caption{Express Middleware: HRUI Example Morgan Logger Output\\(Normally configured to only show errors with response code > 400)}
   \end{figure}
-  \item \textbf{Express Static}: This first-party middleware makes serving files from a directory as simple as: \mintinline{javascript}{app.use(express.static('public'));} Where 'public' is the folder containing the static content. This is useful in sites with few web pages, such as single-page applications like HRUI.
-  \item \textbf{Serve Favicon}: Middleware to serve a favicon to web browsers. A Favicon is the icon that appears in modern browsers next to the URL in the search bar and in Bookmark bars. HRUI's Favicon is an NES Controller.\includesvg[height=12pt]{./img/favicon}
-  \item \textbf{Custom Error Handling Middleware}: Instead of using some third-party error catching middleware, that would frankly be overkill, given that HRUI is a single-page application and is not designed for mass usage, making request errors infrequent, a small error handling middleware function was designed. It is placed at the end of all other middleware calls, meaning that if it's ever reached, no other middleware function could handle it. It generates a bit of HTML that presents the error to the user.
+  \item \textbf{Express Static}: This first-party middleware makes serving files from a directory as simple as: \mintinline{javascript}{app.use(express.static('public'));} Where 'public' is the folder containing the static content. This is useful in sites with few web
+  pages, such as single-page applications like HRUI.
+  \item \textbf{Serve Favicon}: Middleware to serve a favicon to web browsers. A Favicon is the icon that appears in modern browsers
+  next to the URL in the search bar and in Bookmark bars. HRUI's Favicon is an NES Controller.\includesvg[height=12pt]{./img/favicon}
+  \item \textbf{Custom Error Handling Middleware}: Instead of using some third-party error catching middleware, that would frankly be
+  overkill, given that HRUI is a single-page application and is not designed for mass usage, making request errors infrequent, a small
+  error handling middleware function was designed. It is placed at the end of all other middleware calls, meaning that if it's ever
+  reached, no other middleware function could handle it. It generates a bit of HTML that presents the error to the user.
   \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
@@ -1048,8 +1075,10 @@ Running this code would print to the console ``Server listening on port 3000.''.
   \caption{Express Middleware: HRUI Error handling response}
   \end{figure}
 \end{itemize}
-Many other middleware modules are available for express, (Layout engines like Jade, that allow creation of templates to make dozens of similar pages without having to write each one independently. Cookie parsers. etc.) and many more are being developed, making it a very versatile, lightweight alternative to traditional servers like Apache or Nginx.
-\subsection{MongoDB}
+Many other middleware modules are available for express, (Layout engines like Jade, that allow creation of templates to make dozens of
+similar pages without having to write each one independently. Cookie parsers. etc.) and many more are being developed, making it a very
+versatile, lightweight alternative to traditional servers like Apache or Nginx.
+\subsection{MongoDB} \label{mongodb}
 \begin{figure}[H]
   \captionsetup{justification=centering}
   \begin{center}
@@ -1057,7 +1086,9 @@ Many other middleware modules are available for express, (Layout engines like Ja
   \end{center}
   \caption{MongoDB Logo}
 \end{figure}
-MongoDB (the name is derived from huMONGOus) is a NoSQL (Not Only SQL (Structured Query Language)) database. A NoSQL database does not use a relational model, or as the acronym suggests, can use other models as well. The relational model (developed by Edgar Frank Codd in 1970) basically uses a table to store data with logic bindings on each row, called relations.
+MongoDB (the name is derived from huMONGOus) is a NoSQL (Not Only SQL (Structured Query Language)) database. A NoSQL database does not
+use a relational model, or as the acronym suggests, can use other models as well. The relational model (developed by Edgar Frank Codd in
+1970) basically uses a table to store data with logic bindings on each row, called relations.
 \begin{figure}[H]
   \captionsetup{justification=centering}
   \begin{center}
@@ -1065,11 +1096,27 @@ MongoDB (the name is derived from huMONGOus) is a NoSQL (Not Only SQL (Structure
   \end{center}
   \caption{MongoDB: Relational Database Example.\\(Source: \url{http://www.careerbless.com/})}
 \end{figure}
-This model was so extended before NoSQL databases that a special-purpose semi-standard programming language was developed for these DBMS (DataBase Management System). The relational model, while still very much prevalent in web development, has problems with horizontal scalability (using networks of computers to host large databases, required specially for big data applications), performance (querying speed is largely affected by the size of the database and the complexity of the query) and it can be overly complex in design. NoSQL databases on the other hand tend to be much faster and scalable, with simpler models, but sacrifice some consistency when compared to relational databases. This makes NoSQL adequate for applications that require large amounts of distributed data and applications that require very fast read/write operations. HRUI in its current state, only requires the latter, as the database is the interface with which controllers access and write data to and from the model (see section \ref{mvcpattern} on the Model-View-Controller pattern), making the speed of database I/O crucial. In section \ref{scalability} of chapter \ref{futuredevelopment} the possibility of scaling HRUI horizontally in future development is discussed.\\
+This model was so extended before NoSQL databases that a special-purpose semi-standard programming language was developed for these DBMS
+(DataBase Management System). The relational model, while still very much prevalent in web development, has problems with horizontal
+scalability (using networks of computers to host large databases, required specially for big data applications), performance (querying
+speed is largely affected by the size of the database and the complexity of the query) and it can be overly complex in design. NoSQL
+databases on the other hand tend to be much faster and scalable, with simpler models, but sacrifice some consistency when compared to
+relational databases. This makes NoSQL adequate for applications that require large amounts of distributed data and applications that
+require very fast read/write operations. HRUI in its current state, only requires the latter, as the database is the interface with
+which controllers access and write data to and from the model (see section \ref{mvcpattern} on the Model-View-Controller pattern),
+making the speed of database I/O crucial. In section \ref{scalability} of chapter \ref{futuredevelopment} the possibility of scaling
+HRUI horizontally in future development is discussed.\\
 
-MongoDB is a document-based database. This model is very simple, in that the database is merely a collection of objects (documents), each containing data regarding each object. Each document can have any amount of attributes that can be completely unrelated to the attributes of other documents. A MongoDB database is best described as a collection of objects or ``things'' without any obligation to be related to one another. This makes it very simple to implement, as almost no restrictions apply to documents, in contrast with the rigid nature of tables in the relational model.\\
+MongoDB is a document-based database. This model is very simple, in that the database is merely a collection of objects (documents),
+each containing data regarding each object. Each document can have any amount of attributes that can be completely unrelated to the
+attributes of other documents. A MongoDB database is best described as a collection of objects or ``things'' without any obligation to
+be related to one another. This makes it very simple to implement, as almost no restrictions apply to documents, in contrast with the
+rigid nature of tables in the relational model.\\
 
-MongoDB uses JSON (JavaScript Object Notation) to describe documents. Again, striving for simplicity, JSON can be defined very succinctly (see \url{http://json.org/}), and is of course very well suited to use with Node.js, given that no translation is required when reading and writing to the database. It should be noted that documents aren't stored in this format in MongoDB, using instead BSON (Binary JSON), which transforms JSON into binary data for enhanced performance.
+MongoDB uses JSON (JavaScript Object Notation) to describe documents. Again, striving for simplicity, JSON can be defined very
+succinctly (see \url{http://json.org/}), and is of course very well suited to use with Node.js, given that no translation is required
+when reading and writing to the database. It should be noted that documents aren't stored in this format in MongoDB, using instead BSON
+(Binary JSON), which transforms JSON into binary data for enhanced performance.
 \begin{figure}[H]
 \centering
 \captionsetup{justification=centering}
@@ -1096,7 +1143,11 @@ MongoDB uses JSON (JavaScript Object Notation) to describe documents. Again, str
 \end{minted}
 \caption{MongoDB: HRUI Initial JSON Documents (abridged for brevity)}
 \end{figure}
-The fact that MongoDB uses JSON as a format, doesn't imply that it's only suitable for use with programs written in JavaScript. With SQL not being a suitable language, MongoDB uses drivers to be accessed from programs, apart from the "mongo shell" interactive command line tool. These drivers are essentially libraries that supply simple calls to query, insert, delete documents and so on from the database. Drivers are available for all modern programming languages (C/C++, C\#, Java, Python...\cite{mongodb11}) and allow for simple, fast communication with the database.
+The fact that MongoDB uses JSON as a format, doesn't imply that it's only suitable for use with programs written in JavaScript. With SQL
+not being a suitable language, MongoDB uses drivers to be accessed from programs, apart from the "mongo shell" interactive command line
+tool. These drivers are essentially libraries that supply simple calls to query, insert, delete documents and so on from the database.
+Drivers are available for all modern programming languages (C/C++, C\#, Java, Python...\cite{mongodb11}) and allow for simple, fast
+communication with the database.
 \begin{figure}[H]
 \centering
 \captionsetup{justification=centering}
@@ -1116,7 +1167,16 @@ thrust = float(deviceData['devOrientation']['beta'])
 \end{minted}
 \caption{MongoDB: CrazyFlie Python Controller MongoDB usage (abridged for clarity)}
 \end{figure}
-This is specially useful for HRUI, as back-end controllers that read/write data from the model can be written in the developers choice of language, making it extremely simple to integrate controllers for any robot, in any language. This decoupling of the user interface with the actual robot controller will be discussed further in section \ref{mvcpattern} on the MVC pattern. On the other hand, although the drivers are generally simple to use and implement, it would be better to have a universal solution like SQL, which is still the biggest issue with NoSQL databases as opposed to SQL databases: lack of standardization and documentation. Still, it's very simple to use a Python or Node.js script that extracts data from the database and relays it to whatever other program using RPC (Remote Procedure Calls) software or middleware such as CORBA (Common Object Request Broker Architecture), or raw sockets. This circumvents using the more cumbersome MongoDB drivers, while sacrificing some performance by using an interpreted language (generally negligible for most applications). The latter is used in the Khepera III controller for control over a TCP/IP network and is briefly explained in section \ref{kheperaIII}.
+This is specially useful for HRUI, as back-end controllers that read/write data from the model can be written in the developers choice
+of language, making it extremely simple to integrate controllers for any robot, in any language. This decoupling of the user interface
+with the actual robot controller will be discussed further in section \ref{mvcpattern} on the MVC pattern. On the other hand, although
+the drivers are generally simple to use and implement, it would be better to have a universal solution like SQL, which is still the
+biggest issue with NoSQL databases as opposed to SQL databases: lack of standardization and documentation. Still, it's very simple to
+use a Python or Node.js script that extracts data from the database and relays it to whatever other program using RPC (Remote Procedure
+Calls) software or middleware such as CORBA (Common Object Request Broker Architecture), or raw sockets. This circumvents using the more
+cumbersome MongoDB drivers, while sacrificing some performance by using an interpreted language (generally negligible for most
+applications). The latter is used in the Khepera III controller for control over a TCP/IP network and is briefly explained in section
+\ref{kheperaIII}.
 \newpage
 \subsection{AngularJS} \label{AngularJS}
 \begin{figure}[H]
@@ -1124,9 +1184,28 @@ This is specially useful for HRUI, as back-end controllers that read/write data 
 \includesvg[width=0.7\linewidth]{./img/angularjs}
 \caption{AngularJS Logo}
 \end{figure}
-AngularJS is a front-end web application framework that uses an MVC (Model-View-Controller) architecture for the design of client-side applications. The MVC architecture implemented by AngularJS allows for very clear separation between declarative code and business logic, keeping client-side applications well structured and modular. It's important to point out that the MVC pattern used by AngularJS applies only to the front-end of the application, not the overarching architecture of the application as a whole, which is itself an MVC paradigm.\\
+AngularJS is a front-end web application framework that uses an MVC (Model-View-Controller) architecture for the design of client-side
+applications. The MVC architecture implemented by AngularJS allows for very clear separation between declarative code and business
+logic, keeping client-side applications well structured and modular. It's important to point out that the MVC pattern used by AngularJS
+applies only to the front-end of the application, not the overarching architecture of the application as a whole, which is itself an MVC
+paradigm.\\
 
-In the AngularJS framework, declarative code stays separate from business logic. The declarative code (HTML) is the \textbf{View} in the architecture, while business logic is implemented by \textbf{Controllers} (JavaScript). The controllers act upon the \textbf{Model}, which are a collection of JavaScript objects that are bound to the controllers scope (the parts of the model the controller has access to). AngularJS then modifies the view dynamically when the model is changed. It's important to emphasize the difference between this architecture and modifying the DOM (Document Object Model, see section \ref{HTML} for more) directly from JavaScript. When doing the latter, there is no model, and thus no way of knowing what piece of code changed the DOM and why, leading to confusing, difficult to maintain and inelegant code. With "the Angular way", the controller that has access to a certain part of the DOM is declared in HTML, and more importantly, the variables that are bound in the DOM to the model are also explicitly declared in the HTML. By looking at the HTML, one can instantly know which elements correspond to model variables, because they are declared as such. To do this, Angular has custom attributes added to HTML tags. These attributes are called directives, and declare the behavior attached to the element in question. For example the ``ngModel'' directive, attaches the value of an element to the value of a variable in the scope of a controller. If this is attached to a checkbox, for example, when a user (considered a controller in the architecture) changes the state of the checkbox by clicking it, the model will be updated and the variable in the scope of the controller will change to false or true accordingly. The controller will then be able to use that model variable to implement the business logic that the change of state in the checkbox requires. This is exactly what is done in HRUI, when checking modules on and off ("data-" prefix added to ng-model for HTML Validation, as custom attributes require data- or x- prepended):
+In the AngularJS framework, declarative code stays separate from business logic. The declarative code (HTML) is the \textbf{View} in the
+architecture, while business logic is implemented by \textbf{Controllers} (JavaScript). The controllers act upon the \textbf{Model},
+which are a collection of JavaScript objects that are bound to the controllers scope (the parts of the model the controller has access
+to). AngularJS then modifies the view dynamically when the model is changed. It's important to emphasize the difference between this
+architecture and modifying the DOM (Document Object Model, see section \ref{HTML} for more) directly from JavaScript. When doing the
+latter, there is no model, and thus no way of knowing what piece of code changed the DOM and why, leading to confusing, difficult to
+maintain and inelegant code. With "the Angular way", the controller that has access to a certain part of the DOM is declared in HTML,
+and more importantly, the variables that are bound in the DOM to the model are also explicitly declared in the HTML. By looking at the
+HTML, one can instantly know which elements correspond to model variables, because they are declared as such. To do this, Angular has
+custom attributes added to HTML tags. These attributes are called directives, and declare the behavior attached to the element in
+question. For example the ``ngModel'' directive, attaches the value of an element to the value of a variable in the scope of a
+controller. If this is attached to a checkbox, for example, when a user (considered a controller in the architecture) changes the state
+of the checkbox by clicking it, the model will be updated and the variable in the scope of the controller will change to false or true
+accordingly. The controller will then be able to use that model variable to implement the business logic that the change of state in the
+checkbox requires. This is exactly what is done in HRUI, when checking modules on and off ("data-" prefix added to ng-model for HTML
+Validation, as custom attributes require data- or x- prepended):
 \begin{figure}[H]
   \captionsetup{justification=centering}
   \begin{center}
@@ -1163,17 +1242,46 @@ app.controller('HRUIController', ['$rootScope', '$scope', 'SocketSrv', 'ProfileS
 \end{minted}
 \caption{AngularJS: HRUI Checkbox Example (abridged for clarity)}
 \end{figure}
-In the HTML, the controller is declared (in this case for the entire document, as it's the master controller), and the directives are assigned. The state of the checkbox (false equals unchecked) is bound to the scope variable joystickOn, which is initially false, through the ngModel directive. The ngClick directive declares that the function called when the checkbox is clicked is updateControls, that in this case sends the new state of the checkbox back to the server so it can process the actions that are necessary (sendControl, not shown, uses Socket.IO to send the new value of the checkbox to the server via WebSockets. See section \ref{html5websockets} for more).\\
+In the HTML, the controller is declared (in this case for the entire document, as it's the master controller), and the directives are
+assigned. The state of the checkbox (false equals unchecked) is bound to the scope variable joystickOn, which is initially false,
+through the ngModel directive. The ngClick directive declares that the function called when the checkbox is clicked is updateControls,
+that in this case sends the new state of the checkbox back to the server so it can process the actions that are necessary (sendControl,
+not shown, uses Socket.IO to send the new value of the checkbox to the server via WebSockets. See section \ref{html5websockets} for
+more).\\
 
-This is just a small example of what can be achieved with what the creators of Angular call two-way data-binding. What this means is that what is represented in the browser is simultaneously a variable in JavaScript, and can be modified by the user or controllers indistinctly. The possibilities with this architecture are endless. Many of these directives are used in HRUI to create a dynamic single-page application very similar to what is expected of native desktop apps in terms of performance and responsiveness.\\
+This is just a small example of what can be achieved with what the creators of Angular call two-way data-binding. What this means is
+that what is represented in the browser is simultaneously a variable in JavaScript, and can be modified by the user or controllers
+indistinctly. The possibilities with this architecture are endless. Many of these directives are used in HRUI to create a dynamic 
+single-page application very similar to what is expected of native desktop apps in terms of performance and responsiveness.\\
 
-The concept of controllers that act upon different subsections of the DOM also allows for self contained modules to be added and removed at will from an application, without the need to rewrite the whole JavaScript code. Since each controller is an independent entity, that controls a part of the application without interference from other controllers, complex applications such as HRUI become very easy to develop. The main benefits of this modularity are evident: once a module has been added and works correctly, more modules can be added without any fear of breaking previous functionality, as there is no overlap in code; not all modules need to be active at any given time, since each is independent, the user can select the relevant modules for each use-case on the fly; from a programmers perspective, the code is very well compartmentalized making it easy to understand, maintain and improve upon; also from a programmers perspective, code reuse is made simple, writing a controller once, using it in several parts of the application, or in other applications (following the mantra DRY ``don't repeat yourself'. This is used in HRUI, with the same controller code attached to both joysticks, creating two instances of the same controller); from a performance perspective, since modules are active only when they are used, there is no excess resource usage.\\
+The concept of controllers that act upon different subsections of the DOM also allows for self contained modules to be added and removed
+at will from an application, without the need to rewrite the whole JavaScript code. Since each controller is an independent entity, that
+controls a part of the application without interference from other controllers, complex applications such as HRUI become very easy to
+develop. The main benefits of this modularity are evident: once a module has been added and works correctly, more modules can be added
+without any fear of breaking previous functionality, as there is no overlap in code; not all modules need to be active at any given
+time, since each is independent, the user can select the relevant modules for each use-case on the fly; from a programmers perspective,
+the code is very well compartmentalized making it easy to understand, maintain and improve upon; also from a programmers perspective,
+code reuse is made simple, writing a controller once, using it in several parts of the application, or in other applications (following
+the mantra DRY ``don't repeat yourself'. This is used in HRUI, with the same controller code attached to both joysticks, creating two
+instances of the same controller); from a performance perspective, since modules are active only when they are used, there is no excess
+resource usage.\\
 
-Describing each of the directives used in detail would take up too much space, and would be hardly relevant to the subject at hand. Only a couple of the more interesting directives used will be discussed briefly.
+Describing each of the directives used in detail would take up too much space, and would be hardly relevant to the subject at hand. Only
+a couple of the more interesting directives used will be discussed briefly.
 \begin{itemize}
-  \item \textbf{ngIf}: The ngIf directive, allows elements to be added or removed from the DOM when the expression it evaluates is true or false respectively. This is a very important part of HRUI, that on startup seems empty, until the user starts turning modules on (or loading a previously save profile, as explained in \ref{profilemanagement}) and these seem to appear in the browser. This is what allows the user to tailor the interface in a way that suits the use-case, and allows for performance to scale with the number of active modules.
-  \item \textbf{ngAnimate}: This directive allows modules entering and exiting the application to have a visual effect when doing so. This uses a combination of CSS3 Transitions (see sections \ref{CSS} and \ref{html5styling}) and Pseudo-classes created by Angular to make modules fade-in and fade-out.
-  \item \textbf{Custom Directive Touch}: The same way Angular lets the programmer create controllers, it allows the creation of custom directives. In HRUI, there is one custom directive used to add touch functionality to canvas elements (see section \ref{html5canvaselement}). This directive is bound to both the joystick canvases as wellas the map canvas, and uses handler functions to bind touch events to the equivalent mouse events. This is necessary only in canvas elements, as the rest of touch interactions are handled on the browser level.
+  \item \textbf{ngIf}: The ngIf directive, allows elements to be added or removed from the DOM when the expression it evaluates is true
+  or false respectively. This is a very important part of HRUI, that on startup seems empty, until the user starts turning modules on 
+  (or loading a previously save profile, as explained in \ref{profilemanagement}) and these seem to appear in the browser. This is what
+  allows the user to tailor the interface in a way that suits the use-case, and allows for performance to scale with the number of
+  active modules.
+  \item \textbf{ngAnimate}: This directive allows modules entering and exiting the application to have a visual effect when doing so.
+  This uses a combination of CSS3 Transitions (see sections \ref{CSS} and \ref{html5styling}) and Pseudo-classes created by Angular to
+  make modules fade-in and fade-out.
+  \item \textbf{Custom Directive Touch}: The same way Angular lets the programmer create controllers, it allows the creation of custom
+  directives. In HRUI, there is one custom directive used to add touch functionality to canvas elements (see section
+  \ref{html5canvaselement}). This directive is bound to both the joystick canvases as wellas the map canvas, and uses handler functions
+  to bind touch events to the equivalent mouse events. This is necessary only in canvas elements, as the rest of touch interactions are
+  handled on the browser level.
   \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
@@ -1214,7 +1322,11 @@ Describing each of the directives used in detail would take up too much space, a
   \end{minted}
   \caption{AngularJS: HRUI Touch Directive (HTML abridged for clarity)}
   \end{figure}
-  \item \textbf{Custom Directive Compile}: This directive allows the generation of HTML dynamically. This is required in the Custom Input module (see section \ref{custominput}) to generate the HTML controls that the user has required. With the form data entered by the user detailing what kind of inputs are required, an HTML table is created (function generateInputTable) that then needs to be compiled into the DOM with the data-bindings to the model required. It's somewhat complex, but it allows for custom inputs to be generated on the fly, adding great versatility to the interface.
+  \item \textbf{Custom Directive Compile}: This directive allows the generation of HTML dynamically. This is required in the Custom 
+  Input module (see section \ref{custominput}) to generate the HTML controls that the user has required. With the form data entered by 
+  the user detailing what kind of inputs are required, an HTML table is created (function generateInputTable) that then needs to be 
+  compiled into the DOM with the data-bindings to the model required. It's somewhat complex, but it allows for custom inputs to be 
+  generated on the fly, adding great versatility to the interface.
     \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
@@ -1252,12 +1364,22 @@ Describing each of the directives used in detail would take up too much space, a
   \caption{AngularJS: HRUI Compile Directive}
   \end{figure}
 \end{itemize}
-Apart from controllers and directives, Angular (among many other features that are outside the scope of this report) implements services, to allow for communication between controllers, without interfering with each others scope. Services are "singletons" (in object-oriented programming, classes that can only have one instance at runtime) that contained shared methods or shared data. Controllers can claim access to a service and modify or bind to its data as well as call its functions. Since there's only one instance of a service, sharing data between controllers is reduced to writing or binding a service attribute and reading it from another controller. It also allows for code reuse (DRY ``don't repeat yourself') with functions that are used in several controllers being coded only once. There are 4 services in HRUI:
+Apart from controllers and directives, Angular (among many other features that are outside the scope of this report) implements 
+services, to allow for communication between controllers, without interfering with each others scope. Services are "singletons" (in 
+object-oriented programming, classes that can only have one instance at runtime) that contained shared methods or shared data. 
+Controllers can claim access to a service and modify or bind to its data as well as call its functions. Since there's only one instance 
+of a service, sharing data between controllers is reduced to writing or binding a service attribute and reading it from another 
+controller. It also allows for code reuse (DRY ``don't repeat yourself') with functions that are used in several controllers being coded 
+only once. There are 4 services in HRUI:
 \begin{itemize}
-  \item \textbf{ProfileSrv}: Allows controllers to publish the state of their scopes to the master controller, that then creates a profile with these states that can then be saved in the back-end for future use. See section \ref{profilemanagement} for more.
-  \item \textbf{SocketSrv}: Holds the Socket.IO Websocket connection that needs to be accessed from all controllers to receive and emit events to the back-end, as well as media streaming raw WebSockets. See section \ref{html5websockets} on WebSockets.
-  \item \textbf{DrawSrv}: Contains functions used to draw in Canvas elements: drawCircle, drawLineFromCenter and writeInCanvas (used in previous iterations).
-  \item \textbf{GeometrySrv}: Contains functions used to calculate coordinates in Canvas elements: isInsideCircle, forceIntoCircle, centerCoord, canvasCoord, forceDirectionLock.
+  \item \textbf{ProfileSrv}: Allows controllers to publish the state of their scopes to the master controller, that then creates a
+  profile with these states that can then be saved in the back-end for future use. See section \ref{profilemanagement} for more.
+  \item \textbf{SocketSrv}: Holds the Socket.IO Websocket connection that needs to be accessed from all controllers to receive and emit
+  events to the back-end, as well as media streaming raw WebSockets. See section \ref{html5websockets} on WebSockets.
+  \item \textbf{DrawSrv}: Contains functions used to draw in Canvas elements: drawCircle, drawLineFromCenter and writeInCanvas (used in
+  previous iterations).
+  \item \textbf{GeometrySrv}: Contains functions used to calculate coordinates in Canvas elements: isInsideCircle, forceIntoCircle,
+  centerCoord, canvasCoord, forceDirectionLock.
 \end{itemize}
   \begin{figure}[H]
   \centering
@@ -1291,14 +1413,685 @@ Apart from controllers and directives, Angular (among many other features that a
   \end{minted}
   \caption{AngularJS: HRUI DrawSrv Service example}
   \end{figure}
+A full recap of the features of AngularJS is far beyond the scope of this report, but suffice it to say it's one of the core
+technologies of this project, as the previous brief examples have shown. Without AngularJS, the Single-page Application wouldn't be as
+responsive and immediately easy to use; the front-end code would be much less readable and as a result much more difficult to maintain
+and build upon. As it is, a new front-end module can be added to the application very fast, so much so that the modules added later in
+the development (gamepad, device motion and voice commands) took just a few hours to develop on the front-end, in part because of the
+excellent modularity provided by the AngularJS framework that had been implemented previously. AngularJS is supported by Google and has
+extensive and exhaustive documentation online\cite{google10}, both of which make it a very reliable framework to use, although a bit
+daunting at first.
+\newpage
 \section{Development Environment \& Tools}
+This section briefly describes the software development environment, software tools used to develop the project as well as
+the robots used to demonstrate the integration of the project with existing hardware and simulated robots. The development
+environment comprises the operating system (OS) used for development and deployment of the project, the source code editor
+and build management software as well as the revision control system.
 \subsection{Linux}
+\begin{figure}[H]
+\centering
+\subfloat{\includesvg[width=0.2\linewidth]{./img/tux}}
+\subfloat{\frame{\includesvg[width=0.6\linewidth]{./img/mint}}}
+\caption{Tux the penguin, Linux mascot and Linux Mint Official Logo}
+\end{figure}
+Linux is the OS of choice for software development. The Linux distribution used in this project is Linux Mint 17 (Qiana) - 17.1(Rebecca)
+Cinnamon Edition (64-bit version), that is based on the Ubuntu distro, itself based on Debian. A description of the Linux kernel and the
+distribution used in this project is far beyond the scope of this report, but the choice to develop and deploy the application on this
+platform will be discussed briefly.\\
+
+The main reason why this project was developed on Linux is because of how easy it makes the installation and use of development tools 
+through package management systems. A package management system automatically installs software and all of its dependencies (external 
+software a program relies on to function) without having to manually download or install anything. This makes installing the needed 
+software to develop this project as simple as  executing the command: \mintinline{shell}{ sudo apt-get install nodejs npm mongodb python2
+}, which will install any dependencies required and will configure the programs for use. In Microsoft Windows, no official package 
+management is implemented (although third-party package managers exist, like "chocolatey"), so installation and configuration of node, 
+npm, python and mongodb has to be performed manually, with the ensuing troubleshooting. This applies to most Linux distributions, making 
+it very simple to translate the installation and development requirements from one distribution to another. The Raspberry Pi 2 (see 
+section \ref{raspberrypi2}) used as a portable server in this project, uses an Arch Linux distribution, but the installation is roughly 
+the same: \mintinline{shell}{ sudo pacman -Syu install nodejs npm mongodb python2}, using the Pacman package manager. This portability 
+offered is just one of the many reasons (configurable, wealth of development tools, command-line interface, scripting, etc.) that Linux 
+is the main software development platform of the world.
+
+The application is designed to work best on a Linux server, like the majority of web servers publicly accessible on the Internet.
+However, given that one of the objectives of the project is accessibility to both the front-end of the application and the back-end, the
+server works on any machine capable of running Node.js (see section \ref{nodejs}) and MongoDB (see section \ref{mongodb}). The only
+caveat to the use on systems other than Linux is the loss of media streaming capabilities, that rely on Linux dev files to access video
+and audio hardware. The main reason Linux is used as a server platform is for its stability and reliability. Windows machines require
+regular maintenance and reboots to work properly while Linux is generally much more stable.
 \subsection{Sublime Text}
-\subsection{Git}
-\subsection{\LaTeX}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.2\linewidth]{sublime}
+\caption{Sublime Text Logo}
+\end{figure}
+Sublime Text is the text and source code editor used in this project. It's not a traditional IDE (Integrated Development
+Environment) like Eclipse or NetBeans, but includes many of the features found in those, implemented through user developed
+plug-ins that are installed through a package management system of it's own: Package Control. Some of these features are:
+\begin{itemize}
+  \item Project file management: Create custom project file trees to access on the fly from the sidebar.
+  \item Multiple editor tabs and file map: Edit code side by side, very useful when developing front-end and back-end of a module in
+  HRUI, and visual map of file on the right side of the screen for quick scrolling, useful for tracking sections in code or in \LaTeX
+  source.
+  \item Customizable build systems: Create scripts that run custom commands to build or execute the source.
+  \item Language-specific code highlighting and coloring: Helps visual orientation in code.
+  \item Automatic code formatting: Runs a script that automatically refactors the code for readability, with correct indentation and
+  trailing spaces.
+  \item Code completion and code snippets: Auto-completes variable, function and typical programming structures (functions, objects, 
+  if-else if) for convenience.
+  \item Refactoring tools: Make changes to code that affect several parts of the project instantly, e.g. changing a variable name across
+  the whole application once, instead of in each instance of the name.
+  \item Version control integration: Run version control (see section \ref{git}) commands directly from the editor.
+  \item Scripting tools: Such as a CSS auto vendor prefixer (adds vendor specific prefixes to CSS code automatically when including a
+  conflicting CSS rule) or javascript/CSS minifier (reduces the size of javascript/CSS files by refactoring text, saving network
+  resources).
+  \item Aesthetic customization: Modify the UI for visual comfort.
+\end{itemize}
+Sublime Text was used for both the development of the source code as well as for this report in \LaTeX.
+\begin{figure}[H]
+\centering
+\subfloat{\includegraphics[width=0.5\linewidth]{sublime_hrui}}
+\subfloat{\includegraphics[width=0.5\linewidth]{sublime_report}}
+\caption{Sublime Text: HRUI and Report Development Environment}
+\end{figure}
 \subsection{PM2}
-\section{V-REP}
-\section{Hardware}
-\subsection{Khepera III} \label{kheperaIII}
-\subsection{Crazyflie 2}
-\subsection{Raspberry Pi 2}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{pm2}
+\caption{PM2 Logo}
+\end{figure}
+PM2 is a process manager that supplies Apache-like server management. Node.js (see section \ref{nodejs}) creates the possibility of
+lightweight asynchronous web servers through frameworks like Express (see section \ref{express}). This is very useful, but Node is still
+just a process on a server: if for whatever reason the application crashes or the server restarts, there is no service that restarts the
+application or starts the web server on boot. That is where programs like PM2 come in, keeping the web server running, balancing its
+load and restarting it if need be. It also has process monitoring and management options. PM2 is itself installable through the Node
+Package Manager, NPM, as it is a Node.js module.\\
+
+With PM2 the application can be set to start on boot, and restarted automatically if any crashes occur, with a 0 s reload downtime,
+giving a reliable solution for long term use of the server. This is used in this project to implement the portable server using the
+Raspberry Pi 2 (see section \ref{raspberrypi2}). PM2 is configured in the embedded Linux OS to start the app on boot and keep it alive,
+allowing the board to act as an ``out of the box'' server for use anywhere with no configuration, except connection to a given network
+via Ethernet or Wifi.\\
+
+PM2 was also used throughout the development of the application, taking advantage of its file monitoring capabilities. PM2 can be
+configured to restart the application if any of the files in its directory are modified. This was extremely useful in creating an agile
+workflow for development. The PM2 service was started with this option enabled and the server would start. Modifications and additions
+were made to the source code and upon save, PM2 would detect the change and restart the application wit the new source automatically.\\
+
+Other PM2 features used throughout development were its memory and CPU monitoring and logging tools. Logging showed the console output
+of the app for debugging and the monitoring feature helped detect memory leaks and inefficiencies in testing.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{pm2example}
+\caption{PM2: PM2 list, monit and logs command output example}
+\end{figure}
+\subsection{Git \& GitHub} \label{git}
+\begin{figure}[H]
+\centering
+\subfloat{\includegraphics[width=0.3\linewidth]{git}}
+\subfloat{\includegraphics[width=0.4\linewidth]{github}}
+\caption{Git and Github Logo}
+\end{figure}
+Git is a distributed revision control system developed by Linus Torvalds, the creator of the Linux Kernel. A revision control system is
+used in software development to track changes to the source code of a project. The distributed nature of Git allows multiple developers
+to work on a project merging the changes made by all of them to a single or multiple versions of the code, keeping track of all changes,
+so that they can be automatically reversed or superseded if necessary. This aspect of Git wasn't used in this project, as there was only
+one developer, but revision control is also useful in this use-case. With Git, a code repository is created, wherein all of the code is
+placed. The code in the repository is tracked for changes, and when the developer deems it appropriate (normally when a large change or
+several smaller changes are made to the code), the changes are "committed" to Git. This ``commit'' is then "pushed" to the repository,
+establishing a new version of the code, with a short message attached to it, explaining the changes. The cycle then restarts. For multi-
+developer projects, another step is required: ``pulling'' the latest version from the repository  before making changes. If this is not
+done, the changes can be ``merged'' if the changes do not conflict with the latest commit.\\
+
+GitHub is a web service that hosts public Git repositories free of charge. It also maintains statistics on the development and the code,
+ some of which are used in section \ref{planning} on Project Planning. GitHub was used in this project to host both the 
+\href{https://github.com/xpeiro/HTML5RUI}{project repository} as well as \href{https://github.com/xpeiro/PFC}{this report's repository}, 
+as well as for the use of public repositories for the JavaScript MPEG1 decoder \href{https://github.com/phoboslab/jsmpeg}{JSMpeg}, the 
+Voice recognition library \href{https://github.com/TalAter/annyang}{Annyang} and the MP3 JavaScript decoder 
+\href{https://github.com/audiocogs/aurora.js/}{Aurora.js} and their respective documentation. GitHub also allows the possibility of
+hosting static web pages. This features is used to include a version of the User Manual (see section \ref{usermanual}) online at: 
+\url{http://xpeiro.github.io/hrui/index.html}.\\
+
+Revision control in general has many benefits:
+\begin{itemize}
+  \item Revert changes that result in issues: Since all previous versions are stored, the code can be reverted to any previous version
+  very simply.
+  \item Detect source of issues: When a bug or issue with the application arises that was not previously present, revision control can
+  make it very easy to pinpoint which commit created the problem, by testing previous versions and testing which one first had the bug,
+  making debugging easier.
+  \item Backup: By using a hosting service like GitHub the code is protected from local hardware/software failures and errors. In
+  distributed revision control, several copies of the code exist at any given time on different servers.
+  \item Code history or statistics: analysis of work load and work performance is easier with data on who changed the code, when, why
+  and how many times.
+  \item Compartmentalization: Experimental changes to code can be made without affecting a working version of the code, eliminating
+  chances of breaking code inadvertently.
+  \item Sharing: services like GitHub make sharing code very simple.
+\end{itemize}
+\subsection{\LaTeX}
+\LaTeX\ (pronounced ``Lah-tech'') is an open source procedural markup language for document preparation originally developed by Leslie
+Lamport based on the \TeX typesetting system by Donald Knuth. It's widely used to create scientific and technical documentation, such as
+this report. It's comprised of a series of macros (text that is processed to be replaced with other text) for the underlying \TeX\
+typesetting system. It has several advantages over the more common WYSIWYG (``What You See Is What You Get'') word processors like
+Microsoft Word (the de facto alternative):
+\begin{itemize}
+  \item Separation between content and presentation: The content is not tied to the presentation, rather the presentation can be changed
+  using macros without modifying the content, which is simple text.
+  \item Referencing: Powerful tools are available to make cross references in large documents like the ones made in this document when
+  referring to sections.
+  \item Automatic Numbering and Indexing: The cross references made do not make reference to the numbers of the sections. This numbering
+  is generated by \LaTeX\ automatically and references are macros that fill in with the correct number on compilation. This is also used
+  for the bibliography.
+  \item Automatic Table of Contents and Figures: The table of contents is auto generated with the sections on compilation. Likewise the
+  table of figures is generated with the existing figures (also numbered automatically).
+  \item Better content embedding: Inserting images and graphics is much simpler and organized.
+  \item Development Community: Creates hundreds of packages that are useful for all kinds of different use-cases whereas commercial
+  solutions require limited features for broad appeal.
+  \item Compatibility: \LaTeX\ source from 20 years ago can still produce a document today. Word documents cannot, without significant
+  modifications.
+  \item Revision Control: \LaTeX\ source can be easily put under version control, whereas this feature in Microsoft Word is very limited.
+  \item Source readability: Word .docx files are essentially zipped XML, which is very hard to read. \LaTeX\ commands on the other hand
+  are very close to their meaning and do not interfere with the content as much.
+  \item Source Commenting: Adding comments to the source, more information can be added on how the document should be presented and why.
+  \item Open Source: Can be modified at will with added packages that provide new functionalities.
+\end{itemize}
+  \begin{figure}[H]
+  
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[fontsize=\footnotesize]{latex}
+%   HTML5 Robot User Interface Project Report
+%   An ASLab Project,
+%   Developed by Daniel Peiró
+%   ETSII, UPM 2014-2015
+
+% Define Document Type, Font size, Paper size, and input/output encoding.
+\documentclass[12pt,twoside,a4paper]{report}
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+
+%%%%%%% Formatting Section %%%%%%%%
+
+% Document formatted according to PR/CL/1/001,
+% Annex ANX-PR/CL/1/001-01, available at:
+% http://www.industriales.upm.es/la_escuela/doc/Procedimiento-TFG-TFM-PFC-def.pdf
+%
+% Font: Times New Roman, 12 points.
+% Margins: All 1 in.
+% Header and footer content: Defined in 'plain' page style. 
+
+\usepackage{mathptmx} % Times New Roman.
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry} % 1 in. Margins.
+\usepackage{fancyhdr} % Header/Footer formatting.
+  \end{minted}
+  \end{figure}
+  \begin{figure}[H]
+  
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[fontsize=\footnotesize]{latex}
+\pagestyle{plain} %Set Document Page Style to plain
+\setlength{\headheight}{15pt} % Header height 15 points.
+\setcounter{tocdepth}{4} % Set Table of Contents sectioning depth
+\setcounter{secnumdepth}{4} % Set Table of Contents numbering depth
+\fancypagestyle{plain}{
+    \fancyhf{} %Clear Defaults.
+    \renewcommand{\headrulewidth}{1pt} % Header horizontal rule.
+    \renewcommand{\footrulewidth}{1pt} % Footer horizontal rule.
+    \fancyhead[LE]{\nouppercase\leftmark} % Even Pages: Chapter and Section Name, top left.
+    \fancyfoot[LE]{\thepage} % Even Pages: Page number, bottom left.
+    \fancyfoot[RE]{Escuela Técnica Superior de Ingenieros Industriales (UPM)} 
+    % Even Pages: University name, bottom right.
+    \fancyhead[RO]{HTML5 Robot User Interface} % Odd pages: Project name, top right.
+    \fancyfoot[RO]{\thepage} % Odd pages: Page number, bottom right.
+    \fancyfoot[LO]{Daniel Peiró Moreno}  % Odd pages: Author, bottom left.
+}
+%%%%% End Formatting Section %%%%%%
+
+% Title, Author and Date
+\title{HTML5 Robot User Interface}
+\author{Daniel Peiró Moreno}
+\date{2015}
+
+%%%%%% Import Packages %%%%%%
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{subfig}
+\usepackage{epigraph}
+\usepackage{hyperref}
+\usepackage{makeidx}
+\usepackage{minted}
+\usepackage{lipsum}
+%%%% End Import Packages %%%%
+
+\begin{document}
+
+\input{./acknowledgements/acknowledgements}
+\tableofcontents
+\input{./summary/summary}
+\input{./introduction/introduction}
+\input{./tech/techoverview}
+\input{./arch/systemarch}
+\input{./future/futuredev}
+\input{./planning/planning}
+\input{./conclusions/conclusions}
+\input{./annexes/annexes}
+
+\listoffigures
+\printindex
+\input{./bibliography/bibliography}
+
+\end{document}
+
+  \end{minted}
+  \caption{\LaTeX\ : The main source of this report (abridged)}
+  \end{figure}
+\subsection{Robots}
+The following sections briefly describe the software and hardware robots that have been successfully integrated with the project and the
+process of integration for each of them. What this integration entails architecturally is discussed in section \ref{mvcpattern} on the
+MVC Pattern used in this project. Essentially, the integration of these robots is a proof of concept, demonstrating the viability of the
+project as a universal robot control interface, in the sense that any programmable robot can be controlled with a varying, but generally
+low amount of effort.
+\subsubsection{V-REP: Virtual Khepera III}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{vrep}
+\caption{V-REP Logo}
+\end{figure}
+V-REP is a Robot Simulator developed by Coppelia Robotics. It creates a model of a robot in a scene with other objects and simulates the
+physics of the environment as well as the actions of the robot in the environment. V-REP has several means of programming the behavior
+of the robots its simulates and the simulation itself:
+\begin{itemize}
+  \item Embedded Scripts: Lua (scripting programming language) scripts that control the robot and are run inside the simulator.
+  \item Add-on: Similar to embedded scripts in Lua, but with control over the simulator itself.
+  \item Plug-in: A full extension of the simulator that adds functionality.
+  \item \textbf{Remote API Client}: An API of RPC (Remote Procedure Calls) in several different programming languages.
+  \item ROS Node: Use a ROS (Robot Operating System) Node to control the virtual robot.
+  \item Raw Client/Server: Use a custom means of communication between processes (pipes, sockets, etc.).
+\end{itemize}
+The solution that best adapts to HRUI is using the remote API, using a controller script that reads and writes to the database and to 
+V-REP. The Remote API is available in C/C++, Java, \textbf{Python}, Matlab, Octave, Lua and Orbi. The language most suited to work with
+HRUI would be JavaScript through Node.js, but since it's not one of the above supported languages (although writing a wrapper API
+wouldn't be difficult), Python is the most adequate language, given that the MongoDB driver is extremely simple for this language.\\
+
+This was the first integration made for the project, and was initially made when the only modules in the application were the joystick 
+and the table in the data monitor. The controller is heavily based off of a previous project made for a software engineering course 
+(Computadores III) at ETSII, UPM the year prior. It's a C++/Qt user interface to run V-REP controllers for a virtual Khepera III robot, 
+remotely on a network. The code is available \href{https://github.com/xpeiro/computadores-III}{here}.  The result was that using a much 
+simpler controller (180 lines of code, much of which wasn't strictly necessary vs. around 700 lines of code), the level of control was 
+much greater, provided that the HRUI controller gave real-time analog control over the robot and real-time data output vs. fixed control 
+algorithms and limited 4-directional interrupts. It provided a great proof of concept, that encouraged the path chosen.
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{vrepdemo}
+\caption{V-REP: Virtual Khepera III controlled with HRUI}
+\end{figure}
+\begin{figure}[H]  
+  \captionsetup{justification=centering}
+  \begin{minted}[breaklines,fontsize=\footnotesize]{python}
+  while clientID!=-1: 
+    joystick = data.find_one({"_id": 0})
+    x = float(joystick['x'])
+    y = float(joystick['y'])
+    lockMode = str(joystick['mode'])
+    (err, position) = vrep.simxGetObjectPosition(clientID,robot,-1,vrep.simx_opmode_oneshot)
+    (err, orientation) = vrep.simxGetObjectOrientation(clientID,robot,-1,vrep.simx_opmode_oneshot)
+    (err, speed, angularSpeed) = vrep.simxGetObjectVelocity(clientID,robot,vrep.simx_opmode_oneshot)
+    angleModel[0] = orientation[1]
+    (velizq, velder, targetReached) = setSpeeds(x, y, angleModel, lockMode)
+    if (joystick != oldJoystick) or targetReached:      
+      oldJoystick = joystick
+      vrep.simxSetJointTargetVelocity(clientID,lwmotor,velizq,vrep.simx_opmode_oneshot)
+      vrep.simxSetJointTargetVelocity(clientID,rwmotor,velder,vrep.simx_opmode_oneshot)
+  \end{minted}
+  \end{figure}
+  \begin{figure}[H]  
+  \captionsetup{justification=centering}
+  \begin{minted}[breaklines,fontsize=\footnotesize]{python}
+    if (position != oldPosition): 
+      data.update({"item": "robotData"}, {"$set":{"position": {"x": round(position[0],4), "y": round(position[1],4), "z": round(position[2],4)}}})
+      oldPosition = position
+    if (orientation!= oldOrientation):
+      data.update({"item": "robotData"}, {"$set":{"orientation": {"alpha": round(math.degrees(orientation[0]),2), "beta": round(math.degrees(orientation[1]),2), "gamma": round(math.degrees(orientation[2]),2)}}})
+      oldOrientation = orientation
+    if (speed!= oldSpeed):
+      data.update({"item": "robotData"}, {"$set":{"speed": {"vx": round(speed[0],2), "vy": round(speed[1],2), "vz": round(speed[2],2)}}})
+      oldSpeed = speed
+    if (angularSpeed!= oldAngularSpeed):      
+      data.update({"item": "robotData"}, {"$set":{"angularSpeed": {"dAlpha": round(angularSpeed[0],2), "dBeta": round(angularSpeed[1],2), "dGamma": round(angularSpeed[2],2)}}})
+      oldAngularSpeed = angularSpeed
+    
+    #Check connection
+    if vrep.simxGetConnectionId(clientID)==-1:
+      count += 1
+    if count>2:
+      break
+      
+close()   
+  \end{minted}
+  \caption{V-REP: V-REP Khepera III controller main loop}
+  \end{figure}
+\subsubsection{Khepera III} \label{kheperaIII}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{khepera}
+\caption{Khepera III Robot. Source: \href{http://disal.epfl.ch/page-32508-en.html}{DISAL, EPFL}}
+\end{figure}
+The Khepera III is a differential-wheeled mobile robot developed by K-Team, a Swiss robotics company. It's widely used in academic
+circles for investigation in autonomous robots and evolutionary robotics. It carries an embedded ARM architecture micro computer running
+a very lightweight Linux distribution (Angstrom). It has a WiFi card slot to connect to a network, and although it can be connected
+through a serial connection, the required adapter wasn't available (KoreConnect). The only way to connect to a Linux terminal was
+creating a predefined WiFi network to which it was configured to connect to automatically, presumably using the netctl network
+management tool. This proved quite cumbersome at first, since documentation was scarce and confusing for other types of connections, and
+the WiFi connection wasn't self evident. Once the network was created and the connection established through an SSH terminal, the
+challenge was to relay the instructions given by the user interface to the robot through WiFi. The solution was to use a small C program
+on the robot, that opens a TCP/IP socket connection to receive the instructions from a Python script that reads the database and sends
+the data through the socket to the robot. The C program had to be cross-compiled on a host computer, given the low computing power of
+the robot, and sent via SSH to the robot. The program would then be run, and it would idle, waiting for a connection from the Python
+controller. Once the Python controller was started (manually or through the script execution module, see section \ref{scriptexecution})
+the controller would write the speeds for each motor, and likewise the robot would get the encoder data from the wheels and send it back
+to the controller for display on the front-end.\\
+
+This was the final proof of concept for the project and showed a complete success. The latency was completely imperceivable, even when
+using an Internet connection outside the local network, and even though the data had to be relayed twice over TCP/IP: from the client to
+the server and from the server to the robot. The only real doubt after this integration was if the server could be implemented on a
+portable device, so that the whole system could be mounted on a robot, making it a fully autonomous solution.
+  \begin{figure}[H]  
+  \captionsetup{justification=centering}
+  \begin{minted}[breaklines,fontsize=\footnotesize]{python}
+while True:
+    # get joystick position and mode
+    joystick = data.find_one({"_id": 0})
+    joyx = round(float(joystick['x']), 2)
+    joyy = round(float(joystick['y']), 2)
+    lockMode = str(joystick['mode'])
+    gamepad = data.find_one({"item": "gamepad"})
+    lx = 100*float(gamepad['axes'][0])
+    ly = -100*float(gamepad['axes'][1])
+    if math.fabs(ly) > math.fabs(lx):
+      lx = 0
+    else:
+      ly = 0
+    # generate speeds based on joystick
+    (leftSpeed, rightSpeed) = setSpeeds(lx, ly, "lock4ways")
+    # send speeds to khepera
+    s.send(str(leftSpeed)+";"+str(rightSpeed))
+    # receive encoder position in mm from khepera
+    buf = s.recv(1024)
+    x, y, alpha, leftPos, rightPos = correctPos(
+        buf, leftPos, rightPos, x, y, alpha)
+    # update DB with position data
+    data.update({"item": "robotData"}, {
+                "set": {"position": {"x": x, "y": y}, "orientation": {"alpha": alpha}}})  
+  \end{minted}
+  \caption{Khepera III Python controller main loop (later version using gamepad module)\label{kheperapython}}
+  \end{figure}
+  \begin{figure}[H]  
+  \captionsetup{justification=centering}
+  \begin{minted}[breaklines,fontsize=\footnotesize]{c}
+int main(int argc, char *argv[]) {
+
+  if (!initKH3()) {
+    printf("Init OK\n");
+
+    while (n && !end) {
+      bzero(buffer, 256);
+      strcpy(buffer, "");
+      n = read(sock, buffer, 255);
+      if (n < 0) error("ERROR reading from socket");
+      tok = strtok (buffer, ";");
+      while (tok != NULL && i < 2) {
+        speeds[i] = atof(tok);
+        tok = strtok (NULL, ";");
+        i++;
+      }
+      i = 0;
+      printf("leftSpeed: %f / rightSpeed: %f \n", speeds[0], speeds[1]);
+      setSpeeds(speeds[0], speeds[1]);
+      lpos = kmot_GetMeasure(mot1, kMotRegPos) * PULSE_TO_MM;
+      rpos = kmot_GetMeasure(mot2, kMotRegPos) * PULSE_TO_MM;
+      sprintf(buffer, "%f;%f", lpos, rpos);
+      n = write(sock, buffer, strlen(buffer));
+      if (n < 0) error("ERROR writing to socket");
+    }
+
+    printf("Stop motors\n");
+    motStop();
+  }
+  return 0;
+}
+  \end{minted}
+  \caption{Khepera III C local controller main loop (abridged)\label{kheperac}}
+  \end{figure}
+\subsubsection{Crazyflie 2}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{crazyflie}
+\caption{Crazyflie 2 nano drone. Source: \href{http://www.seeedstudio.com/depot/Crazyflie-20-p-2103.html}{Seeed Studio (Official Bitcraze reseller)}}
+\end{figure}
+The Crazyflie 2 is a DIY (``Do It Yourself'') nano drone developed by the Swedish company Bitcraze. It's designed to be 
+"a development-kit that flies", meaning that it's very simple to create controllers for it, with a robust API that supports several
+programming languages. The quadcopter is composed of 4 brushless DC motors, 4 propellers, a 240mAh LiPo battery, and of course the board
+itself which acts as the body of the drone, protected and supported by 4 plastic struts. It also has an expansion board with a LED multi-
+color ring and a forward facing white LED. All of these parts come disassembled and have to be put together on reception. The Crazyflie 
+1 required soldering to put it together, but the Crazyflie 2 uses a simpler, snapping assembly. The quadcopter can receive orders via 
+two communication modes: BLE (Bluetooth Low-Energy) and radio. The first is used in the application created by the developers for 
+smartphones, while the latter is more appropriate for development of custom controllers. The Crazyradio PA radio USB dongle, created by 
+the same developers provides a long range (up to 1 km) radio emitter for the controller hardware. The CrazyFlie and all of the previous 
+components are all open source, with the mechanical and electronic schematics freely available for use and construction. This is typical 
+of open source movement projects (see section \ref{opensourcemovement}).\\
+
+The Crazyflie API is available in several programming languages, including Python, C/C++, Java, C\#, Ruby, and has been integrated into 
+ROS. It also has a JavaScript API through Node.js, although it's still somewhat limited. Main development is centered around Python, and 
+this language was used for this integration as well.\\
+
+The integration of the Crazyflie 2 was the easiest of all. Using the previous Khepera III controller's code for interfacing with HRUI 
+and the extremely simple API, the controller was up and running in a couple of days. As previously stated, the integration of the 
+Khepera III was the real proof of concept for the project, with the Crazyflie confirming how easy integration could be. The full code 
+comes in under 130 lines (of which only 50 lines or so are essential), which include two modes of control: through the gamepad module (
+the most stable way to control a quadcopter) and through the device motion module (implemented for testing of the module, only controls 
+motor thrust using the Beta value of the euler angles of the device).\\
+
+The fact that full control can be achieved through HRUI using around 50 lines of code was a source of great satisfaction and proves the 
+success of the project.
+\begin{figure}[H]  
+\centering
+\captionsetup{justification=centering}
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}[breaklines,fontsize=\footnotesize]{python}
+def gamepad():
+    while True:
+          voiceCommand = data.find_one({"item": "voiceCommand"})
+          gamepad = data.find_one({"item": "gamepad"})
+          if (voiceCommand['value'] == 'stop' or int(gamepad['buttons'][9]) == 1):
+              land(thrust)
+          lx = float(gamepad['axes'][0])
+          ly = -float(gamepad['axes'][1])
+          rx = float(gamepad['axes'][2])
+          ry = -float(gamepad['axes'][3])
+          thrust = 10000 + ry * 50000
+          roll = lx * 30
+          pitch = ly * 30
+          yaw = rx * 200
+          crazyflie.commander.send_setpoint(roll, pitch, yaw, thrust)
+          time.sleep(0.05)
+\end{minted}
+\end{figure}
+\begin{figure}[H]  
+\centering
+\captionsetup{justification=centering}
+\RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+\begin{minted}[breaklines,fontsize=\footnotesize]{python}
+def connected(link_uri):
+    print "Connected"
+    gamepad()
+
+def land(thrust):
+    while thrust > 10000:
+        thrust = thrust/1.2
+        crazyflie.commander.send_setpoint(0, 0, 0, thrust)
+        time.sleep(0.5)
+    crazyflie.close_link()
+
+print "Scanning interfaces for Crazyflies..."
+available = cflib.crtp.scan_interfaces()
+if len(available) >= 1:
+    print "Crazyflies found:"
+    print str(available)
+    link = available[0][0]
+    for i in xrange(1, len(available)):
+        if "80" in available[i][0]:
+            link = available[i][0]
+    print("Connecting to:" + link)
+    crazyflie.connected.add_callback(connected)
+    crazyflie.disconnected.add_callback(disconnected)
+    crazyflie.connection_failed.add_callback(connection_failed)
+    crazyflie.connection_lost.add_callback(connection_lost)
+    crazyflie.open_link(link)
+else:
+    print "No Crazyflies found"
+\end{minted}
+\caption{Crazyflie Controller code (abridged) using Gamepad for control and Voice Command for landing}
+\end{figure}
+\subsection{Python}
+\begin{figure}[H]
+\centering
+\includesvg[width=0.8\linewidth]{./img/python}
+\caption{Python Logo}
+\end{figure}
+Given that all integrations were made with Python, the main reasons for this choice are exposed briefly:
+\begin{itemize}
+  \item \textbf{Ease of use}: The main reason for the use of Python is the main strength of the language altogether: it's simplicity. 
+  Oftentimes Python is praised for getting rid of much of the clutter surrounding the actual business logic of a program that add to the 
+  ``mental overhead'' of programming. This of course comes at a cost of granularity and efficiency, making low level programming 
+  impossible in Python as opposed to C or other languages, but for many use-cases the ease and speed of programming in Python vastly 
+  outweigh low-level programming languages. For an example on how much simpler it is to use see figures \ref{kheperapython} and 
+  \ref{kheperac}. Not pictured for brevity, is the Socket configuration code for each:
+  \begin{figure}[H]  
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[breaklines,fontsize=\footnotesize]{python}
+  # socket setup
+  HOST, PORT = "192.168.141.100", 1000
+  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+  s.connect((HOST, PORT))
+  # end socket setup
+  \end{minted}
+  \caption{Python: Socket Configuration}
+  \end{figure}
+  \begin{figure}[H]  
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[breaklines,fontsize=\footnotesize]{c}
+  //Socket Config
+  bindsock = socket(AF_INET, SOCK_STREAM, 0);
+  if (bindsock < 0) error("ERROR opening socket");
+  bzero((char *) &serv_addr, sizeof(serv_addr));
+  portno = atoi(argv[1]);
+  serv_addr.sin_family = AF_INET;
+  serv_addr.sin_addr.s_addr = INADDR_ANY;
+  serv_addr.sin_port = htons(portno);
+  if (bind(bindsock, (struct sockaddr *) &serv_addr,
+           sizeof(serv_addr)) < 0)
+    error("ERROR on binding");
+  listen(bindsock, 5);
+  clilen = sizeof(cli_addr);
+  sock = accept(bindsock, (struct sockaddr *) &cli_addr, &clilen);
+  if (sock < 0) error("ERROR on accept");
+  //End Socket Config
+  \end{minted}
+  \caption{Python: C Socket Configuration}
+  \end{figure}
+  That's three lines of very clear and readable code versus fourteen lines of somewhat cryptic code.
+  \item \textbf{Portability}: Python is available for most common architectures and Operating Systems, and installation is generally 
+  simple, even on Windows. Since it's an interpreted language, the code is generally multi platform if it uses only native resources, 
+  given that the code is ``translated'' through the interpreter without compilation. Compilation in other languages can lead to severe 
+  annoyances in the development of multi platform applications. Taking C again as an example, on Windows, compiling C code requires the 
+  use of Visual Studio, a very large and powerful, but cumbersome development environment, or the use of Cygwin or Mingw to emulate a 
+  Unix OS.
+  \item \textbf{MongoDB Driver}: One of the requisites for the controller programming language is that a MongoDB driver is available. 
+  This isn't an issue for most languages, given that MongoDB drivers are available for most of them (see section \ref{mongodb}), but 
+  Python as a result of the first point has an extremely easy to use driver:
+  \begin{figure}[H]  
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[breaklines,fontsize=\footnotesize]{python}
+  # MongoDB setup
+  mongoclient = MongoClient()
+  db = mongoclient.hrui
+  data = db.data
+  # end MongoDB setup
+  \end{minted}
+  \caption{Python: MongoDB driver setup in HRUI}
+  \end{figure}
+  \begin{figure}[H]  
+  \centering
+  \captionsetup{justification=centering}
+  \RecustomVerbatimEnvironment{Verbatim}{BVerbatim}{}
+  \begin{minted}[breaklines,fontsize=\footnotesize]{python}
+  # get joystick data
+  joystick = data.find_one({"_id": 0})
+  # update DB with position data
+  data.update({"item": "robotData"}, {
+              "set": {"position": {"x": x, "y": y},
+              "orientation": {"alpha": alpha}}})
+  \end{minted}
+  \caption{Python: MongoDB driver usage in HRUI}
+  \end{figure}
+  That's three lines for setup, and one-liners for getting and setting values in the database.
+  \item \textbf{Performance}: Obviously, as an interpreted high-level language, the performance and efficiency of Python can rarely 
+  compare to compiled, robust, low-level languages. However, the specific requirements of this project do not include fast and large 
+  computation, or hard real-time computing, where missing a deadline is akin to total system failure. Controllers for robots that do 
+  require these features need a dedicated, most likely hardware based solution, as opposed to this project that offers an accessible, 
+  universal and distributed solution. In any case, using an Internet connection for the user interface would likely be the aspect that 
+  would break hard real-time requirements much sooner than using an interpreted language, so the point would be likely moot.
+\end{itemize}
+It should be noted that these advantages over other languages are a function of the specific requirements of the project, and are not 
+meant to declare Python as the perfect solution for all software development. Each project has it's own requirements, and the 
+programming language used for it should be studied individually.
+\subsection{Raspberry Pi 2} \label{raspberrypi2}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{raspberrypi2}
+\caption{Raspberry Pi 2 Model B. Source: \href{https://raspberrypi.org/raspberry-pi-2-on-sale/}{Raspberry Pi Foundation}}
+\end{figure}
+The Raspberry Pi 2 Model B is the second generation of the Raspberry Pi micro computer. It's an affordable, portable computer used, at 
+least in it's original purpose, for education on computer science and programming. It has fostered a vibrant community of developers and 
+``makers'' that have used it for all kinds of applications, from fully fledged network media centers, to full domotics solutions, even 
+making robots and drones that carry the Pi on board. Recently, many applications have turned the Raspberry Pi into a home server, for 
+domotics, file sharing, media centers and others. This was the main inspiration for using the Pi as a portable server for the 
+application. The only prerequisite was that the micro computer had to be capable of running Node.js and MongoDB. The Raspberry Pi has an 
+ARMv7 architecture, on which a Linux kernel can be run. There are several Linux distributions readily available for the Pi, most notably 
+the Raspberry Foundation recommended Raspbian, which is a port of Debian. The problem with this distribution is that packages (see 
+section \ref{linux} on software package managers) for Node.js or MongoDB are not available. This doesn't mean that they cannot be 
+installed, given that they're both open source, they could be compiled from source. However, given the relatively low processing power 
+of the Pi 2 (900Mhz Quad-core), compilation would probably take a couple of days. There's another distribution which does have packages 
+for installation on ARM architectures, Arch Linux. This distribution is known for being a ``rolling'' distribution, meaning that there 
+are no formal releases, with versions of packages installed. Instead, releases are a very small subset of packages required for a live 
+environment for installation, and a package manager to install the latest version of the required packages. This makes it a very 
+lightweight distro out of the box, but also very bare bones, requiring extensive configuration. The up-side to this is that all of the 
+software for the distro is always on the bleeding edge of development. This distribution was chosen for these reasons, so the 
+installation of HRUI on an Arch Linux Raspberry Pi is trivial, requiring only the installation of the dev tools and the app itself 
+through package managers.\\
+
+The other great advantage of the Raspberry Pi is that its power supply is a standard 5V/1.5A micro-USB (Micro-B) connector. This allows 
+it to be powered from any external source that can provide 5V through USB: computers (although the amperage of computer outputs can be 
+too low, around 500mA, for use with a Raspberry Pi with multiple peripherals), standard power socket adapters and best of all: 
+batteries. By attaching a USB power bank to the Raspberry Pi, a fully portable server can be used. The power bank used in this project 
+is rated at 10400mAh, meaning it can roughly provide power to a Raspberry Pi at 1500mA for around 6 to 7 hours on a full charge. 
+Combining this with the USB hub of the Pi that allows any dongles to be attached, it makes for a completely portable platform for HRUI.\\
+
+The integration of the Raspberry Pi 2 was originally done with the Khepera III. The robot was mounted with the power bank, the Pi and a 
+USB webcam attached to the Pi, providing a full FPV (First-Person View) robot, controllable through any web browser capable device, with 
+a very low cost (the Pi costs around 35USD and the power bank around 20USD), aside from the cost of the robot itself.\\
+
+This integration was a success for the project, achieving the goal of an accessible (both from the developers and the users point of
+view), portable, low-cost, universal user interface and controller for any robot.
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.6\linewidth]{raspberrypiint}
+\caption{Screenshot of Raspberry Pi 2 Integration with Khepera III and USB Web Cam. 
+\href{https://www.youtube.com/watch?v=HtgBNOEmj6w}{Full Video}}
+\end{figure}
