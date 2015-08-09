@@ -917,7 +917,7 @@ distributions, MAC OSX, Windows and runs on 32/64 bit architectures and ARM.\\
 
 Node.js is event driven, which in short means that it does not run code synchronously, instead relying on listening for events
 (any significant change in the state of the application is called an event) that are handled by functions called callbacks.
-The main loop of a Node.js is reduced to listening for events and directing them to the function that handles that particular
+The main loop of a Node.js app is reduced to listening for events and directing them to the function that handles that particular
 event, which in turn should have a callback function that is run when the handler is done. What this means without going into
 technical details is that well designed Node.js applications are extremely lightweight when it comes to CPU load, because most
 of the time, the application is not doing anything, in contrast with synchronous applications, that are constantly loading the
@@ -1427,7 +1427,7 @@ This section briefly describes the software development environment, software to
 the robots used to demonstrate the integration of the project with existing hardware and simulated robots. The development
 environment comprises the operating system (OS) used for development and deployment of the project, the source code editor
 and build management software as well as the revision control system.
-\subsection{Linux}
+\subsection{Linux} \label{linux}
 \begin{figure}[H]
 \centering
 \subfloat{\includesvg[width=0.2\linewidth]{./img/tux}}
@@ -1690,7 +1690,7 @@ process of integration for each of them. What this integration entails architect
 MVC Pattern used in this project. Essentially, the integration of these robots is a proof of concept, demonstrating the viability of the
 project as a universal robot control interface, in the sense that any programmable robot can be controlled with a varying, but generally
 low amount of effort.
-\subsubsection{V-REP: Virtual Khepera III}
+\subsubsection{V-REP: Virtual Khepera III} \label{vrepvirtualkheperaiii}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\linewidth]{vrep}
@@ -1861,7 +1861,7 @@ int main(int argc, char *argv[]) {
   \end{minted}
   \caption{Khepera III C local controller main loop (abridged)\label{kheperac}}
   \end{figure}
-\subsubsection{Crazyflie 2}
+\subsubsection{Crazyflie 2}  \label{crazyflie2}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.6\linewidth]{crazyflie}
@@ -1951,7 +1951,7 @@ else:
 \end{minted}
 \caption{Crazyflie Controller code (abridged) using Gamepad for control and Voice Command for landing}
 \end{figure}
-\subsection{Python}
+\subsection{Python} \label{python}
 \begin{figure}[H]
 \centering
 \includesvg[width=0.8\linewidth]{./img/python}
@@ -2045,7 +2045,7 @@ Given that all integrations were made with Python, the main reasons for this cho
   computation, or hard real-time computing, where missing a deadline is akin to total system failure. Controllers for robots that do 
   require these features need a dedicated, most likely hardware based solution, as opposed to this project that offers an accessible, 
   universal and distributed solution. In any case, using an Internet connection for the user interface would likely be the aspect that 
-  would break hard real-time requirements much sooner than using an interpreted language, so the point would be likely moot.
+  would break hard real-time requirements much sooner than using an interpreted language, so the point would likely be moot.
 \end{itemize}
 It should be noted that these advantages over other languages are a function of the specific requirements of the project, and are not 
 meant to declare Python as the perfect solution for all software development. Each project has it's own requirements, and the 
