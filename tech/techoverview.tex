@@ -676,7 +676,7 @@ HRUI makes full use of three of these APIs:\\
   \ref{html5_orientation})
   \begin{figure}[h]
     \begin{center}
-      \includegraphics[width=\linewidth/2]{html5_orientation}
+      \includegraphics[width=\linewidth/2]{deviceorientation}
     \end{center}
     \caption{HTML5 Device Access: Device Orientation in HRUI.\label{html5_orientation}}
   \end{figure}
@@ -941,10 +941,10 @@ NPM. Installing new modules for use in a project is as simple as running the com
 be installed simply by running ``npm install hrui'' which will install all dependencies automatically and get the latest
 version of hrui from github. HRUI uses many of these packages, including but not limited to:
 \begin{itemize}
-  \item \textbf{Socket.IO}: An event-base framework for WebSockets (see section \ref{html5websockets} for more).
-  \item \textbf{Monk}: An abstraction layer to access the MongoDB Node.js driver.
-  \item \textbf{PNGJS}: A PNG Image decoder/encoder used to generate the map from a binary-matrix/parse the user-drawn map.
-  \item \textbf{Busboy}: A module that parses incoming HTTP requests, used to accept file uploads from the client (map image).
+  \item \textbf{Socket.IO}: An event-base framework for WebSockets (see section \ref{html5websockets} for more)\cite{socketio15}.
+  \item \textbf{Monk}: An abstraction layer to access the MongoDB Node.js driver\cite{monk12}.
+  \item \textbf{Node-PNGJS}: A PNG Image decoder/encoder used to generate the map from a binary-matrix/parse the user-drawn map.\cite{nodepngjs12}
+  \item \textbf{Busboy}: A module that parses incoming HTTP requests, used to accept file uploads from the client (map image).\cite{busboy13}
 \end{itemize}
 The most important module used in HRUI is Express, which is discussed in the following section.
 \subsection{Express} \label{express}
@@ -2093,5 +2093,5 @@ view), portable, low-cost, universal user interface and controller for any robot
 \captionsetup{justification=centering}
 \includegraphics[width=0.6\linewidth]{raspberrypiint}
 \caption{Screenshot of Raspberry Pi 2 Integration with Khepera III and USB Web Cam. 
-\href{https://www.youtube.com/watch?v=HtgBNOEmj6w}{Full Video}}
+\href{https://www.youtube.com/watch?v=HtgBNOEmj6w}{Full Video}\label{kheperaiiidemo}}
 \end{figure}
