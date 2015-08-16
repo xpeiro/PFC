@@ -3,4 +3,180 @@
 % 	Developed by Daniel Peiró
 % 	ETSII, UPM 2014-2015
 \chapter{Conclusions} \label{conclusions}
+This chapter briefly analyzes the success and failures of the project. The project objectives and requirements are clearly 
+outlined in the introductory chapter \ref{introduction}, and subsequent chapters have thoroughly discussed the technologies 
+used and architectures implemented to attain the final product.\\
+
+The requirements are laid out the same way as in the introduction, and the success in complying with them is discussed.
+\begin{itemize}
+	\item \textbf{Universal}: \textit{The GUI must be easily adaptable for use in a wide array of robots, with different 
+	features and lack thereof}.\\
+
+	HRUI has been shown to be easily adaptable to robots with different features, through the 3 proof-of-concept 
+	integrations documented (see \ref{vrepvirtualkheperaiii}, \ref{kheperaIII} and \ref{crazyflie2}), and the undocumented 
+	fourth integration with the Parrot Rolling Spider.\\
+
+	\item \textbf{Accessible}: \textit{This is a two-fold requirement}:
+	\begin{itemize}
+		\item \textit{The GUI must be easily usable from a wide array of devices, including but not limited to desktop and 
+		laptop computers, mobile devices such as smartphones and tablets, all running different operating systems, which 
+		the application should be agnostic of}.\\
+
+		The GUI has been shown to work on Desktop and laptop computers as well as smartphones and tablets. The GUI is 
+		completely agnostic of the client-host setup, given that it's run inside the browser environment.\\
+
+		\item \textit{The application that provides the GUI must also expose an API (Application Programming Interface) 
+		that enables external developers to use the inputs and outputs from the GUI, so that the first requirement can be 
+		truly attained, by adapting them to whatever application necessary. This interface should be as simple as possible, 
+		and comply with all other requirements, where applicable (i.e. it must be portable, distributed, real-time capable 
+		and open source)}.\\
+
+		The API exposed by HRUI is accessible from almost any modern general purpose programming language through the 
+		mongoDB drivers that are available (see section \ref{mongodb}). It's as simple as a one-liner with a 3 line setup 
+		for Python (see section \ref{python}), and is similarly simple for all other languages. It's portable, because 
+		mongoDB is multi-platform; it's distributed, because mongoDB allows network connection to the database; it's 
+		real-time, given mongoDB's blazing fast r/w speed; and is of course open source, given that HRUI can be modified 
+		easily and mongoDB is open source software (see section \ref{opensourcemovement} for more).
+	\end{itemize}
+	\item \textbf{Customizable}: \textit{Partially as a result of the first requirement, the GUI must have a variety of 
+	inputs and outputs that can be used independently from one another, so that multiple configurations can be setup and 
+	used for different robots, and different applications of the same robot. If possible, the user should be able to tailor 
+	custom inputs and outputs when the proposed tools are insufficient for the particular application. This process should 
+	be seamless and transparent for the user, when possible}.\\
+
+	The modular front-end architecture (see section \ref{modularfrontendarchitecture}) allows any configuration of modules 
+	to be saved and retrieved for future use (see section \ref{profilemanagement} on the profile management module). The 
+	Custom Input (section \ref{custominput}) and Custom Data (section \ref{customdata}) modules allow the user to create as 
+	many inputs and outputs as necessary on the fly, just by declaring their names and types. This is done without even 
+	having to reload the interface, and allowing the user to save the inputs and outputs for future retrieval using the 
+	mentioned profile management module. The retrieval on the back-end of the inputs and the writing of the outputs is as 
+	simple as using the mongoDB API.
+
+	\item \textbf{Distributed}: \textit{Partially as a result of the accessibility requirement, the application must be 
+	distributed over a network, in such a way that the GUI need not be physically tethered to a particular machine, or 
+	locally executed for the application to function.}\\
+
+	HRUI is a distributed application that can communicate the client with the server (see section 
+	\ref{clientserverpattern}) over a local area network or over the Internet with minimal to no input lag. This has been 
+	tested using even a cellular Internet connection. Furthermore, the mongoDB API is distributed, so the back-end is also 
+	distributed regarding the robot controller.
+
+	\item \textbf{Real-Time}: \textit{The inputs registered by the GUI must be able to control the robot in real-time, as 
+	well as receive output from the robot in real-time. No hard real-time deadlines are set, given that the application is 
+	distributed, these deadlines would be hard to estimate without extensive research and control over the environment of 
+	the application, hence negating the accessibility requirement. However, the response time of the system should be 
+	maximized to the extent of the current state of the art of the technologies used.}\\
+
+	HRUI is a real-time application with inputs being available as fast as the events that generate them are produced, with 
+	a maximum delay of a few milliseconds (the actual value has not been measured, for lack of appropriate tools, but is 
+	surely well within the bounds of reasonable soft real-time constraints). Output presentation is delayed purposefully to 
+	make the front-end more efficient so that low-end hardware can run it comfortably, but the same speed is available if 
+	so required.
+
+	\item \textbf{Portable}: \textit{The application that provides the GUI must be deployable on a wide array of systems 
+	with regards to these variables:}\\
+		\begin{itemize}
+			\item Hardware Capabilities: \textit{The application must be deployable on portable, affordable, low-end 
+			computers, as to be easily mountable on mobile robots if so required.}\\
+
+			HRUI is deployable on a Raspberry Pi 2, a 35\$ micro computer with a 900MHz quad-core processor and 1GB of RAM 
+			Memory. See section \ref{raspberrypi2} for more.
+
+
+			\item Operating System: \textit{The application must be multi-platform, meaning it can be deployed on a variety 
+			of operating systems. These OSs must include at least, but not necessarily limited to: a general purpose Linux 
+			distribution, Microsoft Windows and Apple OS X. Only the latest versions of each need to be supported. Required 
+			Architectures, though not necessarily limited to: 32/64-bit x86}.\\
+
+			HRUI is deployable on any OS that has Node.js and mongoDB binaries available. This includes the cited 
+			architectures and OS, as well as the ARMv7 architecture of the Raspberry Pi 2. HRUI has been tested on Linux 
+			Mint 17-17.2 64-bit, Windows 7/8.1/10 and Arch Linux ARMv7. OS X was not tested for lack of a machine that uses 
+			the operating system, but should work the same as the Linux distribution. The only caveat to this point is that 
+			Media streaming is not available on Windows, and hasn't been tested on OS X (presumably will not work without 
+			significant changes).
+
+		\end{itemize}
+	\item \textbf{Open Source}: \textit{All of the software APIs, Libraries and Frameworks that are used in the application 
+	must be open source. This generally entails that the software is free to use, study and modify, for any purpose. See 
+	section \ref{opensourcemovement} of this report for more on open source software. The tools used for development (IDEs, 
+	OS, Hardware etc.) need not be open source, but will be preferable if available}.\\
+
+	All the software APIs, libraries and frameworks used in HRUI are completely open source. See section 
+	\ref{opensourcemovement} for a brief discussion on the open source movement.
+\end{itemize}
+
+Therefore, the project developer personally believes that the project has been a success. The concepts and technologies 
+learned throughout development have been a source of academic growth and satisfaction, as well as a primer on the tools 
+used in the modern tech industry, and the challenges of software engineering.\\
+\newpage
 \section{Open Source Movement} \label{opensourcemovement}
+Open Source is a production and development concept that arose in the software development community circa 1980, that has 
+been extended to all production and development industries, that states that the design, blueprint or recipe for a product, 
+called \textbf{source}, should be \textbf{freely available to use, modify, study and integrate in other products by anyone, 
+for any purpose.}\\
+
+The Open Source movement is a social movement of individuals that are committed to the proliferation of open source 
+products for as many applications as possible. Since this is a software project, the following discusses that particular 
+aspect of open source, but it has extended to hardware design, manufacturing, industrial specifications etc. In fact, the 
+Crazyflie 2 used in this project as a proof-of-concept (see section \ref{crazyflie2}) is an open source drone: the design 
+documents and manufacturing processes are all freely available. The history of the movement is too long and off-topic to 
+recount, but suffice it to say, since the beginning of the expansion of information technologies, the open-source movement 
+has existed in some way or another. Some figures of the movement are well-known and respected in the software development 
+community: Richard Stallman (1953), founder of the GNU Project in 1983, one of the most important open-source projects that 
+still exist to this day, or Linus Torvalds (1969), responsible for the development of the Linux kernel, and developer of 
+the git revision control system. But the true power of the movement is the willingness of thousands of individuals to 
+dedicate their free time, without any expected return on investment, to create software that is free to use, modify and 
+study by anyone. The only thing sustaining the foundations that are dedicated to free software are donations and the will 
+of software enthusiasts. Some of these foundations are:
+\begin{itemize}
+	\item Apache Software Foundation: Responsible for dozens of projects, most notably the most used web server in the 
+	world, the Apache HTTP server.
+	\item Linux Foundation: Manages the community of developers that make the kernel evolve day by day. Linux powers most 
+	special purpose computers in the world today: super computers, web servers, embedded computers etc. As well as being a 
+	perfectly suitable general purpose OS, and the basis for millions of Android phones worldwide.
+	\item GNU Project: Maintains the GNU/Linux project, an OS with open-source only software.
+	\item Creative Commons: Holders of the Creative Commons copyright license.
+	\item Wikimedia Foundation: parent foundation of the free on-line encyclopedia, Wikipedia. 
+\end{itemize}
+Out of the movement, different open-source licenses have been put forward. An open source license is a piece of text 
+attached to the software that states the conditions by which the user has the right to modify, use and study the source 
+freely, while also enforcing that these rights are upheld. These conditions normally entail attribution of credit to the 
+original author, and the redistribution of the license, attached to the source. Some popular open-source licenses:
+\begin{itemize}
+	\item Apache 2.0 License: Only requires preservation of the copyright notice and disclaimer.
+	\item GNU General Public License (GPL) 3.0: This license obligates derivative works to also be open-source. This is 
+	called ``copyleft''.
+	\item MIT License: Originated at the Massachusetts Institute of Technology, allows propietary software to use the work 
+	without having to relinquish it's proprietary status. This license is very popular for it's simplicity and is used for 
+	almost all of the external software in this project. The license is included in the source code of HRUI (at the end of 
+	index.html), as per the license conditions. The following is the MIT License.\\
+\end{itemize}
+Copyright (c) <year> <copyright holders>\\
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
+files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
+modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the 
+Software is furnished to do so, subject to the following conditions:\\
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the 
+Software.\\
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE 
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR 
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, 
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\\
+
+The open source movement is essential for software to remain in the hands of individuals. With no open source, software 
+development would be exclusively in the hands of companies that are inherently designed to maximize their own profit, even 
+at the expense of the user. Without open source there's no alternative, free, way to access software that is required to 
+access the wealth of information provided by the Internet, that since it's inception is guaranteeing that anybody has the 
+chance to access any knowledge, without any gate keepers.\\
+
+At a much more menial level, this project wouldn't be possible without open source. But imagine how many other projects 
+like this one would be doomed before even being thought of, for lack of financing required to develop or license all the 
+proprietary software required for it's development. The thought becomes much less trivial.\\
+\begin{center}
+\vfill
+\line(1,0){250}\\
+\textit{\textbf{Thank you for taking the time to read this report, and thank you Ricardo, for your time and patience.}}
+\end{center}

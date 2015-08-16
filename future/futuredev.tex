@@ -3,6 +3,151 @@
 % 	Developed by Daniel Peiró
 % 	ETSII, UPM 2014-2015
 \chapter{Future Development} \label{futuredevelopment}
+As with all software engineering projects, and more generally any engineering project, work is not finished once the final 
+product is handed over to the client. Specifically for software development, and software projects that follow the waterfall 
+design process (briefly explained in chapter \ref{planning}) like this project, after the system is designed and implemented, 
+the project enters it's last phase, called maintenance.\\
 \section{Maintenance and Support}
+This phase consists of four types of maintenance:
+\begin{itemize}
+	\item \textbf{Corrective Maintenance}: Modifications to the system to correct errors or issues that arise with the use of 
+	the system. This is prevented in the previous step in the design process, verification, but inevitably errors or software 
+	bugs will slip through, given that it's virtually impossible to go through all the possible variations in the usage of the 
+	system.
+	\item \textbf{Adaptive Maintenance}: Upgrades to the software due to changes in the technology it uses as well as 
+	significant changes to the industry standards. This type of maintenance is briefly discussed in further sections, and for 
+	HRUI basically entails: scalability (section \ref{scalability}) and new additions to the standard (section 
+	\ref{newadditionstothestandard}).
+	\item \textbf{Perfective Maintenance}: Adapts the system even closer to the client requirements if possible, adding new 
+	features or options that weren't taken into account in the design process. This type of maintenance indicates that the 
+	requirements were not accurately captured from the client. There'll always be a certain level of uncertainty in this regard 
+	and some requirements may evolve over time and develop under use of the system. However, if this maintenance is extensive, 
+	it could indicate issues in the design process, since it was unable to provide the solution to the client's requirements out 
+	of the gate.
+	\item \textbf{Preventive Maintenance}: Predicts and tries to solve future problems that may arise. This is similar to 
+	adaptive maintenance, except that in this case, the upgrades are done preemptively, and in the other they're made once the 
+	change is made evident. 
+\end{itemize}
+The plan for HRUI's maintenance and support is divided into three phases:
+\begin{enumerate}
+	\item \textbf{Developer Usage and feedback}: The application is released to robot programmers and researchers, with the 
+	objective of analyzing the strengths and weaknesses of the application from the back-end, controller programming perspective 
+	of the application. Any use-cases that weren't taken into account in initial development are then evaluated taking into 
+	account two variables:
+		\begin{itemize}
+			\item Frequency: If the use-case is present in a wide array of applications for the software or not.
+			\item Cost: The amount of time, effort, and if applicable, monetary cost of implementing the use-case.
+		\end{itemize}
+	These variables are pondered, in such a way that a use-case that is very costly and is not used frequently will probably be 
+	discarded, while a use-case that is used very frequently and requires little effort will most likely be implemented. Cases 
+	in between the extremes will be analyzed further. This phase will likely entail perfective and corrective maintenance.
+	\item \textbf{User Experience and Feedback}: The application, once all of the developer feedback has been dealt with, is 
+	rolled out to users, that will experience the application from the front-end. In reality, these users will most likely be 
+	the robot programmers and researchers themselves at this stage, but the use of the application is decidedly divided due to 
+	it's double decoupling, explained in section \ref{mvcpattern}. This phase will likely entail a large amount of corrective 
+	maintenance, as bugs will be discovered when using the application in all the different permutations possible.
+	\item \textbf{Public Roll-out and Application Maturity}: The application is then rolled out to the public, generally bundled 
+	with the robot controller and the actual robot it was designed for. This will not be the main use of the application as it 
+	is inherently designed to be used as a tool to make robot research easier, not as a commercial product. Nevertheless, the 
+	application is a perfectly valid interface that could be bundled with a robot (some robots come with much less sophisticated 
+	controllers, and charge a lot of money for them). This would likely entail extensive security maintenance that falls into 
+	preventive and corrective maintenance categories alike, as well as any marginal bug that slipped through the previous phases.
+\end{enumerate}
+It should be noted that this phase of the project, particularly perfective maintenance tasks are made decidedly simpler thanks 
+to the implementation of the overall MVC architecture, and the modular front-end architecture. These architectures are both 
+discussed in chapter \ref{systemarchitecture}. By using these, as explained in the cited section, adding features to the 
+application is reduced to three confined steps, that do not require the modification of previously existing modules and 
+controllers. These steps are:
+\begin{itemize}
+	\item Adding a controller: a piece of code that contains the business logic that the feature requires.
+	\item Allocating resources in the model: an ``item'' in the model that contains the state of the feature's variables.
+	\item Designing a view: a visual representation and input method for the user to request actions from the controller, and 
+	retrieve data from the model.
+\end{itemize}
+This of course is a broad stroke, a generalization, and some modifications might entail restructuring the application in some shape 
+or form, but in general adding or subtracting features will remain a relatively isolated affair.\\
+
+Of course, this maintenance planning is theoretical, given that the application is part of an academic project.
 \section{Scalability} \label{scalability}
-\section{New Additions to the Standard}
+One of the more interesting ways that the application could be modified, as part of adaptive maintenance explained in the previous 
+section, is by adding the possibility of having an N amount of users on the front-end at any given time using the application. This 
+of course is possible as is, but all users are considered ``the same user'', as all the inputs are handled as if there were only 
+one user, i.e. there is only one joystick item in the application model, no matter how many users are manipulating their own 
+instance of the client, they will only modify the one set of coordinates. Imagine then that for every user, a new joystick item was 
+created holding the state of every joystick individually, and that a robot programmer could get hundreds if not thousands of unique 
+inputs. The possibilities with such amount of inputs is endless.\\
+
+This adaptation would be very interesting, but would obviously negate the portability and lightweight nature of the application as 
+is. It would require the server to \textit{scale horizontally}, meaning that the model, the mongoDB database, would have to be run 
+on multiple machines, and to be able to handle a large amount of clients, the resources of multiple machines would have to be 
+pooled (this is somewhat alleviated by the asynchronous and non blocking I/O of the node.js framework, see section \ref{nodejs} for 
+more). This is not an issue, given the distributed nature of the mongoDB DBMS, and the fact that scalability would be progressive: 
+the application could still work on a Raspberry Pi (as it does as is) with a low number of concurrent users, given that the 
+workload would scale with the amount of users.\\
+
+Once the infrastructure was ready, the actual changes to the code would not be too dramatic. The system changes would probably 
+entail something in this order:
+\begin{enumerate}
+	\item On client connection, a unique, random, id number is generated identifying the client unequivocally.
+	\item This id is sent to the back-end, where a new collection is spawned in the model, the mongoDB database, with that id 
+	attached to it. Currently there is only one collection in the database, which holds all the items that hold the application 
+	state. This collection would be cloned with each client connection, identified by the id given in the previous step. Each 
+	client would have it's own application state, stored independently.
+	\item All data packages that are delivered to and from the server, would be attached with the id of the client that generated 
+	the event or the id of the collection from where it was extracted from the model. This would be trivial, since all the 
+	communications have been isolated through a single controller, all the controller would have to do is ``label'' the packet 
+	before sending it, and reading its label on reception.
+	\item On client disconnection, either the collection in the model is deleted to free resources, or is labeled as inactive, so 
+	the programmer can decide what to do with the outdated data.
+\end{enumerate}
+The best part of this is that robot controllers would be as easy to design with one client as with N clients. The same method is 
+used to get data from the database, regardless of how many collections and items are present in it. A controller could do a 
+collection-wide poll on the state of N joysticks, and use that to, for example, control a robot swarm, or to control the different 
+parts of a very complex robot. With the custom input module (see section \ref{custominput}), this could be extended to any input, 
+period. The possibilities are enormous.\\
+
+This scalability is already available on the back-end of the application. Since the mongoDB DBMS is inherently distributed, there's 
+no limit to the amount of client robot controllers that could access the inputs on different machines, that could have any hardware 
+capabilities necessary, without loading the server, that could remain a low end computer or a micro computer like the Raspberry Pi, 
+given that the only processing it requires would be networking. Live streaming media could be an issue, given that it relies on the 
+servers resources, and accesses the servers device files, but a relay stream could be devised to feed into a ``mock'' device file 
+on the server, or more directly, change the media acquisition method to a distributed one (Avconv has an integrated networking 
+server, so this would probably be the simplest method).
+\section{New Additions to the Standard} \label{newadditionstothestandard}
+Another interesting aspect of adaptive maintenance (as explained at the beginning of this chapter) for HRUI is the fact that the 
+HTML5 Standard is still evolving, and in the future HTML.next (the name the W3C is giving the next HTML specification after HTML5) 
+will add new features that might be useful to make the interface more usable, more attractive and more efficient so that it can be 
+available on an ever expanding array of devices.\\
+
+There are two ways that this can affect HRUI:
+\begin{itemize}
+	\item \textbf{Change in experimental implementations}: This applies to those APIs that HRUI uses that are still non-standard or 
+	have been implemented in different ways by different browser developers. This is the case for the Web Speech API and the 
+	Gamepad API, used by the voice commands (section \ref{voicecommands}) and gamepad (section \ref{gamepad}) modules respectively. 
+	In the case of the Speech API, it's only available on webkit based browsers, e.g. Google Chrome, and while it probably will be 
+	implemented eventually by all browsers, the implementations may differ, and consequently a new standard will be developed in 
+	concert between all vendors. Or not. The fact is it's subject to change, and it will be necessary to adapt the module when 
+	changes arise. In the case of the Gamepad API, it has been implemented by the three major browser developers, but in different 
+	ways. Particularly, the mapping of buttons and if it's required for the user to press a button on the controller for initial 
+	detection. The specification recommends a layout for the buttons, so in the future the developers should converge on the 
+	recommendation. Again, or not. Once the API is mature enough, HRUI will have to be adapted to it. To a lesser extent, it's 
+	possible that other, more stable specifications change in the future, but the solution would be the same as with experimental 
+	APIs, and it's not likely in any case.
+	\item \textbf{New additions in future standard}: It's possible and very likely that in the future, new additions to the 
+	standard will provide functionality that may be useful for HRUI. Some of the proposals made can be found in the 
+	\href{http://www.w3.org/wiki/HTML/next}{HTML.next WIKI} on the W3C website. One of the more interesting proposals is adaptive 
+	streaming or as the W3C now calls it, \href{https://w3c.github.io/media-source/\#mediasource}{``Media Source Extensions''}, 
+	that could greatly enhance the Live Video module. Or the \href{http://www.w3.org/wiki/HTML/next#.22behaviors.22}{behaviors} 
+	object for JavaScript that could simplify event capturing and binding. The developer for one, would like a definitive standard 
+	for media formats and client decoders. All of this would be progressively added, if the use-cases justify it.
+\end{itemize}
+It should be noted again that these modifications are made decidedly simpler thanks to the implementation of the overall MVC 
+architecture, and the modular front-end architecture. These architectures are both discussed in chapter 
+\ref{systemarchitecture}. By using these, as explained in previous sections and the cited chapter, adding features to the 
+application is reduced to designing very simple, isolated components, that do not require the modification of previously 
+existing modules and controllers.\\
+
+HTML has a history of being very backwards compatible, and efforts to break with this trend have been generally unsuccessful. 
+See sections \ref{HTML} and \ref{HTML5} for more. Because of this, it's very unlikely that this application will become obsolete 
+by becoming incompatible with devices or browsers. Obsolescence will like come from better and newer solutions becoming 
+available as technology progresses naturally.
