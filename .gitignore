@@ -1,4 +1,6 @@
 *.pdf*
+!usermanual.pdf
+*.ods
 *.odg
 !arch*.pdf
 *subl*
@@ -21,3 +23,4 @@
 *.ind
 *.toc
 _minted-pfc/
+usermanual/
