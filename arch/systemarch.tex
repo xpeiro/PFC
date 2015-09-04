@@ -50,7 +50,7 @@ smaller projects, and multiple views being useful in some situations.
 \begin{figure}[H]
 \centering
 \captionsetup{justification=centering}
-\includegraphics[width=\linewidth]{mvc}
+\includegraphics[width=0.9\linewidth]{mvc}
 \caption{MVC Architecture UML Diagram}
 \end{figure}
 In this UML 2.0 (Unified Modeling Language) diagram (robustness analysis diagram, a simplified communication diagram) the 
@@ -199,7 +199,7 @@ HRUI controllers are divided in two distinct categories:
 	\item \textbf{updaters.js}: This module is the controller that collects all requests from other controllers to modify 
 	or get data in the model and processes them. It's represented in the system architecture (figure \ref{mvcarch}) between 
 	io.js and the model. Each of the functions it holds can be considered itself a sub-controller, that is designed to 
-	respond to each distinct requests. The power of the MVC architecture allows this code to be reasonably close the 
+	respond to each distinct request. The power of the MVC architecture allows this code to be reasonably close to the 
 	business logic, making it easily comprehensible and maintainable. The module exposes an interface to other modules, to 
 	call the necessary update to the database as needed. The main consumer of this interface is io.js.	
 	\item \textbf{io.js}: Configures the Socket.IO framework (see section \ref{html5websockets}) to capture and send events 
@@ -441,7 +441,7 @@ users perspective this is totally transparent). These modules are detailed in se
 respectively.\\
 
 To be truly accessible, HRUI has to be usable on a wide range of hardware. This is already achieved, from a theoretical 
-standpoint, by the nature of the View: it's an HTML5 web page, the de-facto standard for data communication worldwide. This 
+standpoint, by the nature of the View: it's an HTML5 web page, the de-facto standard for data visualization worldwide. This 
 also, by any reasonable measure, future-proofs the application, as HTML will likely continue to be relevant for many years to 
 come, and with a history of backwards compatibility reigning supreme throughout the webs evolution (see section \ref{HTML} for 
 more), it's not likely that HTML5 compliant pages, like HRUI's front-end will be deprecated any time soon. But the fact of the 

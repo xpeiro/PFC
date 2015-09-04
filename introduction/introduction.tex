@@ -31,7 +31,7 @@ from the robots themselves. The goal is that the application will comply with al
 	receive output from the robot in real-time. No hard real-time deadlines are set, given that the application is 
 	distributed, these deadlines would be hard to estimate without extensive research and control over the environment of 
 	the application, hence negating the accessibility requirement. However, the response time of the system should be 
-	maximized to the extent of the current state of the art of the technologies used.
+	minimized to the extent of the current state of the art of the technologies used.
 	\item \textbf{Portable}: The application that provides the GUI must be deployable on a wide array of systems with 
 	regards to these variables:\\
 		\begin{itemize}
@@ -47,9 +47,21 @@ from the robots themselves. The goal is that the application will comply with al
 	\ref{opensourcemovement} of this report for more on open source software. The tools used for development (IDEs, OS, 
 	Hardware etc.) need not be open source, but will be preferable if available.\\
 \end{itemize}
-
-The current state of the art of the technologies that comply with these requirements were analyzed, a system architecture 
-was designed, and the solution was developed and tested. These tasks are documented and discussed in chapters 
+In essence, what the application needs to do is bridge the two main entities of robot control:
+\begin{itemize}
+	\item \textbf{The User}: Needs an interface to input commands for the robot to follow. Also needs a view of the output data from the robot, if any is available.
+	\item \textbf{The Robot}: Needs to receive commands in the particular protocol it understands, in order to function. Also, optionally, may output data for the user to consume or register.
+\end{itemize}
+The following simplified UML (Unified Modeling Language) diagram shows the three components: The user, the application, and the robot. The objective of this project is the development of the center component, the application, along with the interfaces it exposes both to the User and the Robot, or more accurately, the robot controller, which will translate the application's interface to the interface understood by the robot.
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=\linewidth]{introuml}
+\caption{Simplified UML Diagram of Project Objectives}
+\end{figure}
+\newpage
+The current state of the art of the technologies that comply with these requirements and diagram were analyzed, a system 
+architecture was designed, and the solution was developed and tested. These tasks are documented and discussed in chapters 
 \textbf{\ref{technologyoverview}. Technology Overview} and \textbf{\ref{systemarchitecture}. System Architecture} 
 respectively. The basic features and components of the solution are as follows. Of course, each of these is explained in 
 detail in the previously cited chapters:
@@ -61,14 +73,14 @@ detail in the previously cited chapters:
 	another, any permutation of modules can be used.
 	\item \textbf{Node.js Server Back-end}: The application is a Node.js web server. Given that Node.js is a multi-platform 
 	framework, that runs on all the required architectures and operating systems listed and more, and is also very 
-	lightweight, this proposes a solution to the portability requirement.\\
+	lightweight, this proposes a solution to the portability requirement.
 	\item \textbf{Client-Server Architecture}: This proposes a solution to the distributed requirement. The client is the 
 	HTML5 web page that holds the GUI. The server is the application that manages inputs and outputs to and from the client. 
 	Each can be executed on different machines, communicating over the Internet and local networks using a variety of 
-	protocols.\\
+	protocols.
 	\item \textbf{WebSocket based communications}: This communication protocol allows the client and server to communicate 
 	in real-time on a network, efficiently, by passing messages with associated data-packets, similarly to how processes 
-	communicate through UNIX sockets. This proposes a solution for the real-time requirement.\\
+	communicate through UNIX sockets. This proposes a solution for the real-time requirement.
 	\item \textbf{MVC Architecture}: Proposes a solution for the universality and second accessibility requirements, by 
 	designing the application so that the GUI (View) is decoupled from the state of the application (Model), allowing 
 	external developers to design Controllers for any robot. This is called \textbf{double-decoupling} in this project.	
@@ -78,7 +90,7 @@ detail in the previously cited chapters:
 	\item \textbf{Open Source}: All the technologies used are open source. A list of the external APIs and libraries used is 
 	available on the second page of the references of this report.
 \end{itemize}
-The results of the proposed solution are exposed in chapter \ref{conclusions}. Conclusions.\\
+The results of the proposed solution are exposed in chapter \textbf{\ref{conclusions}. Conclusions}.\\
 
 This project is part of the ASLab (Autonomous System Laboratory) Robot Control Testbed (RCT) framework. This is a collection 
 of mobile robot systems that are used to test the technologies developed in the Autonomous Systems Project (ASys). The main 
@@ -91,6 +103,6 @@ implementations:
 \begin{itemize}
 	\item Based on the extant user interfaces provided by the ROS (Robot Operating System) middleware and it's associated 
 	stacks. This requires the ROS middleware for execution (hence limiting the portability of the UI).
-	\item The Android Robot Interface (ARI)- that runs on an Android device (Javier Mata, 2013).
+	\item The Android Robot Interface (ARI)- that runs on an Android device (Mata, 2013).
 \end{itemize}
 This project enables the remote use of the Higgs robot (or any other robot) from any browser able to handle HTML5.
