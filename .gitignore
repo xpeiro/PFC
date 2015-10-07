@@ -25,4 +25,7 @@
 _minted-pfc/
 usermanual/
 defensa
-!sublime_*
+!sublime*
+!wbs.pdf
+!gantt.pdf
+!budget.pdf
