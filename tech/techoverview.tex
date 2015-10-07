@@ -348,11 +348,11 @@ presentational tags, which remained part of HTML standard until HTML4 (see figur
 \end{figure}
 
 This presented the problem of mixing declarative, structural markup with styling, making the structure much less clear to
-the editor, which in turn led to error-prone design, while still being a limited solution, since the amount of tags needed
+the editor, which in turn led to error-prone design, while still being a limited solution, given the amount of tags needed
 to be kept in check, if there was to be any structure to the language.\\
 
 CSS allows, similarly to how JavaScript does with behavioral components, the addition of style without substituting
-structure while keeping a separate environment for each. With CSS, the only tag necessary is the script tag, or if included
+structure while keeping a separate environment for each. With CSS, the only tag necessary is the style tag, or if included
 from another file, the link tag:
 \begin{figure}[h]
 \centering
@@ -387,7 +387,7 @@ targets elements with the mouse over them), etc. which allow complete control ov
 
 While rules provide granular presentational control over the web page, as a standalone, they would be cumbersome at best
 and impossible to implement at worst were it not for cascading. Cascading allows the definition of a hierarchical structure
-in the way rules are applied, where rules with a higher priority overwrites lower priority rules. There are several
+in the way rules are applied, where rules with a higher priority override lower priority rules. There are several
 priority definitions (for example, in line style tags prevail over included stylesheets), but the most important is
 selector specificity. If an element fits the target for two or more selectors, the one with the highest specificity will
 prevail, if that rule defines a conflicting declaration. For example:
